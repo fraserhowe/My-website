@@ -1,0 +1,1534 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Howegate Capital — Independent Equity Research</title>
+<meta name="description" content="Independent, deep-research equity notes. Plus a live experiment: Claude runs a virtual £100,000 portfolio against the S&P 500." />
+<meta property="og:title" content="Howegate Capital — Independent Equity Research" />
+<meta property="og:description" content="Long-form notes on individual UK and US equities, and a live Claude-managed virtual portfolio benchmarked against the S&P 500." />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta name="theme-color" content="#152A1E" />
+
+<!-- Fonts: Cormorant Garamond (display) + Hanken Grotesk (body + tabular numerics) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Hanken+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Tailwind Play CDN (no build step) -->
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          cream:    { DEFAULT: '#F5F7F5', deep: '#ECEFEC', soft: '#FFFFFF' },
+          ink:      { DEFAULT: '#161D17', soft: '#2A352C', mute: '#5C675E' },
+          downs:    { DEFAULT: '#2E5E41', deep: '#234D33', soft: '#A9BFAF' },
+          pine:     '#152A1E',
+          chalk:    '#E4E9E4',
+          rose:     '#B85C57',
+        },
+        fontFamily: {
+          serif: ['Cormorant Garamond', 'serif'],
+          sans:  ['Hanken Grotesk', 'system-ui', 'sans-serif'],
+          mono:  ['Hanken Grotesk', 'ui-monospace', 'monospace'],
+        },
+        boxShadow: {
+          'soft': '0 1px 2px rgba(22,29,23,.04), 0 8px 24px -8px rgba(22,29,23,.08)',
+          'lift': '0 2px 6px rgba(22,29,23,.05), 0 20px 40px -16px rgba(22,29,23,.14)',
+        }
+      }
+    }
+  }
+</script>
+
+<!-- Chart.js for the performance chart -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Hanken Grotesk', system-ui, sans-serif; background: #F5F7F5; color: #161D17; -webkit-font-smoothing: antialiased; }
+  h1,h2,h3,h4 { font-family: 'Cormorant Garamond', serif; font-weight: 400; letter-spacing: -0.005em; }
+  .num { font-family: 'Hanken Grotesk', ui-monospace, monospace; font-feature-settings: 'tnum'; }
+
+  /* Display headline — Cormorant Garamond, lighter weight for that expensive, almost editorial feel */
+  .display { font-family: 'Cormorant Garamond', serif; font-weight: 300; letter-spacing: -0.015em; line-height: 1.08; }
+
+  /* ---------- Micro-interaction layer ---------- */
+
+  /* Keyboard focus — visible, branded */
+  :focus-visible { outline: 2px solid #2E5E41; outline-offset: 3px; border-radius: 2px; }
+
+  /* Nav links: underline draws in from the left, exits to the right */
+  .navlink { position: relative; transition: color .25s ease; }
+  .navlink::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 1px;
+    background: currentColor; transform: scaleX(0); transform-origin: right;
+    transition: transform .4s cubic-bezier(.2,.7,.2,1);
+  }
+  .navlink:hover::after, .navlink.active::after { transform: scaleX(1); transform-origin: left; }
+
+  /* Drawn underline for card / row titles */
+  .uline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-repeat: no-repeat; background-position: 0 100%; background-size: 0% 1px;
+    transition: background-size .5s cubic-bezier(.2,.7,.2,1);
+    padding-bottom: 2px;
+  }
+  .group:hover .uline { background-size: 100% 1px; }
+
+  /* Buttons: magnetic (JS) + arrow nudge */
+  .btn { position: relative; transition: background .25s ease, color .25s ease, border-color .25s ease, box-shadow .25s ease; will-change: transform; }
+  .btn svg { transition: transform .3s cubic-bezier(.2,.7,.2,1); }
+  .btn:hover svg { transform: translateX(3px); }
+
+  /* Cards */
+  .card { transition: transform .4s cubic-bezier(.2,.7,.2,1), box-shadow .4s ease, border-color .4s ease; }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 2px 6px rgba(22,29,23,.05), 0 20px 40px -16px rgba(22,29,23,.14); }
+
+  /* Research rows: quiet indent on hover */
+  .row-shift { transition: padding-left .4s cubic-bezier(.2,.7,.2,1); }
+  .row-shift:hover { padding-left: .75rem; }
+
+  /* Table rows */
+  .ticker-row { transition: background .2s ease; }
+  .ticker-row:hover { background: rgba(46,94,65,.05); }
+
+  /* ---------- Entrance choreography ---------- */
+
+  /* Scroll reveals */
+  .reveal { opacity: 0; transform: translateY(14px); transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: .08s; }
+  .reveal-delay-2 { transition-delay: .16s; }
+  .reveal-delay-3 { transition-delay: .24s; }
+  .reveal-delay-4 { transition-delay: .32s; }
+
+  /* Split-text reveal — words rise individually with stagger */
+  .split-word { display: inline-block; opacity: 0; transform: translateY(20px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); }
+  .split-word.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .split-word { opacity: 1; transform: none; }
+  }
+
+  /* Hero headline: line-by-line mask rise */
+  .line-mask { display: block; overflow: hidden; padding-bottom: 0.14em; }
+  .line-mask > span { display: block; transform: translateY(115%); animation: lineUp 1s cubic-bezier(.16,.8,.24,1) forwards; }
+  .line-mask:nth-child(2) > span { animation-delay: .1s; }
+  .line-mask:nth-child(3) > span { animation-delay: .2s; }
+  @keyframes lineUp { to { transform: translateY(0); } }
+
+  /* Contour line drawing (hero + wordmark) */
+  .contour { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 2.6s cubic-bezier(.3,.6,.3,1) forwards; }
+  .contour:nth-child(2) { animation-delay: .15s; }
+  .contour:nth-child(3) { animation-delay: .3s; }
+  .contour:nth-child(4) { animation-delay: .45s; }
+  .contour:nth-child(5) { animation-delay: .6s; }
+  .contour:nth-child(6) { animation-delay: .75s; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+
+  /* Page transitions */
+  .page { display: none; }
+  .page.active { display: block; animation: pageIn .7s cubic-bezier(.16,.8,.24,1) both; }
+  @keyframes pageIn {
+    from { opacity: 0; transform: translateY(10px) translateX(-4px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  /* ---------- Chrome ---------- */
+
+  /* Reading progress bar — fills as the page scrolls */
+  #progress {
+    position: fixed; top: 0; left: 0; height: 2px; width: 0%;
+    background: linear-gradient(90deg, rgba(46,94,65,0), #2E5E41 30%, #234D33);
+    z-index: 60; pointer-events: none;
+    transition: width .12s ease-out;
+  }
+
+  /* Live status dot — small pulsing dot that signals the site is alive */
+  .pulse-dot {
+    display: inline-block; width: 7px; height: 7px; border-radius: 50%;
+    background: #C7DCC9; position: relative; vertical-align: middle; margin-right: 8px;
+  }
+  .pulse-dot::before {
+    content: ""; position: absolute; inset: 0; border-radius: 50%;
+    background: rgba(199,220,201,.6); animation: pulse 2.4s ease-out infinite;
+  }
+  @keyframes pulse { 0% { transform: scale(1); opacity: .8; } 100% { transform: scale(2.4); opacity: 0; } }
+
+  /* Hero image: wrapper handles scroll parallax, image handles Ken Burns */
+  #heroImgWrap { position: absolute; inset: 0; overflow: hidden; will-change: transform; }
+  #heroImg { position: absolute; top: -6%; left: 0; width: 100%; height: 112%; object-fit: cover; will-change: transform; animation: kenburns 38s cubic-bezier(.45,.05,.55,.95) infinite alternate; }
+  @keyframes kenburns {
+    0%   { transform: scale(1.00) translate(0, 0); }
+    100% { transform: scale(1.10) translate(-2.5%, -1.5%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #heroImg { animation: none; }
+  }
+
+  /* Header: transparent over the page, frosted hairline once scrolled */
+  #siteHeader { transition: background .35s ease, box-shadow .35s ease, border-color .35s ease, color .35s ease; border-bottom: 1px solid transparent; }
+  #siteHeader.scrolled { background: rgba(255,255,255,.82); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom-color: rgba(22,29,23,.08); }
+  /* When sitting over the dark image hero on home — read as white */
+  #siteHeader.over-hero { color: #fff; }
+  #siteHeader.over-hero .navlink,
+  #siteHeader.over-hero .text-ink-soft { color: rgba(255,255,255,.85); }
+  #siteHeader.over-hero .text-downs,
+  #siteHeader.over-hero svg { color: #C7DCC9; }
+
+  /* Form fields: focus underline draws from the left */
+  .field {
+    width: 100%; background-color: transparent; border: 0; border-bottom: 1px solid rgba(22,29,23,.2);
+    padding: .9rem 0; font: 400 1rem 'Hanken Grotesk', sans-serif; color: #161D17; outline: none;
+    background-image: linear-gradient(#2E5E41, #2E5E41);
+    background-repeat: no-repeat; background-position: 0 100%; background-size: 0% 2px;
+    transition: background-size .45s cubic-bezier(.2,.7,.2,1);
+  }
+  .field:focus { background-size: 100% 2px; }
+  .field::placeholder { color: rgba(22,29,23,.4); }
+  textarea.field { resize: vertical; min-height: 120px; padding-top: 0; }
+  /* Inverted (on pine) variant */
+  .field-dark .field { color: #fff; border-bottom-color: rgba(255,255,255,.28); background-image: linear-gradient(#C7DCC9, #C7DCC9); }
+  .field-dark .field::placeholder { color: rgba(255,255,255,.45); }
+
+  /* Subtle paper grain */
+  body::before {
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image: radial-gradient(rgba(22,29,23,.02) 1px, transparent 1px);
+    background-size: 3px 3px; mix-blend-mode: multiply; opacity: .4;
+  }
+
+  /* Charts read as instruments */
+  canvas { cursor: crosshair; }
+
+  /* Portfolio tab toggle (Experiment page) */
+  .port-tab {
+    padding: 9px 18px; border-radius: 999px;
+    font: 500 0.82rem 'Hanken Grotesk', sans-serif;
+    letter-spacing: 0.04em; color: var(--ink-mute, #5C675E);
+    background: transparent; border: 0; cursor: pointer;
+    transition: background .25s ease, color .25s ease;
+  }
+  .port-tab:hover { color: #161D17; }
+  .port-tab.active {
+    background: #2E5E41; color: #fff;
+    box-shadow: 0 1px 2px rgba(46,94,65,.25);
+  }
+
+  /* Theme allocation row */
+  .theme-row { padding: 14pt 0; border-bottom: 1px solid rgba(22,29,23,.08); }
+  .theme-row:last-child { border-bottom: 0; }
+  .theme-row-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 6pt;
+  }
+  .theme-row-head .theme-name { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: #161D17; }
+  .theme-row-head .theme-pct { font-size: 0.9rem; color: #2E5E41; font-weight: 500; }
+  .theme-bar { height: 6px; background: rgba(46,94,65,.10); border-radius: 3px; overflow: hidden; }
+  .theme-bar-fill { height: 100%; background: linear-gradient(90deg, #2E5E41, #9CC5A9); border-radius: 3px; transition: width .9s cubic-bezier(.16,.8,.24,1); }
+  .theme-detail {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    margin-top: 6pt; font-size: 0.8rem; color: #5C675E;
+  }
+  .theme-detail strong { color: #2E5E41; font-weight: 600; }
+  @media (max-width: 640px) {
+    .theme-detail { grid-template-columns: 1fr; gap: 4px; }
+  }
+
+  /* ---------- Reduced motion ---------- */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal { opacity: 1; transform: none; }
+    .line-mask > span { transform: none !important; }
+    .contour { stroke-dashoffset: 0 !important; }
+  }
+</style>
+</head>
+<body class="relative">
+
+<!-- Reading progress -->
+<div id="progress" aria-hidden="true"></div>
+
+<!-- ============================== NAV ============================== -->
+<header id="siteHeader" class="fixed top-0 left-0 right-0 z-50">
+  <nav class="max-w-6xl mx-auto px-5 sm:px-8 h-16 sm:h-20 flex items-center justify-between">
+    <a href="#/" data-link class="flex items-center gap-2.5" aria-label="Howegate Capital — home">
+      <svg viewBox="0 0 28 16" class="w-7 h-4 text-downs" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path class="contour" pathLength="1" d="M1 14 Q 7 4, 13 9 T 27 6"/>
+        <path class="contour" pathLength="1" d="M1 14 L 27 14" opacity=".4"/>
+      </svg>
+      <span class="font-serif text-[1.1rem] tracking-tight">Howegate<span class="text-downs"> Capital</span></span>
+    </a>
+    <div class="hidden md:flex items-center gap-9 text-[0.92rem] text-ink-soft">
+      <a href="#/"           data-link class="navlink">Home</a>
+      <a href="#/research"   data-link class="navlink">Research</a>
+      <a href="#/experiment" data-link class="navlink">The Experiment</a>
+      <a href="#/about"      data-link class="navlink">About</a>
+      <a href="#/contact"    data-link class="navlink">Contact</a>
+    </div>
+    <button id="menuBtn" type="button" class="md:hidden p-1.5 -mr-1 text-ink" aria-label="Menu" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </nav>
+  <div id="mobileMenu" class="md:hidden hidden bg-pine border-b border-white/10 px-5 py-4 text-white">
+    <a href="#/"           data-link class="block py-2.5">Home</a>
+    <a href="#/research"   data-link class="block py-2.5">Research</a>
+    <a href="#/experiment" data-link class="block py-2.5">The Experiment</a>
+    <a href="#/about"      data-link class="block py-2.5">About</a>
+    <a href="#/contact"    data-link class="block py-2.5">Contact</a>
+  </div>
+</header>
+
+<main class="relative z-10">
+
+<!-- ============================== HOME ============================== -->
+<section id="page-home" class="page">
+
+  <!-- Hero — image, deep-green washed, typography over the top -->
+  <div class="relative overflow-hidden text-white" id="heroBlock">
+    <div id="heroImgWrap">
+      <img id="heroImg" src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2400&auto=format&fit=crop"
+           alt="" aria-hidden="true" />
+    </div>
+    <!-- duotone-feeling wash: deep pine top + bottom, image breathing through middle -->
+    <div class="absolute inset-0" style="background:linear-gradient(180deg, rgba(21,42,30,.92) 0%, rgba(21,42,30,.55) 38%, rgba(21,42,30,.55) 62%, rgba(21,42,30,.95) 100%);"></div>
+    <!-- colour layer: tint the photo green -->
+    <div class="absolute inset-0 mix-blend-multiply" style="background:rgba(46,94,65,.55);"></div>
+    <!-- film grain -->
+    <div class="absolute inset-0 opacity-[.07] pointer-events-none" style="background-image:radial-gradient(rgba(255,255,255,.6) 1px, transparent 1px);background-size:3px 3px;mix-blend-mode:overlay;"></div>
+
+    <div class="relative z-10 max-w-6xl mx-auto px-5 sm:px-8 pt-28 sm:pt-48 pb-14 sm:pb-28">
+      <p class="flex items-center gap-4 text-[0.74rem] sm:text-[0.78rem] tracking-[0.28em] uppercase text-downs-soft mb-8">
+        Independent Equity Research
+      </p>
+      <h1 class="display text-white text-[2.4rem] sm:text-[4.4rem] md:text-[5.4rem] max-w-5xl" style="text-shadow:0 2px 32px rgba(21,42,30,.5)">
+        <span class="line-mask"><span>Fundamental research</span></span>
+        <span class="line-mask"><span>and valuation</span></span>
+        <span class="line-mask"><span>for long-term investors.</span></span>
+      </h1>
+      <p class="reveal reveal-delay-2 mt-9 max-w-xl text-white/80 text-lg leading-relaxed">
+        Howegate Capital is a research platform publishing theses on UK and US equities, written for investors who want to understand a company before owning it.
+      </p>
+      <div class="reveal reveal-delay-3 mt-10 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+        <a href="#/research" data-link class="btn inline-flex items-center justify-center gap-2 bg-white text-pine hover:bg-downs-soft text-sm px-6 py-3.5 rounded-full">
+          Read the research
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#/experiment" data-link class="btn inline-flex items-center justify-center gap-2 border border-white/45 hover:border-white text-white text-sm px-6 py-3.5 rounded-full">
+          See the experiment
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Editorial line — white band, gives the eye a moment between hero and research -->
+  <div class="bg-white">
+    <div class="max-w-3xl mx-auto px-5 sm:px-8 py-16 sm:py-28 text-center">
+      <!-- Tiny chalk-hill mark — ties to the brand, signals start of a new movement -->
+      <svg viewBox="0 0 40 16" class="reveal mx-auto mb-7 w-[44px] h-[18px] text-downs" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path class="contour" pathLength="1" d="M1 14 Q 10 4, 20 9 T 39 6"/>
+        <path class="contour" pathLength="1" d="M1 14 L 39 14" opacity=".4"/>
+      </svg>
+      <p class="reveal reveal-delay-1 text-[0.78rem] tracking-[0.28em] uppercase text-downs-deep mb-7">Our approach</p>
+      <p class="reveal reveal-delay-2 font-serif text-[1.7rem] sm:text-[2.1rem] leading-[1.3] text-ink">
+        One research piece a month. A patient look at the fundamentals of a single public company: what the business does, how it earns, and what it should be worth.
+      </p>
+      <!-- Mirror hairline below to frame the moment -->
+      <div class="reveal reveal-delay-3 mx-auto mt-9 w-12 h-px bg-downs/30"></div>
+    </div>
+  </div>
+
+  <!-- Latest research — pine band, white cards -->
+  <div class="bg-pine text-white">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 py-14 sm:py-28">
+      <div class="flex items-end justify-between mb-12 reveal">
+        <h2 class="text-4xl sm:text-5xl split-headline">Latest research.</h2>
+        <a href="#/research" data-link class="hidden sm:inline-flex navlink text-sm text-white/70 hover:text-white">All research →</a>
+      </div>
+      <div id="homeNotes" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+    </div>
+  </div>
+
+  <!-- Experiment teaser — cream band -->
+  <div class="bg-cream">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 py-14 sm:py-28 grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+      <div class="reveal">
+        <p class="text-[0.78rem] tracking-[0.22em] uppercase text-downs-deep mb-4">Side experiment</p>
+        <h2 class="text-3xl sm:text-5xl mb-6 leading-[1.05] split-headline">Can an AI beat the index?</h2>
+        <p class="text-ink-mute text-lg leading-relaxed mb-9">
+          A virtual £100,000 portfolio, managed by Claude. Positions reviewed and updated each week, with every trade and the reasoning behind it published openly. Benchmarked against the S&P 500.
+        </p>
+        <a href="#/experiment" data-link class="btn inline-flex items-center gap-2 bg-pine text-white hover:bg-downs-deep text-sm px-6 py-3.5 rounded-full">
+          Follow the experiment
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="reveal reveal-delay-1 bg-white border border-ink/10 rounded-2xl p-7 sm:p-9 shadow-soft">
+        <div class="flex items-baseline justify-between mb-2">
+          <span class="text-[0.78rem] tracking-[0.22em] uppercase text-ink-mute">Portfolio NAV</span>
+          <span id="navPctMini" class="num text-sm text-downs-deep">+0.00%</span>
+        </div>
+        <div class="num text-4xl sm:text-5xl mb-1 text-ink" id="navValueMini">£100,000</div>
+        <div class="text-sm text-ink-mute mb-8">vs S&P 500 <span id="benchPctMini" class="num">+0.00%</span></div>
+        <div class="h-44 sm:h-52">
+          <canvas id="miniChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ============================== RESEARCH ============================== -->
+<section id="page-research" class="page">
+
+  <div class="bg-cream">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 pt-28 sm:pt-48 pb-10 sm:pb-20">
+      <p class="reveal flex items-center gap-4 text-[0.78rem] tracking-[0.28em] uppercase text-downs-deep mb-7">
+        Research
+      </p>
+      <h1 class="reveal reveal-delay-1 display text-[2.4rem] sm:text-[4rem]">All research.</h1>
+      <p class="reveal reveal-delay-2 mt-6 max-w-2xl text-ink-mute text-lg leading-relaxed">
+        Long-form research on individual public companies. Each piece ends with a clear view on what the business is worth and whether it deserves to be owned at today's price.
+      </p>
+    </div>
+  </div>
+
+  <div class="bg-white border-y border-ink/5">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 py-14 sm:py-16">
+      <div id="researchList" class="divide-y divide-ink/10"></div>
+    </div>
+  </div>
+
+  <!-- Request form — pine band, inverted form -->
+  <div class="bg-pine text-white field-dark">
+    <div class="max-w-3xl mx-auto px-5 sm:px-8 py-14 sm:py-28">
+      <div class="reveal">
+        <p class="flex items-center gap-4 text-[0.78rem] tracking-[0.28em] uppercase text-downs-soft mb-6">
+          Request research
+        </p>
+        <h2 class="text-3xl sm:text-5xl mb-5 leading-[1.05]">Tell me what to look at next.</h2>
+        <p class="text-white/65 text-lg leading-relaxed mb-10 max-w-xl">
+          The research agenda is shaped by readers. Submit a company you'd like a full note on, and the reasoning behind why it interests you.
+        </p>
+      </div>
+      <form id="requestForm" class="reveal reveal-delay-1 space-y-8" novalidate>
+        <div>
+          <label for="reqEmail" class="text-[0.78rem] tracking-[0.18em] uppercase text-white/55 block mb-1">Email</label>
+          <input id="reqEmail" class="field" type="email" name="email" placeholder="you@domain.com" required>
+        </div>
+        <div>
+          <label for="reqCompany" class="text-[0.78rem] tracking-[0.18em] uppercase text-white/55 block mb-1">Company</label>
+          <input id="reqCompany" class="field" type="text" name="company" placeholder="e.g. Games Workshop, Costco, Diploma plc" required>
+        </div>
+        <div>
+          <label for="reqReason" class="text-[0.78rem] tracking-[0.18em] uppercase text-white/55 block mb-1">Why this one?</label>
+          <textarea id="reqReason" class="field" name="reason" placeholder="The thesis, the worry, the question you want answered…" required></textarea>
+        </div>
+        <div class="flex items-center gap-5 pt-2">
+          <button type="submit" class="btn inline-flex items-center gap-2 bg-white text-pine hover:bg-downs-soft text-sm px-7 py-3.5 rounded-full">
+            Submit request
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </button>
+          <span id="requestStatus" class="text-sm" style="color:#C7DCC9" role="status"></span>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</section>
+
+<!-- ============================== EXPERIMENT ============================== -->
+<section id="page-experiment" class="page">
+
+  <!-- Hero — cream -->
+  <div class="bg-cream">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 pt-28 sm:pt-48 pb-10 sm:pb-20">
+      <p class="reveal flex items-center gap-4 text-[0.78rem] tracking-[0.28em] uppercase text-downs-deep mb-7">
+        The Experiment
+      </p>
+      <h1 class="reveal reveal-delay-1 display text-[2.4rem] sm:text-[4.4rem] max-w-4xl">Claude vs the S&P 500.</h1>
+      <p class="reveal reveal-delay-2 mt-6 max-w-2xl text-ink-mute text-lg leading-relaxed">
+        Two virtual £100,000 portfolios, managed by Claude. Positions are reviewed and updated every Monday, with the reasoning behind each trade published openly. Benchmarked against the S&P 500 in GBP terms.
+      </p>
+      <p class="reveal reveal-delay-3 mt-7 text-sm font-mono text-downs-deep">
+        Week <span id="weekNum">1</span> · Inception · <span id="experimentDate">29 Jun 2026</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Market overview — white -->
+  <div class="bg-white border-y border-ink/5">
+    <div class="max-w-3xl mx-auto px-5 sm:px-8 py-14 sm:py-20">
+      <p class="reveal text-[0.78rem] tracking-[0.28em] uppercase text-downs-deep mb-5">Market overview</p>
+      <h2 class="reveal reveal-delay-1 text-3xl sm:text-4xl mb-8 split-headline">This week.</h2>
+      <div id="marketOverviewText" class="reveal reveal-delay-2 space-y-5 text-lg leading-relaxed text-ink-soft"></div>
+    </div>
+  </div>
+
+  <!-- Scorecard — pine, both portfolios + benchmark at a glance -->
+  <div class="bg-pine text-white">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 py-14 sm:py-20">
+      <p class="reveal text-[0.78rem] tracking-[0.28em] uppercase text-downs-soft mb-6">Scorecard</p>
+      <h2 class="reveal reveal-delay-1 text-3xl sm:text-4xl mb-10">Both books, since inception.</h2>
+      <div class="reveal reveal-delay-2 grid md:grid-cols-3 gap-x-10 gap-y-10">
+        <div>
+          <div class="text-[0.72rem] tracking-[0.22em] uppercase text-white/50 mb-2">Portfolio A · ETFs</div>
+          <div id="aNav" class="num text-3xl sm:text-4xl">£100,000</div>
+          <div class="mt-3 flex items-center gap-3 text-sm">
+            <span class="text-white/55">Return</span>
+            <span id="aReturn" class="num text-white">+0.00%</span>
+          </div>
+        </div>
+        <div class="md:border-l md:border-white/15 md:pl-10">
+          <div class="text-[0.72rem] tracking-[0.22em] uppercase text-white/50 mb-2">Portfolio B · Equities</div>
+          <div id="bNav" class="num text-3xl sm:text-4xl">£100,000</div>
+          <div class="mt-3 flex items-center gap-3 text-sm">
+            <span class="text-white/55">Return</span>
+            <span id="bReturn" class="num text-white">+0.00%</span>
+          </div>
+        </div>
+        <div class="md:border-l md:border-white/15 md:pl-10">
+          <div class="text-[0.72rem] tracking-[0.22em] uppercase text-white/50 mb-2">S&P 500 · VUAG (GBP)</div>
+          <div class="num text-3xl sm:text-4xl">100.00</div>
+          <div class="mt-3 flex items-center gap-3 text-sm">
+            <span class="text-white/55">Indexed</span>
+            <span class="text-white">at inception</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Performance chart — cream -->
+  <div class="bg-cream">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 py-12 sm:py-20">
+      <div class="reveal bg-white border border-ink/10 rounded-2xl p-4 sm:p-8 shadow-soft">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 mb-4">
+          <h3 class="text-base sm:text-xl">Performance, indexed to 100</h3>
+          <div class="flex flex-wrap items-center gap-4 text-xs text-ink-mute">
+            <span class="inline-flex items-center gap-2"><span class="w-3 h-[2px] bg-downs"></span> Portfolio A</span>
+            <span class="inline-flex items-center gap-2"><span class="w-3 h-[2px]" style="background:#9CC5A9"></span> Portfolio B</span>
+            <span class="inline-flex items-center gap-2"><span class="w-3 h-[2px]" style="border-top:1px dashed #5C675E"></span> S&P 500</span>
+          </div>
+        </div>
+        <canvas id="perfChart" style="max-height:380px"></canvas>
+        <p class="text-xs text-ink-mute mt-3 text-center sm:text-left italic">Lines populate week-on-week. Currently at inception (Week 1).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Portfolio toggle + content — white -->
+  <div class="bg-white border-t border-ink/5">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 py-12 sm:py-20">
+
+      <!-- Tab toggle -->
+      <div class="reveal flex justify-center mb-10">
+        <div class="inline-flex items-center bg-cream border border-ink/10 rounded-full p-1" role="tablist">
+          <button type="button" class="port-tab active" data-tab="A" role="tab" aria-selected="true">Portfolio A · ETFs</button>
+          <button type="button" class="port-tab" data-tab="B" role="tab" aria-selected="false">Portfolio B · Equities</button>
+        </div>
+      </div>
+
+      <p id="portfolioBlurb" class="reveal text-ink-mute leading-relaxed mb-8 max-w-3xl"></p>
+
+      <!-- Holdings -->
+      <div class="reveal overflow-x-auto -mx-5 sm:mx-0 px-5 sm:px-0 mb-10">
+        <table class="w-full sm:min-w-[760px] text-left text-sm sm:text-base">
+          <thead>
+            <tr class="text-[0.72rem] tracking-[0.22em] uppercase text-ink-mute border-b border-ink/15">
+              <th class="py-3 pr-4 font-normal">Ticker</th>
+              <th class="py-3 pr-4 font-normal">Name</th>
+              <th class="py-3 pr-4 font-normal hidden md:table-cell">Ccy</th>
+              <th class="py-3 pr-4 font-normal text-right">Entry</th>
+              <th class="py-3 pr-4 font-normal text-right hidden sm:table-cell">Shares</th>
+              <th class="py-3 pr-4 font-normal text-right">Weight</th>
+              <th class="py-3 pr-0 font-normal text-right hidden md:table-cell">£ Cost</th>
+            </tr>
+          </thead>
+          <tbody id="holdingsBody" class="divide-y divide-ink/10"></tbody>
+          <tfoot id="holdingsFoot" class="text-sm"></tfoot>
+        </table>
+      </div>
+
+      <!-- Position notes -->
+      <h3 class="reveal text-xl sm:text-2xl mb-5">Positions &amp; short-term targets</h3>
+      <ul id="positionNotes" class="reveal divide-y divide-ink/10"></ul>
+
+      <p id="portfolioSummary" class="reveal mt-10 max-w-3xl text-ink-mute leading-relaxed text-sm italic"></p>
+    </div>
+  </div>
+
+  <!-- Theme allocation — cream -->
+  <div class="bg-cream">
+    <div class="max-w-4xl mx-auto px-5 sm:px-8 py-14 sm:py-20">
+      <p class="reveal text-[0.78rem] tracking-[0.28em] uppercase text-downs-deep mb-5">Theme allocation</p>
+      <h2 class="reveal reveal-delay-1 text-3xl sm:text-4xl mb-6">What each book bets on.</h2>
+      <p class="reveal reveal-delay-2 text-ink-mute leading-relaxed mb-8 max-w-2xl">Both books chase the same themes; the difference is expression. A uses GBP-listed UCITS ETFs where a basket beats a single bet, B uses single stocks throughout. Where B's proxy carries fresh single-name risk (Rheinmetall, Strategy) it's sized a touch lighter, which is why B holds marginally more cash. Where the weights differ, the percentages below read Portfolio A / Portfolio B.</p>
+      <div id="themeAllocation" class="reveal reveal-delay-3 space-y-1"></div>
+    </div>
+  </div>
+
+  <!-- Methodology — white -->
+  <div class="bg-white border-t border-ink/5">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 py-14 sm:py-20">
+      <div class="grid md:grid-cols-3 gap-12">
+        <div class="reveal">
+          <p class="flex items-center gap-4 text-[0.78rem] tracking-[0.28em] uppercase text-downs-deep mb-4">
+                Methodology
+          </p>
+          <h2 class="text-3xl sm:text-4xl leading-[1.1]">How Claude picks the books.</h2>
+        </div>
+        <div class="md:col-span-2 space-y-7 text-ink-mute leading-relaxed">
+          <div class="reveal reveal-delay-1">
+            <div class="num text-downs-deep text-sm mb-2">01 · Universe</div>
+            <p>Global liquid equities and exchange-listed ETFs. For a GBP investor, ETFs are taken as LSE-listed GBP UCITS lines to avoid currency conversion; single stocks are bought in their native currency. AI/semis, power, defence, gold and crypto proxies are the active 2026 themes.</p>
+          </div>
+          <div class="reveal reveal-delay-2">
+            <div class="num text-downs-deep text-sm mb-2">02 · Process</div>
+            <p>Each Monday Claude reviews both books and writes a rationale for every change. Two parallel portfolios test the same themes through different instruments (ETFs vs single stocks), so the wrapper question gets a clean answer.</p>
+          </div>
+          <div class="reveal reveal-delay-3">
+            <div class="num text-downs-deep text-sm mb-2">03 · Rules</div>
+            <p>No derivatives, leverage or shorting. Cash is permitted. The weekly review runs every Monday, and trades execute at the US market open (2:30pm UK), one timestamp covering the whole book and the benchmark. All three start level at inception; dealing friction (0.10% commission, 0.5% UK stamp on UK shares, 0.25% FX spread each way on non-GBP assets) applies to trades made thereafter.</p>
+          </div>
+          <div class="reveal reveal-delay-4">
+            <div class="num text-downs-deep text-sm mb-2">04 · Scoring</div>
+            <p>Indexed against Vanguard's S&P 500 UCITS ETF (VUAG) in GBP, a real, GBP-denominated, total-return tracker. Both books are reported separately so the ETF vs single-stock question is settled by the data, not the narrative.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- This week's note — pine -->
+  <div class="bg-pine text-white">
+    <div class="max-w-3xl mx-auto px-5 sm:px-8 py-14 sm:py-20">
+      <div class="reveal">
+        <p class="text-[0.78rem] tracking-[0.28em] uppercase text-downs-soft mb-5">This week</p>
+        <h2 class="text-3xl sm:text-4xl mb-8" id="weekTitle"></h2>
+        <p class="text-lg leading-relaxed text-white/75" id="weekBody"></p>
+        <p class="mt-8 text-xs text-white/45 italic">This is a research simulation; nothing here is financial advice.</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ============================== ABOUT ============================== -->
+<section id="page-about" class="page">
+
+  <div class="bg-cream">
+    <div class="max-w-3xl mx-auto px-5 sm:px-8 pt-28 sm:pt-48 pb-10 sm:pb-20">
+      <p class="reveal flex items-center gap-4 text-[0.78rem] tracking-[0.28em] uppercase text-downs-deep mb-7">
+        About
+      </p>
+      <h1 class="reveal reveal-delay-1 display text-[2.5rem] sm:text-[4rem]">A research desk<br/>of one.</h1>
+    </div>
+    <div class="max-w-3xl mx-auto px-5 sm:px-8 pb-14 sm:pb-28 space-y-8 text-lg leading-relaxed text-ink-soft">
+      <p class="reveal">
+        Howegate Capital is an independent equity research site focused on fundamental analysis and valuation. Each research piece is a study of one public company — what the business does, how it earns, the durability of those earnings, and what the equity should be worth at today's price.
+      </p>
+      <p class="reveal reveal-delay-1">
+        The site is run by one person. There are no clients, no advertisers, no sponsored coverage. Coverage is shaped by reader requests and the writer's own conviction.
+      </p>
+      <p class="reveal reveal-delay-2">
+        The Experiment is a side project: two virtual £100,000 portfolios managed by Claude, updated weekly and benchmarked against the S&P 500. Both are published in full as a public test of what a careful AI can do with a small book of well-understood businesses.
+      </p>
+    </div>
+  </div>
+
+  <div class="bg-white border-t border-ink/5">
+    <div class="max-w-3xl mx-auto px-5 sm:px-8 py-16 sm:py-20">
+      <div class="reveal">
+        <p class="flex items-center gap-4 text-[0.78rem] tracking-[0.28em] uppercase text-downs-deep mb-5">
+            Disclaimer
+        </p>
+        <h3 class="text-2xl mb-5">Not investment advice.</h3>
+        <p class="text-ink-mute leading-relaxed">
+          Everything published on Howegate Capital is for information and education only. It is not a recommendation, an offer, or a solicitation to buy or sell any security. Howegate Capital is not authorised or regulated by the Financial Conduct Authority. The two virtual portfolios managed by Claude are a public experiment and are not a real fund — no money is managed on behalf of any reader. Do your own research and, if in doubt, speak to a qualified financial adviser.
+        </p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ============================== CONTACT ============================== -->
+<section id="page-contact" class="page">
+
+  <div class="bg-cream">
+    <div class="max-w-3xl mx-auto px-5 sm:px-8 pt-28 sm:pt-48 pb-10 sm:pb-20">
+      <p class="reveal flex items-center gap-4 text-[0.78rem] tracking-[0.28em] uppercase text-downs-deep mb-7">
+        Contact
+      </p>
+      <h1 class="reveal reveal-delay-1 display text-[2.4rem] sm:text-[4.4rem]">Say hello.</h1>
+      <p class="reveal reveal-delay-2 mt-6 text-ink-mute text-lg leading-relaxed max-w-xl">
+        Questions, feedback, ideas for research — all welcome. Most messages are answered within a week.
+      </p>
+    </div>
+  </div>
+
+  <div class="bg-white border-t border-ink/5">
+    <div class="max-w-3xl mx-auto px-5 sm:px-8 py-16 sm:py-20 grid md:grid-cols-2 gap-12">
+      <form id="contactForm" class="reveal space-y-7" novalidate>
+        <div>
+          <label for="conName" class="text-[0.78rem] tracking-[0.18em] uppercase text-ink-mute block mb-1">Name</label>
+          <input id="conName" class="field" type="text" name="name" required>
+        </div>
+        <div>
+          <label for="conEmail" class="text-[0.78rem] tracking-[0.18em] uppercase text-ink-mute block mb-1">Email</label>
+          <input id="conEmail" class="field" type="email" name="email" required>
+        </div>
+        <div>
+          <label for="conMessage" class="text-[0.78rem] tracking-[0.18em] uppercase text-ink-mute block mb-1">Message</label>
+          <textarea id="conMessage" class="field" name="message" required></textarea>
+        </div>
+        <div class="flex items-center gap-5 pt-1">
+          <button type="submit" class="btn inline-flex items-center gap-2 bg-pine text-white hover:bg-downs-deep text-sm px-7 py-3.5 rounded-full">
+            Send
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </button>
+          <span id="contactStatus" class="text-sm text-downs-deep" role="status"></span>
+        </div>
+      </form>
+      <div class="reveal reveal-delay-1 space-y-8 text-ink-soft">
+        <div>
+          <div class="text-[0.78rem] tracking-[0.22em] uppercase text-ink-mute mb-2">Direct</div>
+          <a href="mailto:fraser.howe@icloud.com" class="text-lg navlink">fraser.howe@icloud.com</a>
+        </div>
+        <div>
+          <div class="text-[0.78rem] tracking-[0.22em] uppercase text-ink-mute mb-2">Cadence</div>
+          <p>One research piece a month. Weekly portfolio updates on Mondays.</p>
+        </div>
+        <div>
+          <div class="text-[0.78rem] tracking-[0.22em] uppercase text-ink-mute mb-2">Location</div>
+          <p>United Kingdom.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<!-- ============================== FOOTER ============================== -->
+<footer class="relative z-10 bg-pine text-white border-t border-white/10">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 py-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+    <div>
+      <div class="flex items-center gap-2 mb-4">
+        <svg viewBox="0 0 28 16" class="w-6 h-4 text-downs-soft" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M1 14 Q 7 4, 13 9 T 27 6"/>
+          <path d="M1 14 L 27 14" opacity=".4"/>
+        </svg>
+        <span class="font-serif text-[1.05rem]">Howegate<span class="text-downs-soft"> Capital</span></span>
+      </div>
+      <p class="text-sm text-white/55 leading-relaxed">Fundamental research and valuation for the long-term investor.</p>
+    </div>
+    <div>
+      <div class="text-[0.72rem] tracking-[0.22em] uppercase text-white/45 mb-4">Site</div>
+      <ul class="space-y-2 text-sm text-white/80">
+        <li><a href="#/"           data-link class="navlink">Home</a></li>
+        <li><a href="#/research"   data-link class="navlink">Research</a></li>
+        <li><a href="#/experiment" data-link class="navlink">The Experiment</a></li>
+        <li><a href="#/about"      data-link class="navlink">About</a></li>
+        <li><a href="#/contact"    data-link class="navlink">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="text-[0.72rem] tracking-[0.22em] uppercase text-white/45 mb-4">Contact</div>
+      <ul class="space-y-2 text-sm text-white/80">
+        <li><a href="mailto:fraser.howe@icloud.com" class="navlink">fraser.howe@icloud.com</a></li>
+        <li class="text-white/55">United Kingdom</li>
+      </ul>
+    </div>
+    <div>
+      <div class="text-[0.72rem] tracking-[0.22em] uppercase text-white/45 mb-4">Disclaimer</div>
+      <p class="text-xs text-white/55 leading-relaxed">
+        For information only. Not investment advice and not regulated by the FCA. The Claude-managed portfolios are a virtual experiment; no client money is managed. Do your own research.
+      </p>
+    </div>
+  </div>
+  <div class="border-t border-white/10">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/45">
+      <span>© <span id="year"></span> Howegate Capital. All rights reserved.</span>
+      <span>Built with patience.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================== DATA + LOGIC ============================== -->
+<script>
+/* ----------------------------------------------------------------------------
+   DATA — edit this block each week. Everything below it is plumbing.
+---------------------------------------------------------------------------- */
+const DATA = {
+  // Last time the site was updated. Shown on the Experiment page.
+  updatedAt: "29 Jun 2026",
+  weekNumber: 1,
+
+  // Latest research notes. Newest first. Status: "published" | "upcoming".
+  // url:  paste a PDF or HTML path like "notes/games-workshop.pdf" — or leave blank to keep the card non-clickable for now.
+  research: [
+    {
+      ticker: "UKW.L",
+      company: "Greencoat UK Wind",
+      title: "A covered 10% yield on UK wind, priced at a discount",
+      summary: "A FTSE 250 renewable infrastructure trust trading ~22% below NAV, with a covered ~10% yield and 1.3x dividend cover. Discount, NAV mechanics and one-year scenarios.",
+      date: "Jun 2026",
+      length: "Initiation",
+      status: "published",
+      url: "greencoat-uk-wind.html",
+    },
+    {
+      ticker: "MA",
+      company: "Mastercard Incorporated",
+      title: "A toll road on the global shift from cash to digital",
+      summary: "A near-duopoly in global payments with ~58% operating margins, recently de-rated from its high. Business model, structural features and a five-year DCF with scenarios.",
+      date: "Jun 2026",
+      length: "Initiation",
+      status: "published",
+      url: "notes/mastercard-2026-06.html",
+    },
+    {
+      ticker: "—",
+      company: "More research",
+      title: "More coming soon",
+      summary: "New company notes are in the works. The next published piece will appear here.",
+      date: "",
+      length: "",
+      status: "upcoming",
+      url: "",
+    },
+  ],
+
+  // ====== THE EXPERIMENT — two virtual portfolios, updated weekly ======
+  // To add a week:
+  //   1. Append one number to each of: performance.labels, performance.A, performance.B, performance.bench
+  //   2. Update navOpening on each portfolio if positions/weights changed
+  //   3. Replace weekNote.title and weekNote.body
+  //   4. Update marketOverview paragraphs
+  experiment: {
+    inception: "29 Jun 2026",
+    fx: { gbpUsd: 1.3190, gbpEur: 1.1580 },
+
+    // Weekly performance — all three series indexed to 100 at inception
+    performance: {
+      labels: ["W1"],
+      A:     [100],
+      B:     [100],
+      bench: [100],
+    },
+
+    marketOverview: [
+      `<strong class="font-semibold text-ink">This week.</strong> We launch into a market that has just repriced its biggest theme. The S&P 500 fell nearly 2% last week to 7,354, and the Nasdaq dropped 4.6% in its fifth straight losing session, as a report that OpenAI may delay its IPO raised fears about the sustainability of AI infrastructure spending. This wasn't a broad collapse but a rotation. Advancing shares outnumbered decliners even on down days, and by Thursday 63% of the S&P traded above its 50-day average, up from 50% at the start of June, as money moved into healthcare, industrials and value. For long-term capital, a reset like this is an opportunity: we build at lower prices.`,
+      `<strong class="font-semibold text-ink">Why now is a good entry.</strong> The AI fundamentals never wavered. Micron posted "market-crushing" earnings with its stock up over 325% year-to-date, and Bernstein called Nvidia and Broadcom "absurdly cheap" while Druckenmiller reportedly bought Broadcom. Our core names are simply cheaper for the same thesis. Two holdings took idiosyncratic hits we're pricing in deliberately: Rheinmetall fell roughly 19% after Germany moved to scrap its F126 frigate programme, and Strategy (MSTR) closed down ~27% as Bitcoin slid below $60,000. Gold corrected too, with August futures briefly breaking below $4,000 for the first time in seven months, but miners firmed into Friday as gold steadied.`,
+      `<strong class="font-semibold text-ink">For a GBP investor.</strong> Sterling absorbed PM Starmer's resignation and trades near 1.32, while hitting a ten-month high against the euro. Near-flat cable means little FX noise on entry; a firm pound versus the euro is a mild headwind on our one euro holding.`,
+      `<strong class="font-semibold text-ink">Strategy this week.</strong> Build the AI/compute core at reset prices, hold power-for-AI and gold as diversifiers, keep defence and a small crypto sleeve but size both for their fresh risks, and carry ~20% cash into Thursday's US jobs report.`,
+    ],
+
+    portfolioA: {
+      label: "Portfolio A",
+      sub: "ETFs allowed",
+      blurb: "ETFs for diversified macro exposure (semis breadth, defence, gold, crypto); single stocks for the highest-conviction names. All four ETFs are GBP-listed UCITS lines, so they carry no FX; only the individual US stocks do.",
+      navOpening: 100000.00,
+      friction: 0.00,
+      holdings: [
+        { ticker: "NVDA",   name: "Nvidia",                         ccy: "USD", entryPx: 193.23,  entryGbp: 146.4965, shares:   68.261, weight: 10, costGbp: 10000 },
+        { ticker: "AVGO",   name: "Broadcom",                       ccy: "USD", entryPx: 365.02,  entryGbp: 276.7400, shares:   36.135, weight: 10, costGbp: 10000 },
+        { ticker: "TSM",    name: "TSMC (ADR)",                     ccy: "USD", entryPx: 434.99,  entryGbp: 329.7545, shares:   27.290, weight:  9, costGbp:  9000 },
+        { ticker: "SMGB",   name: "VanEck Semiconductor UCITS ETF", ccy: "GBP", entryPx: 118.00,  entryGbp: 118.0000, shares:   76.271, weight:  9, costGbp:  9000 },
+        { ticker: "CEG",    name: "Constellation Energy",           ccy: "USD", entryPx: 264.02,  entryGbp: 200.1681, shares:   49.958, weight: 10, costGbp: 10000 },
+        { ticker: "NATO.L", name: "Future of Defence ETF",          ccy: "GBP", entryPx:  19.55,  entryGbp:  19.5500, shares:  460.311, weight:  9, costGbp:  9000 },
+        { ticker: "SGLN.L", name: "iShares Physical Gold ETF",      ccy: "GBP", entryPx:  59.94,  entryGbp:  59.9400, shares:  166.834, weight: 10, costGbp: 10000 },
+        { ticker: "AMD",    name: "AMD",                            ccy: "USD", entryPx: 521.58,  entryGbp: 395.4327, shares:   20.231, weight:  8, costGbp:  8000 },
+        { ticker: "IB1T",   name: "iShares Bitcoin ETP",            ccy: "GBP", entryPx:   4.5425,entryGbp:   4.5425, shares: 1100.715, weight:  5, costGbp:  5000 },
+      ],
+      cashWeight: 20,
+      cashGbp: 20000,
+      notes: [
+        { ticker: "NVDA",   target: "$230",                text: "AI compute leader bought ~8% cheaper after the rotation; demand signals remain the market's strongest and the thesis is intact." },
+        { ticker: "AVGO",   target: "$420",                text: `Custom AI silicon and networking, down ~11% and called "absurdly cheap" by Bernstein with smart money buying. Our highest-conviction reset entry.` },
+        { ticker: "TSM",    target: "$480",                text: "The foundry bottleneck (~70% share); Q2 earnings land 16 July and analyst targets sit far higher." },
+        { ticker: "SMGB",   target: "Recover the breakdown", text: "One-line semis breadth (memory, equipment, AMD); the UK-listed UCITS line, GBP and FX-free." },
+        { ticker: "CEG",    target: "$300",                text: "Power-for-AI via nuclear at ~36% below its high; FY EPS guide $11–12 and structural datacentre demand." },
+        { ticker: "NATO.L", target: "£21",                 text: "Diversified defence basket; cushions the single-name Rheinmetall risk that hit the sector last week." },
+        { ticker: "SGLN.L", target: "£63",                 text: "Physical gold after the sub-$4,000 reset, GBP-quoted; the book's equity hedge." },
+        { ticker: "AMD",    target: "$580",                text: "Second accelerator vendor at a lower multiple; UBS recently set a street-high target." },
+        { ticker: "IB1T",   target: "Track BTC",           text: "Direct Bitcoin exposure after the break below $60k; small, speculative sleeve." },
+      ],
+      summary: "Portfolio A expresses the AI core through leaders (NVDA, AVGO, TSM, AMD) plus an ETF for breadth (SMGB), then uses the wrapper for defence (NATO.L), gold (SGLN.L) and crypto (IB1T). CEG is the power-for-AI play. 20% cash is insurance into Thursday's jobs print."
+    },
+
+    portfolioB: {
+      label: "Portfolio B",
+      sub: "Equities only",
+      blurb: "Same themes as A, expressed purely through single stocks. The clean stock-picking book.",
+      navOpening: 100000.00,
+      friction: 0.00,
+      holdings: [
+        { ticker: "NVDA", name: "Nvidia",               ccy: "USD", entryPx:  193.23, entryGbp: 146.4965, shares: 68.261, weight: 10, costGbp: 10000 },
+        { ticker: "AVGO", name: "Broadcom",             ccy: "USD", entryPx:  365.02, entryGbp: 276.7400, shares: 36.135, weight: 10, costGbp: 10000 },
+        { ticker: "TSM",  name: "TSMC (ADR)",           ccy: "USD", entryPx:  434.99, entryGbp: 329.7545, shares: 27.290, weight:  9, costGbp:  9000 },
+        { ticker: "MU",   name: "Micron",               ccy: "USD", entryPx: 1132.33, entryGbp: 858.4510, shares: 10.484, weight:  9, costGbp:  9000 },
+        { ticker: "AMD",  name: "AMD",                  ccy: "USD", entryPx:  521.58, entryGbp: 395.4327, shares: 20.231, weight:  8, costGbp:  8000 },
+        { ticker: "CEG",  name: "Constellation Energy", ccy: "USD", entryPx:  264.02, entryGbp: 200.1681, shares: 49.958, weight: 10, costGbp: 10000 },
+        { ticker: "RHM",  name: "Rheinmetall",          ccy: "EUR", entryPx:  946.60, entryGbp: 817.4108, shares:  9.787, weight:  8, costGbp:  8000 },
+        { ticker: "AEM",  name: "Agnico Eagle",         ccy: "USD", entryPx:  158.29, entryGbp: 120.0077, shares: 83.328, weight: 10, costGbp: 10000 },
+        { ticker: "MSTR", name: "Strategy",             ccy: "USD", entryPx:   82.31, entryGbp:  62.4034, shares: 64.099, weight:  4, costGbp:  4000 },
+      ],
+      cashWeight: 22,
+      cashGbp: 22000,
+      notes: [
+        { ticker: "NVDA", target: "$230",   text: "AI compute leader bought ~8% cheaper after the rotation; same thesis as Portfolio A." },
+        { ticker: "AVGO", target: "$420",   text: `Custom AI silicon and networking, called "absurdly cheap" by Bernstein; same thesis as A.` },
+        { ticker: "TSM",  target: "$480",   text: "The foundry bottleneck (~70% share); Q2 earnings 16 July, analyst targets far higher." },
+        { ticker: "MU",   target: "$1,250", text: "The memory supercycle's purest large-cap, fresh off record earnings; sized for its steep run." },
+        { ticker: "AMD",  target: "$580",   text: "Direct accelerator exposure at a lower multiple than Nvidia." },
+        { ticker: "CEG",  target: "$300",   text: "Power-for-AI at a discount, identical thesis to A." },
+        { ticker: "RHM",  target: "€1,150", text: "Defence proxy cut to 8%. It fell ~21% on the scrapped F126 frigate deal and a JPMorgan downgrade, but trades near 52-week lows with analyst targets far higher and insider buying; a contrarian, risk-managed entry." },
+        { ticker: "AEM",  target: "$175",   text: "Senior gold miner bought into the metals reset; firmed Friday as gold steadied, P/E ~15." },
+        { ticker: "MSTR", target: "$105",   text: "Crypto proxy trimmed to 4%. High risk after Bitcoin's drop took its mNAV below 1.0; deliberately small and speculative." },
+      ],
+      summary: "B mirrors A's themes through single stocks: MU + AMD for semis breadth, Rheinmetall for defence, Agnico for gold, Strategy for crypto. The two beaten-down names are sized down to reflect their idiosyncratic risks."
+    },
+
+    themeAllocation: [
+      { theme: "AI / Semiconductors", pctA: 46, pctB: 46, aDetail: "NVDA, AVGO, TSM, SMGB, AMD",     bDetail: "NVDA, AVGO, TSM, MU, AMD" },
+      { theme: "Power-for-AI",        pctA: 10, pctB: 10, aDetail: "CEG",                             bDetail: "CEG" },
+      { theme: "Defence",             pctA:  9, pctB:  8, aDetail: "NATO.L (Future of Defence ETF)",  bDetail: "Rheinmetall" },
+      { theme: "Gold",                pctA: 10, pctB: 10, aDetail: "SGLN.L (Physical Gold ETF)",      bDetail: "Agnico Eagle" },
+      { theme: "Crypto",              pctA:  5, pctB:  4, aDetail: "IB1T (Bitcoin ETP)",              bDetail: "Strategy (MSTR)" },
+      { theme: "Cash",                pctA: 20, pctB: 22, aDetail: "—",                               bDetail: "—" },
+    ],
+
+    weekNote: {
+      title: "Week 1: Inception.",
+      body: "All three start level at £100,000 / 100.00, with no opening fees, so the race begins on equal footing. We're deliberately building into a tech/gold/crypto reset: the AI thesis is intact and now cheaper, while the two names that took specific damage, Rheinmetall (F126) and Strategy (Bitcoin), are sized down rather than dropped. The concentration in AI/semis (~46%) is the bet, and the main risk. The benchmark is Vanguard's GBP S&P 500 tracker (VUAG), anchored at the 26 Jun close of £107.76 = 100.00. Dealing friction (0.10% commission, 0.5% UK stamp on UK shares, 0.25% FX each way on non-GBP assets) applies to trades from here, not to the start."
+    },
+  }
+};
+
+/* ----------------------------------------------------------------------------
+   ROUTER — show/hide page sections on hash change
+---------------------------------------------------------------------------- */
+const routes = ['home','research','experiment','about','contact'];
+const pageTitles = {
+  home: 'Howegate Capital — Independent Equity Research',
+  research: 'Research — Howegate Capital',
+  experiment: 'The Experiment — Howegate Capital',
+  about: 'About — Howegate Capital',
+  contact: 'Contact — Howegate Capital',
+};
+function routeFromHash() {
+  const h = (location.hash || '#/').replace(/^#\/?/, '').split('?')[0];
+  return routes.includes(h) ? h : 'home';
+}
+function go(route) {
+  routes.forEach(r => {
+    const el = document.getElementById('page-' + r);
+    if (el) el.classList.toggle('active', r === route);
+  });
+  document.querySelectorAll('[data-link]').forEach(a => {
+    const target = (a.getAttribute('href') || '').replace(/^#\/?/, '') || 'home';
+    a.classList.toggle('active', target === route);
+  });
+  document.title = pageTitles[route] || pageTitles.home;
+  const menu = document.getElementById('mobileMenu');
+  menu.classList.add('hidden');
+  document.getElementById('menuBtn').setAttribute('aria-expanded', 'false');
+  window.scrollTo(0, 0);
+  const pageEl = document.getElementById('page-' + route);
+  bindReveals(pageEl);
+  bindCounts(pageEl);
+  bindSplits(pageEl);
+  if (route === 'experiment') renderPerfChart();
+  if (route === 'home') renderMiniChart();
+}
+window.addEventListener('hashchange', () => go(routeFromHash()));
+
+/* ----------------------------------------------------------------------------
+   MOTION HELPERS
+---------------------------------------------------------------------------- */
+const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* Scroll reveals */
+let io;
+function bindReveals(scope) {
+  if (!scope) return;
+  if (!io) {
+    io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  }
+  const vh = window.innerHeight;
+  scope.querySelectorAll('.reveal:not(.in)').forEach(el => {
+    // Anything already in the initial viewport — reveal immediately so we don't depend on IO timing
+    const r = el.getBoundingClientRect();
+    if (r.top < vh && r.bottom > 0) { el.classList.add('in'); return; }
+    io.observe(el);
+  });
+}
+
+/* Split-text headlines — words rise individually with stagger */
+let splitIO;
+function bindSplits(scope) {
+  if (!scope) return;
+  if (!splitIO) {
+    splitIO = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.querySelectorAll('.split-word').forEach(w => w.classList.add('in'));
+          splitIO.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.35 });
+  }
+  const vh = window.innerHeight;
+  scope.querySelectorAll('.split-headline:not([data-split-bound])').forEach(el => {
+    el.setAttribute('data-split-bound', '1');
+    const txt = el.textContent;
+    el.textContent = '';
+    txt.split(/(\s+)/).forEach(part => {
+      if (/^\s+$/.test(part)) { el.appendChild(document.createTextNode(part)); return; }
+      const span = document.createElement('span');
+      span.className = 'split-word';
+      span.textContent = part;
+      el.appendChild(span);
+    });
+    Array.from(el.querySelectorAll('.split-word')).forEach((w, i) => {
+      w.style.transitionDelay = (i * 90) + 'ms';
+    });
+    // If the headline is already in the initial viewport, reveal immediately
+    const r = el.getBoundingClientRect();
+    if (r.top < vh && r.bottom > 0) {
+      el.querySelectorAll('.split-word').forEach(w => w.classList.add('in'));
+    } else {
+      splitIO.observe(el);
+    }
+  });
+}
+
+/* Odometer count-up: any element with data-count animates when scrolled into view.
+   data-count   final number
+   data-prefix  e.g. "£"
+   data-suffix  e.g. "%"
+   data-decimals
+   data-signed  "1" → always show +/− sign
+   data-group   "1" → thousands separators */
+function fmtCount(el, v) {
+  const dec = parseInt(el.dataset.decimals || '0', 10);
+  const signed = el.dataset.signed === '1';
+  const group = el.dataset.group === '1';
+  let body = group ? Math.round(v).toLocaleString('en-GB') : v.toFixed(dec);
+  let sign = '';
+  if (signed) sign = v > 0 ? '+' : v < 0 ? '−' : '+';
+  if (signed && v < 0) body = group ? Math.round(Math.abs(v)).toLocaleString('en-GB') : Math.abs(v).toFixed(dec);
+  return (el.dataset.prefix || '') + sign + body + (el.dataset.suffix || '');
+}
+function runCount(el) {
+  const target = parseFloat(el.dataset.count);
+  if (isNaN(target)) return;
+  if (REDUCED) { el.textContent = fmtCount(el, target); return; }
+  const from = parseFloat(el.dataset.from || '0');
+  const dur = 1300;
+  const t0 = performance.now();
+  function tick(t) {
+    const p = Math.min((t - t0) / dur, 1);
+    const eased = 1 - Math.pow(1 - p, 4); // strong ease-out, settles like a dial
+    el.textContent = fmtCount(el, from + (target - from) * eased);
+    if (p < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+let countIO;
+function bindCounts(scope) {
+  if (!scope) return;
+  if (!countIO) {
+    countIO = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { runCount(e.target); countIO.unobserve(e.target); } });
+    }, { threshold: 0.4 });
+  }
+  scope.querySelectorAll('[data-count]').forEach(el => {
+    countIO.unobserve(el);
+    countIO.observe(el);
+  });
+}
+function setCount(el, value, opts = {}) {
+  if (!el) return;
+  el.dataset.count = String(value);
+  for (const [k, v] of Object.entries(opts)) el.dataset[k] = String(v);
+  el.textContent = fmtCount(el, value); // static fallback; observer animates when seen
+}
+
+/* Magnetic buttons: a quiet pull toward the cursor, snaps home on leave */
+function bindMagnetic() {
+  if (REDUCED || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  document.querySelectorAll('.btn').forEach(b => {
+    if (b.dataset.magnet) return;
+    b.dataset.magnet = '1';
+    b.addEventListener('mousemove', (e) => {
+      const r = b.getBoundingClientRect();
+      const x = e.clientX - r.left - r.width / 2;
+      const y = e.clientY - r.top - r.height / 2;
+      b.style.transform = `translate(${x * 0.12}px, ${y * 0.22}px)`;
+    });
+    b.addEventListener('mouseleave', () => {
+      b.style.transition = 'transform .5s cubic-bezier(.2,.9,.25,1.2), background .25s ease, color .25s ease, border-color .25s ease';
+      b.style.transform = '';
+      setTimeout(() => { b.style.transition = ''; }, 500);
+    });
+  });
+}
+
+/* ----------------------------------------------------------------------------
+   RENDER — home notes preview
+---------------------------------------------------------------------------- */
+function noteHref(n) {
+  // Has a real URL → opens the PDF / article. No URL → goes to the research index.
+  return n.url ? n.url : '#/research';
+}
+function noteLinkAttrs(n) {
+  if (!n.url) return 'data-link';
+  const ext = /\.pdf($|\?)/i.test(n.url);
+  return ext ? 'target="_blank" rel="noopener"' : '';
+}
+
+function renderHomeNotes() {
+  const wrap = document.getElementById('homeNotes');
+  if (!wrap) return;
+  const items = DATA.research.slice(0, 3);
+  wrap.innerHTML = items.map((n, i) => `
+    <a href="${noteHref(n)}" ${noteLinkAttrs(n)} class="card group reveal reveal-delay-${(i%3)+1} block bg-white border border-ink/10 rounded-xl p-7 shadow-soft">
+      <div class="flex items-center justify-between mb-6">
+        <span class="num text-xs text-downs-deep tracking-wider">${n.ticker}</span>
+        <span class="text-xs text-ink-mute">${n.date}</span>
+      </div>
+      <h3 class="text-xl leading-snug mb-3 text-ink"><span class="uline">${n.title}</span></h3>
+      <p class="text-sm text-ink-mute leading-relaxed mb-7">${n.summary}</p>
+      <div class="flex items-center justify-between text-xs text-ink-mute">
+        <span>${n.length}</span>
+        <span class="inline-flex items-center gap-1.5 text-downs-deep">${ n.url ? 'Read note' : 'Coming soon' }
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </span>
+      </div>
+    </a>
+  `).join('');
+}
+
+/* ----------------------------------------------------------------------------
+   RENDER — research list
+---------------------------------------------------------------------------- */
+function renderResearchList() {
+  const wrap = document.getElementById('researchList');
+  if (!wrap) return;
+  wrap.innerHTML = DATA.research.map((n, i) => {
+    const clickable = !!n.url;
+    const Tag = clickable ? 'a' : 'article';
+    const linkAttrs = clickable ? `href="${n.url}" ${noteLinkAttrs(n)}` : '';
+    return `
+      <${Tag} ${linkAttrs} class="group row-shift reveal reveal-delay-${(i%3)+1} py-9 sm:py-11 grid grid-cols-12 gap-6 items-start ${clickable ? 'block hover:bg-cream/60 -mx-3 px-3 rounded-lg transition-colors duration-300' : ''}">
+        <div class="col-span-12 sm:col-span-2">
+          <div class="num text-sm text-downs-deep">${n.ticker}</div>
+          <div class="text-xs text-ink-mute mt-1">${n.date}</div>
+        </div>
+        <div class="col-span-12 sm:col-span-8">
+          <h3 class="text-2xl sm:text-[1.7rem] leading-snug mb-2 text-ink"><span class="uline">${n.title}</span></h3>
+          <p class="text-ink-mute leading-relaxed">${n.summary}</p>
+        </div>
+        <div class="col-span-12 sm:col-span-2 sm:text-right">
+          ${ n.status === 'upcoming'
+              ? `<span class="inline-flex items-center gap-2 text-xs text-ink-mute border border-ink/15 px-3 py-1 rounded-full">Upcoming</span>`
+              : `<span class="inline-flex items-center gap-2 text-xs text-downs-deep border border-downs/30 px-3 py-1 rounded-full">${n.length}</span>` }
+        </div>
+      </${Tag}>
+    `;
+  }).join('');
+}
+
+/* ----------------------------------------------------------------------------
+   RENDER — experiment KPIs, holdings, weekly note, hero strip
+---------------------------------------------------------------------------- */
+function fmtPct(v) { return (v >= 0 ? '+' : '') + v.toFixed(2) + '%'; }
+// Light backgrounds (cream/white) — green for positive
+function pctColor(v)     { return v > 0 ? 'text-downs-deep' : v < 0 ? 'text-rose' : 'text-ink-mute'; }
+// Pine backgrounds — white for positive (no green on green)
+function pctColorDark(v) { return v > 0 ? 'text-white'      : v < 0 ? 'text-rose' : 'text-white'; }
+
+// Currently active tab in the portfolio panel
+let activeTab = 'A';
+
+function fmtMoney(v) { return '£' + Math.round(v).toLocaleString('en-GB') + (v % 1 ? '.' + String(v.toFixed(2)).split('.')[1] : ''); }
+function fmtMoney2(v) { return '£' + v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+
+function renderPortfolio(which) {
+  const e = DATA.experiment;
+  const p = which === 'A' ? e.portfolioA : e.portfolioB;
+  const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+
+  set('portfolioBlurb', p.blurb);
+  set('portfolioSummary', p.summary);
+
+  // Holdings table
+  const body = document.getElementById('holdingsBody');
+  if (body) {
+    body.innerHTML = p.holdings.map(h => `
+      <tr class="ticker-row">
+        <td class="py-3 pr-4 num text-downs-deep">${h.ticker}</td>
+        <td class="py-3 pr-4">${h.name}</td>
+        <td class="py-3 pr-4 text-xs text-ink-mute hidden md:table-cell">${h.ccy}</td>
+        <td class="py-3 pr-4 num text-right">${ h.ccy === 'GBP' ? '£' + h.entryPx.toFixed(2) : h.ccy === 'EUR' ? '€' + h.entryPx.toFixed(2) : '$' + h.entryPx.toFixed(2) }</td>
+        <td class="py-3 pr-4 num text-right text-ink-mute hidden sm:table-cell">${h.shares.toFixed(4)}</td>
+        <td class="py-3 pr-4 num text-right">${h.weight}%</td>
+        <td class="py-3 pr-0 num text-right hidden md:table-cell">£${h.costGbp.toLocaleString('en-GB')}</td>
+      </tr>
+    `).join('') + `
+      <tr class="ticker-row">
+        <td class="py-3 pr-4 num text-ink-mute">CASH</td>
+        <td class="py-3 pr-4 text-ink-mute">Sterling</td>
+        <td class="py-3 pr-4 text-xs text-ink-mute hidden md:table-cell">GBP</td>
+        <td class="py-3 pr-4 num text-right text-ink-mute">—</td>
+        <td class="py-3 pr-4 num text-right text-ink-mute hidden sm:table-cell">—</td>
+        <td class="py-3 pr-4 num text-right">${p.cashWeight}%</td>
+        <td class="py-3 pr-0 num text-right hidden md:table-cell">£${p.cashGbp.toLocaleString('en-GB')}</td>
+      </tr>
+    `;
+  }
+
+  // Footer: opening NAV + friction
+  const foot = document.getElementById('holdingsFoot');
+  if (foot) {
+    foot.innerHTML = `
+      <tr><td colspan="7" class="pt-5"></td></tr>
+      <tr class="text-xs text-ink-mute">
+        <td colspan="5" class="py-2 pr-4">Opening NAV</td>
+        <td class="py-2 pr-4 num text-right">100% </td>
+        <td class="py-2 pr-0 num text-right text-ink hidden md:table-cell">${fmtMoney2(p.navOpening)}</td>
+      </tr>
+      <tr class="text-xs text-ink-mute">
+        <td colspan="5" class="py-2 pr-4">Dealing friction at inception</td>
+        <td class="py-2 pr-4 text-right">—</td>
+        <td class="py-2 pr-0 num text-right hidden md:table-cell">${fmtMoney2(p.friction)}</td>
+      </tr>
+    `;
+  }
+
+  // Position notes
+  const notes = document.getElementById('positionNotes');
+  if (notes) {
+    notes.innerHTML = p.notes.map(n => `
+      <li class="py-4 grid grid-cols-12 gap-3 sm:gap-5 items-start">
+        <div class="col-span-3 sm:col-span-2">
+          <div class="num text-downs-deep text-sm">${n.ticker}</div>
+          <div class="num text-xs text-ink-mute mt-1">${n.target}</div>
+        </div>
+        <div class="col-span-9 sm:col-span-10 text-ink-soft leading-relaxed">${n.text}</div>
+      </li>
+    `).join('');
+  }
+
+  // Update tab active state
+  document.querySelectorAll('.port-tab').forEach(t => {
+    const isActive = t.dataset.tab === which;
+    t.classList.toggle('active', isActive);
+    t.setAttribute('aria-selected', isActive ? 'true' : 'false');
+  });
+  activeTab = which;
+}
+
+function renderExperiment() {
+  const e = DATA.experiment;
+  const A = e.performance.A, B = e.performance.B, bench = e.performance.bench;
+  const aPct = A[A.length-1] - 100;
+  const bPct = B[B.length-1] - 100;
+  const benchPct = bench[bench.length-1] - 100;
+  const aNav = e.portfolioA.navOpening * (1 + aPct/100);
+  const bNav = e.portfolioB.navOpening * (1 + bPct/100);
+
+  const cls = (id, c) => { const el = document.getElementById(id); if (!el) return; el.classList.remove('text-downs-deep','text-rose','text-ink-mute','text-white'); el.classList.add(c); };
+  const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+
+  // Scorecard
+  setCount(document.getElementById('aNav'), Math.round(aNav), { prefix: '£', group: 1, from: e.portfolioA.navOpening });
+  setCount(document.getElementById('bNav'), Math.round(bNav), { prefix: '£', group: 1, from: e.portfolioB.navOpening });
+  setCount(document.getElementById('aReturn'), aPct, { suffix: '%', decimals: 2, signed: 1 });
+  setCount(document.getElementById('bReturn'), bPct, { suffix: '%', decimals: 2, signed: 1 });
+  cls('aReturn', pctColorDark(aPct));
+  cls('bReturn', pctColorDark(bPct));
+
+  // Week / date strip
+  set('weekNum', String(DATA.weekNumber));
+  set('experimentDate', DATA.updatedAt);
+
+  // Market overview paragraphs
+  const mo = document.getElementById('marketOverviewText');
+  if (mo) mo.innerHTML = e.marketOverview.map(p => `<p>${p}</p>`).join('');
+
+  // Theme allocation rows
+  const themeWrap = document.getElementById('themeAllocation');
+  if (themeWrap) {
+    const max = Math.max(...e.themeAllocation.map(t => Math.max(t.pctA, t.pctB)));
+    themeWrap.innerHTML = e.themeAllocation.map(t => {
+      const pctLabel = t.pctA === t.pctB ? `${t.pctA}%` : `${t.pctA}% / ${t.pctB}%`;
+      const barPct = Math.max(t.pctA, t.pctB);
+      return `
+      <div class="theme-row">
+        <div class="theme-row-head">
+          <span class="theme-name">${t.theme}</span>
+          <span class="theme-pct num">${pctLabel}</span>
+        </div>
+        <div class="theme-bar"><div class="theme-bar-fill" style="width: ${(barPct / max) * 100}%"></div></div>
+        <div class="theme-detail">
+          <span><strong>A</strong> · ${t.aDetail}</span>
+          <span><strong>B</strong> · ${t.bDetail}</span>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  // Active portfolio panel
+  renderPortfolio(activeTab);
+
+  // Week note
+  set('weekTitle', e.weekNote.title);
+  set('weekBody',  e.weekNote.body);
+
+  // Home teaser — show Portfolio A for the home page mini chart card
+  setCount(document.getElementById('navValueMini'), Math.round(aNav), { prefix: '£', group: 1, from: e.portfolioA.navOpening });
+  set('navPctMini',   fmtPct(aPct));
+  set('benchPctMini', fmtPct(benchPct));
+
+  // Hero desk strip — show latest research + Portfolio A vs S&P
+  const latest = DATA.research.find(n => n.status === 'published');
+  set('stripNote',  latest ? `${latest.ticker} · ${latest.date}` : '—');
+  set('stripPort',  fmtPct(aPct));
+  set('stripBench', fmtPct(benchPct));
+  set('stripDate',  DATA.updatedAt);
+}
+
+// Tab clicks
+document.addEventListener('click', (ev) => {
+  const tab = ev.target.closest('.port-tab');
+  if (!tab) return;
+  renderPortfolio(tab.dataset.tab);
+});
+
+/* ----------------------------------------------------------------------------
+   CHARTS
+---------------------------------------------------------------------------- */
+const chartAnim = REDUCED ? false : { duration: 1100, easing: 'easeOutCubic' };
+
+// Crosshair plugin — vertical dashed line + dot at each series, hugs the hovered x-position.
+// Quiet on the eye, signals "this is an instrument."
+const crosshairPlugin = {
+  id: 'crosshair',
+  afterDatasetsDraw(chart) {
+    const active = chart.tooltip?._active;
+    if (!active || !active.length) return;
+    const ctx = chart.ctx;
+    const x = active[0].element.x;
+    const { top, bottom } = chart.chartArea;
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(x, top);
+    ctx.lineTo(x, bottom);
+    ctx.lineWidth = 1;
+    ctx.setLineDash([3, 4]);
+    ctx.strokeStyle = 'rgba(22,29,23,.28)';
+    ctx.stroke();
+    // Series dots
+    active.forEach(item => {
+      const ds = chart.data.datasets[item.datasetIndex];
+      ctx.beginPath();
+      ctx.arc(item.element.x, item.element.y, 3.5, 0, Math.PI * 2);
+      ctx.fillStyle = ds.borderColor;
+      ctx.fill();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = '#fff';
+      ctx.stroke();
+    });
+    ctx.restore();
+  }
+};
+
+let perfChartInstance = null;
+function renderPerfChart() {
+  const canvas = document.getElementById('perfChart');
+  if (!canvas || !window.Chart) return;
+  if (perfChartInstance) { perfChartInstance.destroy(); perfChartInstance = null; }
+  const ctx = canvas.getContext('2d');
+  const grad = ctx.createLinearGradient(0, 0, 0, 360);
+  grad.addColorStop(0, 'rgba(46,94,65,.16)');
+  grad.addColorStop(1, 'rgba(46,94,65,0)');
+
+  const perf = DATA.experiment.performance;
+  const singlePoint = perf.labels.length === 1;
+  perfChartInstance = new Chart(ctx, {
+    type: 'line',
+    plugins: [crosshairPlugin],
+    data: {
+      labels: perf.labels,
+      datasets: [
+        {
+          label: 'Portfolio A',
+          data: perf.A,
+          borderColor: '#2E5E41', backgroundColor: grad,
+          borderWidth: 2, tension: .35, fill: true,
+          pointRadius: singlePoint ? 5 : 0, pointHoverRadius: 5,
+          pointBackgroundColor: '#2E5E41', pointBorderColor: '#fff', pointBorderWidth: 2,
+        },
+        {
+          label: 'Portfolio B',
+          data: perf.B,
+          borderColor: '#9CC5A9', backgroundColor: 'rgba(156,197,169,0)',
+          borderWidth: 2, tension: .35, fill: false,
+          pointRadius: singlePoint ? 5 : 0, pointHoverRadius: 5,
+          pointBackgroundColor: '#9CC5A9', pointBorderColor: '#fff', pointBorderWidth: 2,
+        },
+        {
+          label: 'S&P 500',
+          data: perf.bench,
+          borderColor: 'rgba(22,29,23,.45)', borderDash: [4,4],
+          borderWidth: 1.5, tension: .35, fill: false,
+          pointRadius: singlePoint ? 4 : 0, pointHoverRadius: 4,
+          pointBackgroundColor: 'rgba(22,29,23,.6)', pointBorderColor: '#fff', pointBorderWidth: 2,
+        }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      animation: chartAnim,
+      interaction: { mode: 'index', intersect: false },
+      layout: { padding: { top: 8, right: 12, bottom: 0, left: 4 } },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#152A1E', borderColor: 'rgba(255,255,255,.12)', borderWidth: 1,
+          titleFont: { family: 'Hanken Grotesk', size: 11, weight: '500' },
+          bodyFont:  { family: 'Hanken Grotesk', size: 12 },
+          padding: 12, displayColors: true, boxPadding: 4,
+          callbacks: { label: (c) => ` ${c.dataset.label}: ${c.parsed.y.toFixed(2)}` }
+        }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: 'rgba(22,29,23,.5)', font: { family: 'Hanken Grotesk', size: 11 }, autoSkip: true, maxTicksLimit: 8 } },
+        y: { grid: { color: 'rgba(22,29,23,.07)' }, ticks: { color: 'rgba(22,29,23,.5)', font: { family: 'Hanken Grotesk', size: 11 }, maxTicksLimit: 6 }, beginAtZero: false }
+      }
+    }
+  });
+}
+
+let miniChartInstance = null;
+function renderMiniChart() {
+  const canvas = document.getElementById('miniChart');
+  if (!canvas || !window.Chart) return;
+  if (miniChartInstance) { miniChartInstance.destroy(); miniChartInstance = null; }
+  const ctx = canvas.getContext('2d');
+  const grad = ctx.createLinearGradient(0, 0, 0, 200);
+  grad.addColorStop(0, 'rgba(46,94,65,.18)');
+  grad.addColorStop(1, 'rgba(46,94,65,0)');
+
+  const perf = DATA.experiment.performance;
+  const singlePoint = perf.labels.length === 1;
+  miniChartInstance = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: perf.labels,
+      datasets: [
+        { data: perf.A,     borderColor: '#2E5E41', backgroundColor: grad, borderWidth: 2, tension: .35, fill: true,  pointRadius: singlePoint ? 4 : 0, pointBackgroundColor: '#2E5E41', pointBorderColor: '#fff', pointBorderWidth: 2 },
+        { data: perf.bench, borderColor: 'rgba(22,29,23,.35)', borderDash: [3,3], borderWidth: 1.25, tension: .35, fill: false, pointRadius: singlePoint ? 3 : 0, pointBackgroundColor: 'rgba(22,29,23,.6)' },
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      animation: REDUCED ? false : { duration: 900, easing: 'easeOutCubic' },
+      layout: { padding: { top: 4, right: 6, bottom: 0, left: 2 } },
+      plugins: { legend: { display: false }, tooltip: { enabled: false } },
+      scales: { x: { display: false }, y: { display: false } },
+      elements: { line: { borderJoinStyle: 'round' } }
+    }
+  });
+}
+
+/* ----------------------------------------------------------------------------
+   FORMS — local-only feedback (swap with Formspree later if you want)
+---------------------------------------------------------------------------- */
+function wireForms() {
+  const req = document.getElementById('requestForm');
+  if (req) req.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const s = document.getElementById('requestStatus');
+    if (!req.checkValidity()) { s.textContent = 'Please fill the required fields.'; s.classList.remove('text-downs-deep'); s.classList.add('text-rose'); return; }
+    s.textContent = 'Request received — thank you. I’ll reply within a few days.';
+    s.classList.add('text-downs-deep'); s.classList.remove('text-rose');
+    req.reset();
+  });
+
+  const con = document.getElementById('contactForm');
+  if (con) con.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const s = document.getElementById('contactStatus');
+    if (!con.checkValidity()) { s.textContent = 'Please fill the required fields.'; s.classList.remove('text-downs-deep'); s.classList.add('text-rose'); return; }
+    s.textContent = 'Message sent — I’ll be in touch.';
+    s.classList.add('text-downs-deep'); s.classList.remove('text-rose');
+    con.reset();
+  });
+}
+
+/* ----------------------------------------------------------------------------
+   INIT
+---------------------------------------------------------------------------- */
+document.getElementById('year').textContent = new Date().getFullYear();
+
+document.getElementById('menuBtn').addEventListener('click', () => {
+  const menu = document.getElementById('mobileMenu');
+  const open = menu.classList.toggle('hidden');
+  document.getElementById('menuBtn').setAttribute('aria-expanded', String(!open));
+});
+
+// Frosted header once the page moves; white text while over the dark image hero on home
+const header = document.getElementById('siteHeader');
+const progress = document.getElementById('progress');
+const heroImgWrap = document.getElementById('heroImgWrap');
+
+function onScroll() {
+  const y = window.scrollY;
+  const scrolled = y > 12;
+  header.classList.toggle('scrolled', scrolled);
+  const onHome = routeFromHash() === 'home';
+  header.classList.toggle('over-hero', onHome && !scrolled);
+
+  // Reading progress
+  const docH = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = docH > 0 ? Math.min(Math.max(y / docH, 0), 1) : 0;
+  progress.style.width = (pct * 100) + '%';
+
+  // Hero parallax — wrapper translates with scroll; image keeps Ken Burns running underneath
+  if (heroImgWrap && onHome && y < window.innerHeight * 1.2) {
+    heroImgWrap.style.transform = 'translateY(' + (y * 0.12) + 'px)';
+  }
+}
+let scrollTicking = false;
+window.addEventListener('scroll', () => {
+  if (scrollTicking) return;
+  scrollTicking = true;
+  requestAnimationFrame(() => { onScroll(); scrollTicking = false; });
+}, { passive: true });
+window.addEventListener('hashchange', onScroll);
+onScroll();
+
+renderHomeNotes();
+renderResearchList();
+renderExperiment();
+wireForms();
+go(routeFromHash());
+bindMagnetic();
+</script>
+
+</body>
+</html>
