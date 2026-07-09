@@ -1,0 +1,5 @@
+# Local Claude Code tooling / machine-specific config
+.claude/
+
+# Old pre-rebrand draft, not part of the live site
+Downland Capital page.html

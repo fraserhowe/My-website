@@ -301,8 +301,9 @@
     <div class="absolute inset-0 opacity-[.07] pointer-events-none" style="background-image:radial-gradient(rgba(255,255,255,.6) 1px, transparent 1px);background-size:3px 3px;mix-blend-mode:overlay;"></div>
 
     <div class="relative z-10 max-w-6xl mx-auto px-5 sm:px-8 pt-28 sm:pt-48 pb-14 sm:pb-28">
-      <p class="flex items-center gap-4 text-[0.74rem] sm:text-[0.78rem] tracking-[0.28em] uppercase text-downs-soft mb-8">
-        Independent Equity Research
+      <p class="flex flex-wrap items-center gap-x-4 gap-y-2.5 text-[0.74rem] sm:text-[0.78rem] tracking-[0.28em] uppercase text-downs-soft mb-8">
+        <span>Independent Equity Research</span>
+        <span class="inline-flex items-center border border-white/35 rounded-full px-3 py-[5px] text-[0.6rem] sm:text-[0.62rem] tracking-[0.18em] text-white/80">Student research project</span>
       </p>
       <h1 class="display text-white text-[2.4rem] sm:text-[4.4rem] md:text-[5.4rem] max-w-5xl" style="text-shadow:0 2px 32px rgba(21,42,30,.5)">
         <span class="line-mask"><span>Fundamental research</span></span>
@@ -310,7 +311,7 @@
         <span class="line-mask"><span>for long-term investors.</span></span>
       </h1>
       <p class="reveal reveal-delay-2 mt-9 max-w-xl text-white/80 text-lg leading-relaxed">
-        Howegate Capital is a research platform publishing theses on UK and US equities, written for investors who want to understand a company before owning it.
+        Howegate Capital publishes deep, independent research on UK and US markets: long-form studies of individual public companies, plus thematic and sector overviews for investors who want to understand what they own.
       </p>
       <div class="reveal reveal-delay-3 mt-10 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
         <a href="#/research" data-link class="btn inline-flex items-center justify-center gap-2 bg-white text-pine hover:bg-downs-soft text-sm px-6 py-3.5 rounded-full">
@@ -335,7 +336,7 @@
       </svg>
       <p class="reveal reveal-delay-1 text-[0.78rem] tracking-[0.28em] uppercase text-downs-deep mb-7">Our approach</p>
       <p class="reveal reveal-delay-2 font-serif text-[1.7rem] sm:text-[2.1rem] leading-[1.3] text-ink">
-        One research piece a month. A patient look at the fundamentals of a single public company: what the business does, how it earns, and what it should be worth.
+        One research piece a month. Usually a deep dive into a single public company (what it does, how it earns, and what it's worth), and at times a thematic or sector overview of where a market is heading.
       </p>
       <!-- Mirror hairline below to frame the moment -->
       <div class="reveal reveal-delay-3 mx-auto mt-9 w-12 h-px bg-downs/30"></div>
@@ -393,7 +394,7 @@
       </p>
       <h1 class="reveal reveal-delay-1 display text-[2.4rem] sm:text-[4rem]">All research.</h1>
       <p class="reveal reveal-delay-2 mt-6 max-w-2xl text-ink-mute text-lg leading-relaxed">
-        Long-form research on individual public companies. Each piece ends with a clear view on what the business is worth and whether it deserves to be owned at today's price.
+        Long-form research on individual public companies, plus thematic and sector overviews. Each piece works through what a business or theme is, how it earns, and how it might be valued. For information and education, not investment advice.
       </p>
     </div>
   </div>
@@ -448,6 +449,9 @@
   <!-- Hero — cream -->
   <div class="bg-cream">
     <div class="max-w-6xl mx-auto px-5 sm:px-8 pt-28 sm:pt-48 pb-10 sm:pb-20">
+      <div class="reveal mb-8 max-w-2xl border border-rose/40 rounded-xl px-5 py-3.5 text-sm text-ink-soft bg-white/60">
+        <strong class="text-ink">This is Claude.</strong> A virtual experiment, not advice. Do your own research, and do not follow these activities.
+      </div>
       <p class="reveal flex items-center gap-4 text-[0.78rem] tracking-[0.28em] uppercase text-downs-deep mb-7">
         The Experiment
       </p>
@@ -538,7 +542,7 @@
 
       <!-- Holdings -->
       <div class="reveal overflow-x-auto -mx-5 sm:mx-0 px-5 sm:px-0 mb-10">
-        <table class="w-full min-w-[860px] text-left text-sm sm:text-base">
+        <table class="w-full min-w-[920px] text-left text-sm sm:text-base">
           <thead>
             <tr class="text-[0.72rem] tracking-[0.22em] uppercase text-ink-mute border-b border-ink/15">
               <th class="py-3 pr-4 font-normal">Ticker</th>
@@ -546,9 +550,10 @@
               <th class="py-3 pr-4 font-normal">Ccy</th>
               <th class="py-3 pr-4 font-normal text-right">Entry</th>
               <th class="py-3 pr-4 font-normal text-right">Now</th>
+              <th class="py-3 pr-4 font-normal text-right">Chg</th>
               <th class="py-3 pr-4 font-normal text-right">Value</th>
-              <th class="py-3 pr-4 font-normal text-right">Weight</th>
-              <th class="py-3 pr-0 font-normal text-right">P/L</th>
+              <th class="py-3 pr-4 font-normal text-right">P/L</th>
+              <th class="py-3 pr-0 font-normal text-right">Weight</th>
             </tr>
           </thead>
           <tbody id="holdingsBody" class="divide-y divide-ink/10"></tbody>
@@ -557,7 +562,7 @@
       </div>
 
       <!-- Position notes -->
-      <h3 class="reveal text-xl sm:text-2xl mb-5">Positions &amp; short-term targets</h3>
+      <h3 class="reveal text-xl sm:text-2xl mb-5">Positions &amp; reasoning</h3>
       <ul id="positionNotes" class="reveal divide-y divide-ink/10"></ul>
 
       <p id="portfolioSummary" class="reveal mt-10 max-w-3xl text-ink-mute leading-relaxed text-sm italic"></p>
@@ -632,7 +637,7 @@
     </div>
     <div class="max-w-3xl mx-auto px-5 sm:px-8 pb-14 sm:pb-28 space-y-8 text-lg leading-relaxed text-ink-soft">
       <p class="reveal">
-        Howegate Capital is an independent equity research site focused on fundamental analysis and valuation. Each research piece is a study of one public company — what the business does, how it earns, the durability of those earnings, and what the equity should be worth at today's price.
+        Howegate Capital is an independent equity research site focused on fundamental analysis and valuation. Most pieces are deep dives into a single public company: what the business does, how it earns, the durability of those earnings, and what the equity should be worth today. Others step back to a whole theme or sector, mapping the forces shaping an industry and where value is likely to accrue.
       </p>
       <p class="reveal reveal-delay-1">
         The site is run by one person. There are no clients, no advertisers, no sponsored coverage. Coverage is shaped by reader requests and the writer's own conviction.
@@ -669,7 +674,7 @@
       </p>
       <h1 class="reveal reveal-delay-1 display text-[2.4rem] sm:text-[4.4rem]">Say hello.</h1>
       <p class="reveal reveal-delay-2 mt-6 text-ink-mute text-lg leading-relaxed max-w-xl">
-        Questions, feedback, ideas for research — all welcome. Most messages are answered within a week.
+        Questions, feedback, ideas for research are all welcome.
       </p>
     </div>
   </div>
@@ -853,15 +858,15 @@ const DATA = {
       navCurrent: 98687,
       returnPct: -1.31,
       notes: [
-        { ticker: "NVDA",   target: "$230",                text: "AI compute leader bought ~8% cheaper after the rotation; demand signals remain the market's strongest and the thesis is intact." },
-        { ticker: "AVGO",   target: "$420",                text: `Custom AI silicon and networking, down ~11% and called "absurdly cheap" by Bernstein with smart money buying. Our highest-conviction reset entry.` },
-        { ticker: "TSM",    target: "$480",                text: "The foundry bottleneck (~70% share); Q2 earnings land 16 July and analyst targets sit far higher." },
-        { ticker: "SMGB",   target: "Recover the breakdown", text: "One-line semis breadth (memory, equipment, AMD); the UK-listed UCITS line, GBP and FX-free." },
-        { ticker: "CEG",    target: "$300",                text: "Power-for-AI via nuclear at ~36% below its high; FY EPS guide $11–12 and structural datacentre demand." },
-        { ticker: "NATO.L", target: "$23",                 text: "Diversified defence basket, now treated as the USD line and up ~9% in dollars; cushions the single-name Rheinmetall risk in the sector." },
-        { ticker: "SGLN.L", target: "£63",                 text: "Physical gold after the sub-$4,000 reset, GBP-quoted; the book's equity hedge." },
-        { ticker: "AMD",    target: "$580",                text: "Second accelerator vendor at a lower multiple; UBS recently set a street-high target." },
-        { ticker: "IB1T",   target: "Track BTC",           text: "Direct Bitcoin exposure after the break below $60k; small, speculative sleeve." },
+        { ticker: "NVDA",   text: "AI compute leader, bought around 8% cheaper after the rotation. Demand signals remain the strongest in the market and the core thesis is intact. We are holding for the datacentre buildout to compound rather than for a quick bounce." },
+        { ticker: "AVGO",   text: "Custom AI silicon and networking, down around 11% into our entry and flagged as very cheap by Bernstein with smart money accumulating. This is our highest conviction reset entry. We want the market to reprice the custom silicon story back toward where the fundamentals point." },
+        { ticker: "TSM",    text: "The foundry bottleneck at roughly 70% share, so almost every AI chip runs through them. Q2 earnings land on 16 July and the setup into that print looks constructive. We are hoping the results confirm pricing power and lift sentiment across the sector." },
+        { ticker: "SMGB",   text: "A single line giving broad semis breadth across memory, equipment and the second tier names. It is the UK listed UCITS version, GBP quoted and free of FX drag, which is exactly why it belongs in this book. We want it to recover the recent breakdown and track the sector higher without the currency cost." },
+        { ticker: "CEG",    text: "Power for AI via nuclear, trading around 36% below its high. The FY EPS guide and the structural pull from datacentre demand underpin the case. We are holding for the multiyear power shortage story to play out rather than the next quarter." },
+        { ticker: "NATO.L", text: "A diversified defence basket, now treated as the USD line and up around 9% in dollars. It spreads exposure across the sector and cushions the single name Rheinmetall risk sitting in the other book. We want steady sector strength rather than any one contract outcome." },
+        { ticker: "SGLN.L", text: "Physical gold after the reset back below 4,000 dollars, GBP quoted. This is the book's equity hedge and the ballast when risk assets wobble. We are hoping it holds firm and offsets drawdowns elsewhere." },
+        { ticker: "AMD",    text: "The second accelerator vendor, bought at a lower multiple than Nvidia, with UBS recently setting a street high view. It gives us a second horse in the accelerator race without paying the leader's premium. We want share gains and margin progress to close some of that valuation gap." },
+        { ticker: "IB1T",   text: "Direct Bitcoin exposure after the break below 60k, kept small and speculative. It is the crypto sleeve, sized so a sharp move either way stays contained. We are hoping for a recovery in Bitcoin without the position ever threatening the book." },
       ],
       summary: "Action: hold all. Gold, bitcoin and defence cushioned the chip drop, which is the ETF book doing its job."
     },
@@ -888,15 +893,15 @@ const DATA = {
       navCurrent: 98582,
       returnPct: -1.42,
       notes: [
-        { ticker: "NVDA", target: "$230",   text: "AI compute leader bought ~8% cheaper after the rotation; same thesis as Portfolio A." },
-        { ticker: "AVGO", target: "$420",   text: `Custom AI silicon and networking, called "absurdly cheap" by Bernstein; same thesis as A.` },
-        { ticker: "TSM",  target: "$480",   text: "The foundry bottleneck (~70% share); Q2 earnings 16 July, analyst targets far higher." },
-        { ticker: "MU",   target: "$1,250", text: "The memory supercycle's purest large-cap, fresh off record earnings; sized for its steep run." },
-        { ticker: "AMD",  target: "$580",   text: "Direct accelerator exposure at a lower multiple than Nvidia." },
-        { ticker: "CEG",  target: "$300",   text: "Power-for-AI at a discount, identical thesis to A." },
-        { ticker: "RHM",  target: "€1,150", text: "Defence proxy cut to 8%. It fell ~21% on the scrapped F126 frigate deal and a JPMorgan downgrade, but trades near 52-week lows with analyst targets far higher and insider buying; a contrarian, risk-managed entry." },
-        { ticker: "AEM",  target: "$175",   text: "Senior gold miner bought into the metals reset; firmed Friday as gold steadied, P/E ~15." },
-        { ticker: "MSTR", target: "$105",   text: "Crypto proxy trimmed to 4%. High risk after Bitcoin's drop took its mNAV below 1.0; deliberately small and speculative." },
+        { ticker: "NVDA", text: "AI compute leader, bought around 8% cheaper after the rotation. Demand signals remain the strongest in the market and the core thesis is intact. We are holding for the datacentre buildout to compound rather than for a quick bounce." },
+        { ticker: "AVGO", text: "Custom AI silicon and networking, down around 11% into our entry and flagged as very cheap by Bernstein with smart money accumulating. This is our highest conviction reset entry. We want the market to reprice the custom silicon story back toward where the fundamentals point." },
+        { ticker: "TSM",  text: "The foundry bottleneck at roughly 70% share, so almost every AI chip runs through them. Q2 earnings land on 16 July and the setup into that print looks constructive. We are hoping the results confirm pricing power and lift sentiment across the sector." },
+        { ticker: "MU",   text: "The purest large cap play on the memory supercycle, entered fresh off record earnings. It is sized for a steep run, so it carries more volatility than the rest of the book. We want the supercycle to keep feeding pricing and hope to ride the upside while managing the swings." },
+        { ticker: "AMD",  text: "The second accelerator vendor, bought at a lower multiple than Nvidia, with UBS recently setting a street high view. It gives us a second horse in the accelerator race without paying the leader's premium. We want share gains and margin progress to close some of that valuation gap." },
+        { ticker: "CEG",  text: "Power for AI via nuclear, trading around 36% below its high. The FY EPS guide and the structural pull from datacentre demand underpin the case. We are holding for the multiyear power shortage story to play out rather than the next quarter." },
+        { ticker: "RHM",  text: "The defence proxy, cut to 8% after it fell around 21% on the scrapped F126 frigate deal and a JPMorgan downgrade. It now trades near 52 week lows with analyst views far higher and insiders buying, so this is a contrarian, risk managed entry. We are hoping the overreaction reverses as the wider defence spending trend reasserts itself." },
+        { ticker: "AEM",  text: "A senior gold miner bought into the metals reset, firming as gold steadied and trading on a reasonable multiple. It gives leveraged exposure to the gold story with real cashflow behind it. We want a firm gold price to flow through to earnings and the share." },
+        { ticker: "MSTR", text: "The crypto proxy, trimmed to 4% and deliberately speculative. It is high risk after Bitcoin's drop pushed its mNAV below 1.0, so the small size is intentional. We are hoping for a Bitcoin recovery while keeping the downside contained." },
       ],
       summary: "Action: hold all. Micron and Constellation dragged, while Rheinmetall and MicroStrategy rescued a large part of it. Every thesis is intact."
     },
@@ -1184,27 +1189,32 @@ function renderPortfolio(which) {
   // Holdings table
   const body = document.getElementById('holdingsBody');
   if (body) {
-    body.innerHTML = p.holdings.map(h => `
+    body.innerHTML = p.holdings.map(h => {
+      const chg = (h.now / h.entryPx - 1) * 100;      // local-currency price move since entry
+      const pl  = (h.valueGbp / h.costGbp - 1) * 100; // £ profit/loss (includes the FX move)
+      return `
       <tr class="ticker-row">
         <td class="py-3 pr-4 num text-downs-deep">${h.ticker}</td>
         <td class="py-3 pr-4">${h.name}</td>
         <td class="py-3 pr-4 text-xs text-ink-mute">${h.ccy}</td>
         <td class="py-3 pr-4 num text-right text-ink-mute">${fmtLocal(h.ccy, h.entryPx)}</td>
         <td class="py-3 pr-4 num text-right">${fmtLocal(h.ccy, h.now)}</td>
+        <td class="py-3 pr-4 num text-right ${pctColor(chg)}">${fmtPL(chg)}</td>
         <td class="py-3 pr-4 num text-right">£${h.valueGbp.toLocaleString('en-GB')}</td>
-        <td class="py-3 pr-4 num text-right">${h.weightNow}%</td>
-        <td class="py-3 pr-0 num text-right ${pctColor(h.plPct)}">${fmtPL(h.plPct)}</td>
-      </tr>
-    `).join('') + `
+        <td class="py-3 pr-4 num text-right ${pctColor(pl)}">${fmtPL(pl)}</td>
+        <td class="py-3 pr-0 num text-right">${h.weightNow.toFixed(1)}%</td>
+      </tr>`;
+    }).join('') + `
       <tr class="ticker-row">
         <td class="py-3 pr-4 num text-ink-mute">CASH</td>
         <td class="py-3 pr-4 text-ink-mute">Sterling</td>
         <td class="py-3 pr-4 text-xs text-ink-mute">GBP</td>
         <td class="py-3 pr-4 num text-right text-ink-mute">—</td>
         <td class="py-3 pr-4 num text-right text-ink-mute">—</td>
+        <td class="py-3 pr-4 num text-right text-ink-mute">—</td>
         <td class="py-3 pr-4 num text-right">£${p.cashGbp.toLocaleString('en-GB')}</td>
-        <td class="py-3 pr-4 num text-right">${p.cashWeight}%</td>
-        <td class="py-3 pr-0 num text-right text-ink-mute">—</td>
+        <td class="py-3 pr-4 num text-right text-ink-mute">—</td>
+        <td class="py-3 pr-0 num text-right">${p.cashWeight.toFixed(1)}%</td>
       </tr>
     `;
   }
@@ -1213,15 +1223,15 @@ function renderPortfolio(which) {
   const foot = document.getElementById('holdingsFoot');
   if (foot) {
     foot.innerHTML = `
-      <tr><td colspan="8" class="pt-5"></td></tr>
+      <tr><td colspan="9" class="pt-5"></td></tr>
       <tr class="text-sm border-t border-ink/15">
-        <td colspan="5" class="py-3 pr-4 text-ink">NAV · Week ${DATA.weekNumber}</td>
+        <td colspan="6" class="py-3 pr-4 text-ink">NAV · Week ${DATA.weekNumber}</td>
         <td class="py-3 pr-4 num text-right text-ink">£${p.navCurrent.toLocaleString('en-GB')}</td>
-        <td class="py-3 pr-4 num text-right">100%</td>
-        <td class="py-3 pr-0 num text-right ${pctColor(p.returnPct)}">${fmtPL(p.returnPct)}</td>
+        <td class="py-3 pr-4 num text-right ${pctColor(p.returnPct)}">${fmtPct(p.returnPct)}</td>
+        <td class="py-3 pr-0 num text-right">100%</td>
       </tr>
       <tr class="text-xs text-ink-mute">
-        <td colspan="8" class="py-2 pr-0 leading-relaxed">No trades this week, so dealing friction is £0.00. Value and P/L are in pounds; the local-currency price is shown alongside.</td>
+        <td colspan="9" class="py-2 pr-0 leading-relaxed">Chg is the local-currency price move since entry. Value and P/L are in pounds and include the currency move, so a dollar holding can rise in price yet slip in pounds as sterling firms. No trades this week; dealing friction £0.00.</td>
       </tr>
     `;
   }
@@ -1233,7 +1243,6 @@ function renderPortfolio(which) {
       <li class="py-4 grid grid-cols-12 gap-3 sm:gap-5 items-start">
         <div class="col-span-3 sm:col-span-2">
           <div class="num text-downs-deep text-sm">${n.ticker}</div>
-          <div class="num text-xs text-ink-mute mt-1">${n.target}</div>
         </div>
         <div class="col-span-9 sm:col-span-10 text-ink-soft leading-relaxed">${n.text}</div>
       </li>

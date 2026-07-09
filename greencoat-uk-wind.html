@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Greencoat UK Wind · Howegate Capital</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Hanken+Grotesk:wght@300;400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --ink:    #161D17;
+    --soft:   #2A352C;
+    --mute:   #5C675E;
+    --line:   #D6DCD7;
+    --hair:   #ECEFEC;
+    --paper:  #FFFFFF;
+    --tint:   #F4F6F4;
+    --pine:   #152A1E;
+    --downs:  #2E5E41;
+    --downs-soft: #C7DCC9;
+    --rose:   #B85C57;
+  }
+
+  @page { size: A4; margin: 0; }
+  @media print {
+    body { background: #fff !important; }
+    .page { box-shadow: none !important; margin: 0 !important; }
+    .no-print { display: none !important; }
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Hanken Grotesk', system-ui, sans-serif;
+    color: var(--ink);
+    background: #E8ECE8;
+    -webkit-font-smoothing: antialiased;
+    font-size: 10.5pt;
+    line-height: 1.55;
+  }
+
+  h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; font-weight: 400; letter-spacing: -0.005em; margin: 0; }
+  .num { font-family: 'Roboto Mono', ui-monospace, monospace; font-feature-settings: 'tnum'; }
+  strong { font-weight: 600; color: var(--ink); }
+
+  .page {
+    width: 210mm; min-height: 297mm; margin: 12mm auto;
+    background: var(--paper);
+    padding: 22mm 22mm 18mm 22mm;
+    position: relative;
+    box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 10px 30px -10px rgba(0,0,0,.18);
+    page-break-after: always;
+    overflow: hidden;
+  }
+  .page:last-child { page-break-after: auto; }
+
+  .runhdr {
+    position: absolute; top: 11mm; left: 22mm; right: 22mm;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 8.2pt; letter-spacing: .14em; text-transform: uppercase; color: var(--mute);
+    padding-bottom: 6pt; border-bottom: 1px solid var(--hair);
+  }
+  .runhdr .mark { display: inline-flex; align-items: center; gap: 6px; color: var(--ink); }
+  .runhdr svg { color: var(--downs); }
+
+  .runftr {
+    position: absolute; bottom: 10mm; left: 22mm; right: 22mm;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 8.2pt; color: var(--mute); letter-spacing: .08em;
+    padding-top: 6pt; border-top: 1px solid var(--hair);
+  }
+  .runftr .pageno { font-family: 'Roboto Mono', monospace; }
+
+  .eyebrow {
+    display: block;
+    font-size: 9pt; letter-spacing: .26em; text-transform: uppercase;
+    color: var(--downs); margin-bottom: 16pt;
+  }
+  .eyebrow.lg { font-size: 11pt; margin-bottom: 20pt; }
+
+  p { margin: 0 0 11pt; }
+  p.lede { font-size: 11.5pt; color: var(--soft); margin-bottom: 14pt; }
+
+  ul { margin: 0 0 11pt; padding: 0; list-style: none; }
+  ul li {
+    position: relative; padding-left: 18px; margin-bottom: 8pt;
+  }
+  ul li::before {
+    content: ""; position: absolute; left: 0; top: .65em; width: 7px; height: 1px; background: var(--downs);
+  }
+
+  .rule { height: 1px; background: var(--hair); margin: 18pt 0; }
+
+  h3 { font-family: 'Cormorant Garamond', serif; font-size: 14pt; font-weight: 500; margin: 16pt 0 6pt; color: var(--ink); }
+
+  /* ============== COVER ============== */
+  .cover {
+    display: flex; flex-direction: column; justify-content: space-between;
+    background: var(--paper);
+  }
+  .cover::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 6px;
+    background: linear-gradient(90deg, var(--pine), var(--downs) 70%, var(--downs-soft));
+  }
+  .cover .head {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 8.6pt; letter-spacing: .26em; text-transform: uppercase; color: var(--mute);
+  }
+  .cover .head .mark { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); }
+  .cover .head .mark svg { color: var(--downs); }
+
+  .cover-body { max-width: 160mm; }
+  .cover-eyebrow {
+    display: inline-flex; align-items: center; gap: 14px;
+    font-size: 9pt; letter-spacing: .28em; text-transform: uppercase; color: var(--downs);
+    margin-bottom: 14pt;
+  }
+  .cover-eyebrow::before {
+    content: ""; width: 42px; height: 1px; background: var(--downs); display: inline-block;
+  }
+  .cover-title {
+    font-family: 'Cormorant Garamond', serif; font-weight: 400;
+    font-size: 52pt; line-height: 1.0; letter-spacing: -0.02em; color: var(--ink); margin: 0;
+    position: relative;
+  }
+  .cover-title::after {
+    content: ""; display: block; width: 60px; height: 3px; background: var(--downs);
+    margin-top: 12pt;
+  }
+  .cover-ticker {
+    margin-top: 8pt; font-family: 'Roboto Mono', monospace; font-size: 11pt; color: var(--downs); letter-spacing: .12em;
+  }
+  .cover-sub {
+    margin-top: 22pt; font-family: 'Cormorant Garamond', serif; font-size: 19pt; font-weight: 300;
+    line-height: 1.3; color: var(--soft); max-width: 150mm; font-style: italic;
+  }
+  .cover-lede {
+    margin-top: 18pt; font-size: 11pt; line-height: 1.55; color: var(--soft); max-width: 140mm;
+  }
+
+  .cover-foot {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    color: var(--mute); font-size: 8.6pt; letter-spacing: .12em; text-transform: uppercase;
+  }
+
+  /* ============== INVESTMENT SUMMARY KPI ============== */
+  .kpi {
+    display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
+    border: 1px solid var(--line); margin-bottom: 14pt; background: var(--tint);
+  }
+  .kpi .c { padding: 10pt 14pt; border-right: 1px solid var(--line); }
+  .kpi .c:last-child { border-right: 0; }
+  .kpi .c .k { font-size: 7.4pt; letter-spacing: .22em; text-transform: uppercase; color: var(--mute); margin-bottom: 5pt; }
+  .kpi .c .v { font-family: 'Roboto Mono', monospace; font-size: 14pt; color: var(--ink); }
+  .kpi .c .v.up { color: var(--downs); }
+  .kpi .c .v.down { color: var(--rose); }
+
+  /* ============== TRADING / NOTE CALLOUT ============== */
+  .callout {
+    border: 1px solid var(--line); border-left: 3px solid var(--downs);
+    background: var(--tint); padding: 12pt 16pt; margin: 14pt 0;
+    font-size: 10pt; line-height: 1.5;
+  }
+  .callout .label { font-size: 7.6pt; letter-spacing: .26em; text-transform: uppercase; color: var(--downs); margin-bottom: 5pt; }
+  .callout p { margin: 0; color: var(--soft); }
+
+  /* ============== RISK + DATA TABLES ============== */
+  table.data { width: 100%; border-collapse: collapse; margin: 8pt 0 14pt; }
+  table.data th {
+    text-align: left; font-weight: 500;
+    font-size: 7.8pt; letter-spacing: .22em; text-transform: uppercase; color: var(--mute);
+    padding: 8pt 12pt 8pt 0; border-bottom: 1px solid var(--soft);
+  }
+  table.data td { padding: 9pt 12pt 9pt 0; vertical-align: top; border-bottom: 1px solid var(--hair); font-size: 9.8pt; }
+  table.data tr:last-child td { border-bottom: 0; }
+  table.data td.risk { width: 42%; color: var(--ink); }
+  table.data td.mitigant { color: var(--soft); }
+  table.data tbody tr:nth-child(even) td { background: rgba(229, 239, 230, 0.45); }
+
+  /* ============== NAV BRIDGE TABLE ============== */
+  table.bridge { width: 100%; border-collapse: collapse; margin: 6pt 0 10pt; font-size: 9.8pt; }
+  table.bridge caption {
+    text-align: left; caption-side: top;
+    font-size: 7.6pt; letter-spacing: .22em; text-transform: uppercase; color: var(--mute);
+    margin-bottom: 6pt;
+  }
+  table.bridge td { padding: 5pt 10pt 5pt 0; border-bottom: 1px solid var(--hair); }
+  table.bridge td.lab { color: var(--soft); }
+  table.bridge td.num { text-align: right; font-family: 'Roboto Mono', monospace; color: var(--ink); }
+  table.bridge tr.tot td { font-weight: 500; color: var(--ink); border-top: 1px solid var(--soft); border-bottom: 0; padding-top: 8pt; background: rgba(229, 239, 230, 0.45); }
+
+  /* ============== PEER TABLE ============== */
+  table.peer { width: 100%; border-collapse: collapse; margin: 6pt 0 10pt; font-size: 9.8pt; }
+  table.peer caption {
+    text-align: left; caption-side: top;
+    font-size: 7.6pt; letter-spacing: .22em; text-transform: uppercase; color: var(--mute);
+    margin-bottom: 6pt;
+  }
+  table.peer th, table.peer td { padding: 6pt 10pt 6pt 0; border-bottom: 1px solid var(--hair); }
+  table.peer th {
+    font-weight: 500; font-size: 7.4pt; letter-spacing: .18em; text-transform: uppercase; color: var(--mute);
+    text-align: left; border-bottom: 1px solid var(--soft);
+  }
+  table.peer td { color: var(--soft); }
+  table.peer td.fund { color: var(--ink); font-weight: 500; }
+  table.peer td.num, table.peer th.num { text-align: right; font-family: 'Roboto Mono', monospace; }
+  table.peer tr.me td { background: rgba(229, 239, 230, 0.45); color: var(--ink); font-weight: 500; }
+
+  /* ============== SCENARIO TABLE ============== */
+  table.scenarios { width: 100%; border-collapse: collapse; margin: 6pt 0 14pt; }
+  table.scenarios th, table.scenarios td {
+    padding: 9pt 10pt; text-align: left; border-bottom: 1px solid var(--hair); font-size: 10pt;
+  }
+  table.scenarios th {
+    font-weight: 500; font-size: 7.6pt; letter-spacing: .22em; text-transform: uppercase; color: var(--mute);
+    border-bottom: 1px solid var(--soft); padding-top: 8pt; padding-bottom: 8pt;
+  }
+  table.scenarios td.label { font-family: 'Cormorant Garamond', serif; font-size: 15pt; color: var(--ink); width: 13%; }
+  table.scenarios td.label.base { color: var(--downs); }
+  table.scenarios td.num, table.scenarios th.num { text-align: right; font-family: 'Roboto Mono', monospace; }
+  table.scenarios tr.row-base td { background: rgba(229, 239, 230, 0.45); }
+  table.scenarios tr.row-base td .num { color: var(--downs); font-weight: 600; }
+
+  /* ============== ASSUMPTION LINES ============== */
+  .assumps {
+    border: 1px solid var(--hair); background: var(--tint); padding: 10pt 14pt;
+    margin: 6pt 0 0;
+  }
+  .assumps .label { font-size: 7.2pt; letter-spacing: .24em; text-transform: uppercase; color: var(--downs); margin-bottom: 6pt; }
+  .assumps .row { display: grid; grid-template-columns: 32mm 1fr; gap: 10pt; padding: 3pt 0; border-bottom: 1px dotted var(--line); font-size: 8.5pt; line-height: 1.35; }
+  .assumps .row:last-child { border-bottom: 0; }
+  .assumps .row .k { font-weight: 500; color: var(--ink); font-size: 8.5pt; }
+  .assumps .row .v { color: var(--soft); }
+
+  /* Side-by-side layout */
+  .twopack { display: grid; grid-template-columns: 1fr 1fr; gap: 14pt; margin-top: 10pt; }
+  .twopack h3 { margin-top: 0; }
+
+  /* ============== ASIDE BOX ============== */
+  .aside {
+    border: 1px solid var(--line); border-left: 3px solid var(--downs);
+    background: var(--tint); padding: 10pt 14pt; margin: 6pt 0 0;
+    font-size: 8.5pt; line-height: 1.4;
+  }
+  .aside .label { font-size: 7.2pt; letter-spacing: .24em; text-transform: uppercase; color: var(--downs); margin-bottom: 6pt; }
+  .aside p { margin: 0 0 5pt; color: var(--soft); }
+  .aside p:last-child { margin-bottom: 0; }
+  .aside p strong { color: var(--ink); }
+
+  /* ============== THESIS BLOCKS ============== */
+  .thesis-big { display: grid; grid-template-columns: 32mm 1fr; gap: 14pt; margin-bottom: 16pt; align-items: start; }
+  .thesis-big .n {
+    font-family: 'Cormorant Garamond', serif; color: var(--downs-soft);
+    font-size: 54pt; font-weight: 300; line-height: 0.9;
+    letter-spacing: -0.02em; text-align: right; padding-right: 6pt;
+    border-right: 1px solid var(--hair); padding-top: 4pt;
+  }
+  .thesis-big p { color: var(--soft); margin: 0; padding-top: 6pt; }
+  .thesis-big p strong { color: var(--ink); font-weight: 600; }
+
+  /* ============== "Where the cash comes from" SIDEBAR ============== */
+  .moneybox {
+    border-left: 2px solid var(--downs); padding: 0 0 0 14pt; margin: 14pt 0;
+  }
+  .moneybox .label { font-size: 7.8pt; letter-spacing: .26em; text-transform: uppercase; color: var(--downs); margin-bottom: 8pt; }
+  .moneybox .stream { margin-bottom: 7pt; font-size: 10pt; }
+  .moneybox .stream:last-child { margin-bottom: 0; }
+
+  /* ============== NAV FLOW DIAGRAM ============== */
+  .flow {
+    display: flex; align-items: stretch; gap: 0;
+    margin: 14pt 0 4pt; padding: 14pt 12pt;
+    background: var(--tint); border: 1px solid var(--hair); border-radius: 4px;
+  }
+  .flow .node {
+    flex: 1; padding: 10pt 4pt; text-align: center; background: #fff;
+    border: 1px solid var(--line); border-radius: 3px;
+    font-family: 'Hanken Grotesk', sans-serif; font-size: 8pt; line-height: 1.25;
+    color: var(--ink); display: flex; align-items: center; justify-content: center;
+  }
+  .flow .node strong { display: block; font-weight: 600; margin-bottom: 2pt; }
+  .flow .node-pine {
+    background: var(--downs); color: #fff; border-color: var(--downs);
+    box-shadow: 0 2px 8px -2px rgba(46, 94, 65, 0.4);
+    flex: 1.3;
+  }
+  .flow .node-pine strong { font-family: 'Cormorant Garamond', serif; font-size: 11pt; font-weight: 500; letter-spacing: .02em; }
+  .flow .arrow {
+    flex: 0 0 18px; display: flex; align-items: center; justify-content: center;
+    color: var(--downs); font-size: 14pt; font-weight: 300;
+  }
+  .flow-caption {
+    text-align: center; font-size: 8.5pt; color: var(--mute); margin-top: 4pt; margin-bottom: 14pt; font-style: italic;
+  }
+
+  /* ============== RECOMMENDATION BOX ============== */
+  .recbox {
+    background: var(--downs); color: #fff; padding: 18pt 20pt;
+    display: grid; grid-template-columns: auto 1fr auto; gap: 24pt; align-items: center;
+    margin-top: 18pt;
+  }
+  .recbox .label { font-size: 7.8pt; letter-spacing: .26em; text-transform: uppercase; opacity: .55; margin-bottom: 4pt; }
+  .recbox .v { font-family: 'Cormorant Garamond', serif; font-size: 22pt; line-height: 1; }
+  .recbox .price { font-family: 'Roboto Mono', monospace; font-size: 22pt; }
+  .recbox .note { font-size: 9.5pt; opacity: .75; max-width: 80mm; }
+
+  /* Print button */
+  .print-bar {
+    position: fixed; top: 14px; right: 14px; z-index: 50;
+    background: var(--downs); color: #fff; border: 0; cursor: pointer;
+    padding: 10px 18px; border-radius: 999px; font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
+    box-shadow: 0 4px 16px rgba(46,94,65,.25);
+  }
+  .print-bar:hover { background: var(--pine); }
+
+  small.foot { color: var(--mute); font-size: 8.2pt; display: block; margin-top: 8pt; line-height: 1.5; }
+</style>
+</head>
+<body>
+
+<button class="print-bar no-print" onclick="window.print()">Save as PDF</button>
+
+<!-- ====================== PAGE 1 — COVER ====================== -->
+<section class="page cover">
+  <header class="head">
+    <span class="mark">
+      <svg viewBox="0 0 28 16" width="22" height="13" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 14 Q 7 4, 13 9 T 27 6"/>
+        <path d="M1 14 L 27 14" opacity=".4"/>
+      </svg>
+      Howegate Capital
+    </span>
+    <span>June 2026</span>
+  </header>
+
+  <div class="cover-body">
+    <span class="cover-eyebrow" style="margin-bottom:6pt;">Equity Research</span>
+    <div style="font-family:'Hanken Grotesk',sans-serif;font-size:8.5pt;letter-spacing:.24em;text-transform:uppercase;color:#5C675E;margin:0 0 14pt;">Student research project</div>
+    <h1 class="cover-title">Greencoat<br/>UK Wind</h1>
+    <div class="cover-ticker">LSE : UKW &nbsp;·&nbsp; Manager: Schroders Greencoat &nbsp;·&nbsp; 26 June 2026</div>
+    <p class="cover-sub">A covered 10% yield on UK wind, with the shares priced at a discount to net asset value.</p>
+  </div>
+
+  <div>
+    <table style="width:100%;border-collapse:collapse;border:1px solid #D0D8D1;margin-top:8mm;background:#F4F6F4;table-layout:fixed;">
+      <tr>
+        <td style="width:20%;padding:13pt 15pt;border-right:1px solid #D0D8D1;vertical-align:top;">
+          <div style="font-family:'Hanken Grotesk',sans-serif;font-size:7pt;letter-spacing:.22em;text-transform:uppercase;color:#5C675E;margin-bottom:6pt;">Yield</div>
+          <div style="font-family:'Roboto Mono',monospace;font-size:15pt;color:#2E5E41;line-height:1;">10.2%</div>
+        </td>
+        <td style="width:20%;padding:13pt 15pt;border-right:1px solid #D0D8D1;vertical-align:top;">
+          <div style="font-family:'Hanken Grotesk',sans-serif;font-size:7pt;letter-spacing:.22em;text-transform:uppercase;color:#5C675E;margin-bottom:6pt;">Disc. to NAV</div>
+          <div style="font-family:'Roboto Mono',monospace;font-size:15pt;color:#2E5E41;line-height:1;">22%</div>
+        </td>
+        <td style="width:20%;padding:13pt 15pt;border-right:1px solid #D0D8D1;vertical-align:top;">
+          <div style="font-family:'Hanken Grotesk',sans-serif;font-size:7pt;letter-spacing:.22em;text-transform:uppercase;color:#5C675E;margin-bottom:6pt;">Cover (2025)</div>
+          <div style="font-family:'Roboto Mono',monospace;font-size:15pt;color:#161D17;line-height:1;">1.3x</div>
+        </td>
+        <td style="width:20%;padding:13pt 15pt;border-right:1px solid #D0D8D1;vertical-align:top;">
+          <div style="font-family:'Hanken Grotesk',sans-serif;font-size:7pt;letter-spacing:.22em;text-transform:uppercase;color:#5C675E;margin-bottom:6pt;">NAV / share</div>
+          <div style="font-family:'Roboto Mono',monospace;font-size:15pt;color:#161D17;line-height:1;">134.2p</div>
+        </td>
+        <td style="width:20%;padding:13pt 15pt;vertical-align:top;">
+          <div style="font-family:'Hanken Grotesk',sans-serif;font-size:7pt;letter-spacing:.22em;text-transform:uppercase;color:#5C675E;margin-bottom:6pt;">Current</div>
+          <div style="font-family:'Roboto Mono',monospace;font-size:15pt;color:#161D17;line-height:1;">104.6p</div>
+        </td>
+      </tr>
+    </table>
+    <p style="font-family:'Hanken Grotesk',sans-serif;font-size:8pt;color:#5C675E;margin:10pt 0 0;line-height:1.5;">This is research for information and education only, not investment advice.</p>
+    <div class="cover-foot" style="margin-top:10pt;">
+      <span>Howegate Capital · Independent Equity Research</span>
+      <span>Page 01 / 08</span>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== PAGE 2 — INVESTMENT SUMMARY ====================== -->
+<section class="page">
+  <div class="runhdr">
+    <span class="mark">
+      <svg viewBox="0 0 28 16" width="18" height="11" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 14 Q 7 4, 13 9 T 27 6"/>
+        <path d="M1 14 L 27 14" opacity=".4"/>
+      </svg>
+      Greencoat UK Wind · LSE: UKW
+    </span>
+    <span>Howegate Capital</span>
+  </div>
+
+  <div class="eyebrow" style="margin-top: 8pt;">Key Points</div>
+
+  <ul>
+    <li><strong>A covered double-digit income.</strong> UKW pays a CPI-linked dividend yielding about 10%, covered 1.3 times by cash in 2025 and guided to 1.7 times in 2026. This dividend has risen for twelve consecutive years.</li>
+    <li><strong>Assets are priced above where the market values the shares.</strong> The shares trade 22% below the 134.2p net asset value. In 2025 the company sold £181m of wind farms at their carrying value, and a rival fund, Bluefield Solar, has agreed to be taken over near its own NAV — both data points suggesting the underlying asset marks are being validated by real transactions even as the share price sits well below them.</li>
+    <li><strong>The discount is sector-wide, not company-specific.</strong> Higher interest rates re-rated every renewable trust from premiums to wide discounts. Within its wind peer group UKW trades at the narrowest discount and carries the strongest cover.</li>
+    <li><strong>The catalysts that would close the gap haven't yet appeared.</strong> A recovery in the share price would need lower rates or firmer power prices. The Bank of England held rates in June with two members voting to raise them, and the long-term power price outlook is soft. NAV fell in 2024 and 2025 before stabilising in Q1 2026.</li>
+    <li><strong>Scenario modelling.</strong> A base case holding NAV broadly flat and the discount near current levels implies a share value close to where it sits today. A scenario where power prices and sentiment recover points to a higher implied share value; further power-price downgrades and a wider discount, to a lower one.</li>
+  </ul>
+
+  <div class="callout">
+    <div class="label">Latest trading · Q1 2026</div>
+    <p>Generation ran 4.2% above budget and net cash generation reached £131m, up 11% year on year, lifting quarterly dividend cover to 2.3x. Full-year guidance is for EBITDA of £560–660m and dividend cover of 1.7x. Since launch the trust has paid £1.4bn in dividends at 1.7x aggregate cover.</p>
+  </div>
+
+  <div class="runftr">
+    <span>Howegate Capital · Independent Equity Research</span>
+    <span class="pageno">02</span>
+  </div>
+</section>
+
+<!-- ====================== PAGE 3 — BUSINESS OVERVIEW ====================== -->
+<section class="page">
+  <div class="runhdr">
+    <span class="mark">
+      <svg viewBox="0 0 28 16" width="18" height="11" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 14 Q 7 4, 13 9 T 27 6"/>
+        <path d="M1 14 L 27 14" opacity=".4"/>
+      </svg>
+      Greencoat UK Wind · LSE: UKW
+    </span>
+    <span>Howegate Capital</span>
+  </div>
+
+  <div class="eyebrow" style="margin-top: 8pt;">Business Overview</div>
+
+  <p>UKW listed in 2013 as the first renewable infrastructure trust in London and is now a FTSE 250 member with a market value of about £2.1bn. It owns interests in 49 operating UK wind farms totalling 1.9 GW, split by value across England (47%), Scotland (43%), Northern Ireland (8%) and Wales (2%). The company purchases completed, revenue-generating wind farms rather than building them, collects the cash they produce, and distributes most of it as a quarterly dividend that targets growth in line with CPI inflation.</p>
+
+  <p>It is externally managed by Schroders Greencoat, Europe's largest specialist renewable manager, for an ongoing charge of 0.83%. The board is independent, chaired by Lucinda Riches. There is no controlling shareholder: like most UK investment trusts, UKW is widely held by retail investors and wealth managers.</p>
+
+  <p>Because it is closed-ended, the company has a fixed number of shares that trade on the exchange at whatever price the market sets, which can sit well above or below the value of the underlying assets, rather than issuing or redeeming shares at asset value like an open-ended fund.</p>
+
+  <p>Revenue comes from three sources: electricity sold at market prices, government subsidies attached to most of the portfolio, and fixed-price power contracts. About 68% of cash flow is fixed over the next twelve months, giving near-term visibility, though this proportion falls over time as older subsidies expire and the portfolio becomes more exposed to the open-market power price. One structural change is worth noting: from April 2026 the Renewables Obligation, the portfolio's main inflation-linked subsidy, switched from RPI to CPI indexation, and the dividend target moved with it. UKW now assumes CPI of about 2.4–2.5% against RPI of 3.1–3.5%, so the annual uplift on both the dividend and the index-linked revenue is roughly a point lower than before. This trims future growth in the dividend and the NAV, though the inflation linkage itself remains intact.</p>
+
+  <div class="runftr">
+    <span>Howegate Capital · Independent Equity Research</span>
+    <span class="pageno">03</span>
+  </div>
+</section>
+
+<!-- ====================== PAGE 4 — NAV MECHANICS ====================== -->
+<section class="page">
+  <div class="runhdr">
+    <span class="mark">
+      <svg viewBox="0 0 28 16" width="18" height="11" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 14 Q 7 4, 13 9 T 27 6"/>
+        <path d="M1 14 L 27 14" opacity=".4"/>
+      </svg>
+      Greencoat UK Wind · LSE: UKW
+    </span>
+    <span>Howegate Capital</span>
+  </div>
+
+  <div class="eyebrow lg" style="margin-top: 8pt;">NAV mechanics</div>
+
+  <p>The manager values each wind farm by discounting its projected lifetime cash flows — an asset-by-asset DCF. These sum to the gross portfolio value; debt and costs are deducted to reach the net asset value of 134.2p per share. Two inputs dominate: the <strong>discount rate</strong>, currently 9% unlevered and 11% levered, and the <strong>long-term power-price curve</strong> from an external consultant. The NAV is therefore an estimate, and sensitive — a 0.5 point rise in the discount rate cuts NAV by about 6%. UKW's 9% unlevered rate is higher, and so more conservative, than several peers use to value their assets.</p>
+
+  <p>The quarterly NAV walk shows the moving parts clearly. In Q1 2026, inflation and power prices added value while a higher discount rate and a subsidy change subtracted it — leaving NAV marginally higher.</p>
+
+  <table class="bridge">
+    <caption>NAV bridge · Q4 2025 → Q1 2026 (pence per share)</caption>
+    <tbody>
+      <tr><td class="lab">NAV at 31 December 2025</td><td class="num">133.5</td></tr>
+      <tr><td class="lab">Net cash generation</td><td class="num">+6.1</td></tr>
+      <tr><td class="lab">Dividend paid</td><td class="num">(2.6)</td></tr>
+      <tr><td class="lab">Depreciation</td><td class="num">(1.4)</td></tr>
+      <tr><td class="lab">Power prices</td><td class="num">+1.2</td></tr>
+      <tr><td class="lab">Inflation</td><td class="num">+3.0</td></tr>
+      <tr><td class="lab">Discount rates</td><td class="num">(3.6)</td></tr>
+      <tr><td class="lab">Other</td><td class="num">+0.1</td></tr>
+      <tr><td class="lab">Carbon Price Support removal (from 2028)</td><td class="num">(2.1)</td></tr>
+      <tr class="tot"><td class="lab">NAV at 31 March 2026</td><td class="num">134.2</td></tr>
+    </tbody>
+  </table>
+
+  <div class="runftr">
+    <span>Howegate Capital · Independent Equity Research</span>
+    <span class="pageno">04</span>
+  </div>
+</section>
+
+<!-- ====================== PAGE 5 — INDUSTRY + THESIS ====================== -->
+<section class="page">
+  <div class="runhdr">
+    <span class="mark">
+      <svg viewBox="0 0 28 16" width="18" height="11" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 14 Q 7 4, 13 9 T 27 6"/>
+        <path d="M1 14 L 27 14" opacity=".4"/>
+      </svg>
+      Greencoat UK Wind · LSE: UKW
+    </span>
+    <span>Howegate Capital</span>
+  </div>
+
+  <div class="eyebrow" style="margin-top: 8pt;">Industry Overview</div>
+
+  <p>UKW sits among listed funds that own renewable assets and pay high incomes. The group was popular when rates were near zero and often traded above NAV; once a safe government bond began yielding around 4.5%, the sector re-rated to wide discounts. That repricing — driven by rates and sentiment rather than the wind farms — is the main reason the discount exists.</p>
+
+  <p>The longer-term swing factor is the <strong>power price</strong>. As clean power expands, the share of hours in which gas sets the wholesale price has fallen from over 90% in 2021 to around 60% today, and is expected near 15% by 2030. This lowers exposure to gas shocks but presses down the long-term prices wind farms achieve — the principal cause of the NAV falls in 2024 and 2025.</p>
+
+  <table class="peer">
+    <caption>Wind &amp; wind-led comparators · June 2026</caption>
+    <thead>
+      <tr><th>Fund</th><th>Type</th><th class="num">Discount</th><th class="num">Yield</th><th class="num">Cover</th></tr>
+    </thead>
+    <tbody>
+      <tr class="me"><td class="fund">Greencoat UK Wind (UKW)</td><td>UK wind only</td><td class="num">22%</td><td class="num">10.2%</td><td class="num">1.3x</td></tr>
+      <tr><td class="fund">Greencoat Renewables (GRP)</td><td>Irish &amp; European wind</td><td class="num">27%</td><td class="num">9.4%</td><td class="num">1.5x</td></tr>
+      <tr><td class="fund">Renewables Infrastructure (TRIG)</td><td>Wind-led, plus solar/battery</td><td class="num">28%</td><td class="num">10.1%</td><td class="num">1.0x</td></tr>
+      <tr><td class="fund">Octopus Renewables (ORIT)</td><td>Wind and solar</td><td class="num">43%</td><td class="num">11.8%</td><td class="num">1.14x</td></tr>
+    </tbody>
+  </table>
+  <small class="foot">UKW carries the narrowest discount and the best cover among true peers. TRIG's 1.0x is low because it repays project debt annually; guided to 1.1x in 2026. Discounts calculated from Q1 2026 NAVs and prices on 25 June 2026.</small>
+
+  <div class="runftr">
+    <span>Howegate Capital · Independent Equity Research</span>
+    <span class="pageno">05</span>
+  </div>
+</section>
+
+<!-- ====================== PAGE 6 — CATALYSTS + RISKS ====================== -->
+<section class="page">
+  <div class="runhdr">
+    <span class="mark">
+      <svg viewBox="0 0 28 16" width="18" height="11" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 14 Q 7 4, 13 9 T 27 6"/>
+        <path d="M1 14 L 27 14" opacity=".4"/>
+      </svg>
+      Greencoat UK Wind · LSE: UKW
+    </span>
+    <span>Howegate Capital</span>
+  </div>
+
+  <div class="eyebrow" style="margin-top: 8pt;">What Would Move the Picture</div>
+
+  <h3 style="margin-top: 4pt;">Catalysts</h3>
+  <ul>
+    <li><strong>Sector takeovers near NAV.</strong> Bluefield Solar's agreed Drax takeover and BBGI's take-private both closed near asset value, and each such deal further validates UKW's own marks.</li>
+    <li><strong>Supportive government policy.</strong> Clean Power 2030 positions wind as the backbone of the electricity system, and the government has ruled out zonal pricing, which would have disadvantaged Scottish wind.</li>
+    <li><strong>Grid build-out.</strong> Up to £90bn of planned UK transmission investment and connection-queue reform would, if delivered, ease the Scotland–England bottleneck that constrains 43% of UKW's portfolio by value.</li>
+    <li><strong>Voluntary CfDs.</strong> An April 2026 proposal to offer long-term fixed-price contracts to existing ROC-subsidised generators, with allocation planned for 2027, would directly reduce the power-price uncertainty weighing on NAV if UKW's assets are admitted.</li>
+    <li><strong>Continued buybacks below NAV.</strong> £199m completed to date, adding 2.1p to NAV; repurchases below NAV mechanically narrow the discount as they continue.</li>
+  </ul>
+
+  <h3>Risks &amp; Mitigants</h3>
+  <ul>
+    <li><strong>A further fall in power prices.</strong> The cause of the last two NAV declines.</li>
+    <li><strong>Capture-price erosion.</strong> As more wind capacity is built, output increasingly sells into the same windy hours.</li>
+    <li><strong>A renewed energy-price shock.</strong> One that pushes the Bank of England toward rate rises rather than cuts; NAV is modelled to fall ~6% per 0.5pp rise in the discount rate.</li>
+    <li><strong>The discount persisting.</strong> Renewable-trust discounts have stayed wide for several years.</li>
+    <li><strong>The Electricity Generator Levy rising 45% to 55% from July 2026.</strong> UKW's 2025 captured price of £70/MWh sits below the £82.61/MWh threshold, so the company has stated this is not material at current levels.</li>
+    <li><strong>A shrinking asset base.</strong> If buybacks stay funded by disposals, though the board has indicated a measured return to acquisitions from 2026.</li>
+  </ul>
+
+  <div class="runftr">
+    <span>Howegate Capital · Independent Equity Research</span>
+    <span class="pageno">06</span>
+  </div>
+</section>
+
+<!-- ====================== PAGE 7 — VALUATION ====================== -->
+<section class="page">
+  <div class="runhdr">
+    <span class="mark">
+      <svg viewBox="0 0 28 16" width="18" height="11" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 14 Q 7 4, 13 9 T 27 6"/>
+        <path d="M1 14 L 27 14" opacity=".4"/>
+      </svg>
+      Greencoat UK Wind · LSE: UKW
+    </span>
+    <span>Howegate Capital</span>
+  </div>
+
+  <div class="eyebrow lg" style="margin-top: 8pt;">Valuation</div>
+
+  <p>We do not build a DCF of the company, because <strong>the NAV already is one</strong>. We value UKW on its net asset value one year forward, then apply a discount informed by sector comparables to reach an implied share value.</p>
+
+  <h3>Scenario analysis · one-year NAV and implied share value</h3>
+  <table class="scenarios">
+    <thead>
+      <tr>
+        <th>Case</th>
+        <th class="num">NAV</th>
+        <th class="num">Discount</th>
+        <th class="num">Implied share value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="label">A</td>
+        <td class="num">138p</td>
+        <td class="num">15%</td>
+        <td class="num">117p</td>
+      </tr>
+      <tr class="row-base">
+        <td class="label base">B</td>
+        <td class="num">131p</td>
+        <td class="num">21%</td>
+        <td class="num">103p</td>
+      </tr>
+      <tr>
+        <td class="label">C</td>
+        <td class="num">121p</td>
+        <td class="num">27%</td>
+        <td class="num">88p</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Scenario B holds NAV broadly flat at 131p, recognising the Q1 2026 stabilisation but allowing for continued power-price pressure, and keeps the discount near today's 21%, since no comparable fund currently trades tighter and rates are on hold. Scenario A assumes firmer power prices and a re-rating toward a 15% discount; Scenario C assumes renewed power-price downgrades and a wider discount. For reference, the average broker target near 137p implies the discount closing almost entirely, which is a more optimistic assumption than Scenario B.</p>
+
+  <div class="runftr">
+    <span>Howegate Capital · Independent Equity Research</span>
+    <span class="pageno">07</span>
+  </div>
+</section>
+
+<!-- ====================== PAGE 8 — CONCLUSION ====================== -->
+<section class="page">
+  <div class="runhdr">
+    <span class="mark">
+      <svg viewBox="0 0 28 16" width="18" height="11" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 14 Q 7 4, 13 9 T 27 6"/>
+        <path d="M1 14 L 27 14" opacity=".4"/>
+      </svg>
+      Greencoat UK Wind · LSE: UKW
+    </span>
+    <span>Howegate Capital</span>
+  </div>
+
+  <div class="eyebrow" style="margin-top: 8pt;">Conclusion</div>
+
+  <p class="lede">Greencoat UK Wind offers a well-covered income of approximately 10%, and a discount to NAV that recent third-party transactions suggest is wider than the underlying assets alone would justify.</p>
+
+  <p>A narrowing of that discount depends largely on factors outside the company's control — interest-rate direction and power-price sentiment — neither of which currently points toward a near-term re-rating, with rates held and the power-price outlook soft. The income component of returns appears the more dependable element on current data; any capital recovery is more contingent. Things that would shift this picture include a turn in power-price forecasts, allocation of voluntary CfDs to UKW's ROC assets in 2027, a takeover approach for the company itself, or — on the downside — a further NAV downgrade, cover falling below ~1.2x, or a halt to the disposals currently validating the asset marks.</p>
+
+  <p>On a longer view, wind and solar economics look structurally favourable: the technology is mature, costs are established, and the energy-security case has been reinforced twice in three years by fossil-fuel shocks. The near-term picture is more volatile, with policy, power prices, and the broader emissions-reduction landscape all still moving. The UK and EU combined account for roughly 8% of global emissions, yet bear a large share of the regulatory and investment burden of the transition — a mismatch that keeps political risk elevated relative to the underlying asset quality.</p>
+
+  <div class="rule" style="margin-top: 22pt;"></div>
+
+  <small class="foot">
+    <strong style="color: var(--ink); font-weight: 600;">Disclaimer.</strong> This research piece is for information and education only. It is not a recommendation, an offer, or a solicitation to buy or sell any security. Howegate Capital is not authorised or regulated by the Financial Conduct Authority. Funds of this kind can trade at a discount or premium to asset value and may fall as well as rise; income is variable and not guaranteed. The author may or may not hold a position in the securities discussed. Do your own research and, if in doubt, speak to a qualified financial adviser.
+  </small>
+
+  <div class="runftr">
+    <span>Howegate Capital · Independent Equity Research</span>
+    <span class="pageno">08</span>
+  </div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,888 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mastercard Incorporated · Howegate Capital</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Hanken+Grotesk:wght@300;400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --ink:    #161D17;
+    --soft:   #2A352C;
+    --mute:   #5C675E;
+    --line:   #D6DCD7;
+    --hair:   #ECEFEC;
+    --paper:  #FFFFFF;
+    --tint:   #F4F6F4;
+    --pine:   #152A1E;
+    --downs:  #2E5E41;
+    --downs-soft: #C7DCC9;
+    --rose:   #B85C57;
+  }
+
+  @page { size: A4; margin: 0; }
+  @media print {
+    body { background: #fff !important; }
+    .page { box-shadow: none !important; margin: 0 !important; }
+    .no-print { display: none !important; }
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Hanken Grotesk', system-ui, sans-serif;
+    color: var(--ink);
+    background: #E8ECE8;
+    -webkit-font-smoothing: antialiased;
+    font-size: 10.5pt;
+    line-height: 1.55;
+  }
+
+  h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; font-weight: 400; letter-spacing: -0.005em; margin: 0; }
+  .num { font-family: 'Roboto Mono', ui-monospace, monospace; font-feature-settings: 'tnum'; }
+  strong { font-weight: 600; color: var(--ink); }
+
+  .page {
+    width: 210mm; min-height: 297mm; margin: 12mm auto;
+    background: var(--paper);
+    padding: 22mm 22mm 18mm 22mm;
+    position: relative;
+    box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 10px 30px -10px rgba(0,0,0,.18);
+    page-break-after: always;
+    overflow: hidden;
+  }
+  .page:last-child { page-break-after: auto; }
+
+  /* Running header on every non-cover page */
+  .runhdr {
+    position: absolute; top: 11mm; left: 22mm; right: 22mm;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 8.2pt; letter-spacing: .14em; text-transform: uppercase; color: var(--mute);
+    padding-bottom: 6pt; border-bottom: 1px solid var(--hair);
+  }
+  .runhdr .mark { display: inline-flex; align-items: center; gap: 6px; color: var(--ink); }
+  .runhdr svg { color: var(--downs); }
+
+  .runftr {
+    position: absolute; bottom: 10mm; left: 22mm; right: 22mm;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 8.2pt; color: var(--mute); letter-spacing: .08em;
+    padding-top: 6pt; border-top: 1px solid var(--hair);
+  }
+  .runftr .pageno { font-family: 'Roboto Mono', monospace; }
+
+  /* Section eyebrow — small uppercase label (no leading rule, no section number) */
+  .eyebrow {
+    display: block;
+    font-size: 9pt; letter-spacing: .26em; text-transform: uppercase;
+    color: var(--downs); margin-bottom: 16pt;
+  }
+  .eyebrow.lg { font-size: 11pt; margin-bottom: 20pt; }
+
+  /* No big titles under sections — keep eyebrow as the heading */
+
+  /* Body */
+  p { margin: 0 0 11pt; }
+  p.lede { font-size: 11.5pt; color: var(--soft); margin-bottom: 14pt; }
+
+  ul { margin: 0 0 11pt; padding: 0; list-style: none; }
+  ul li {
+    position: relative; padding-left: 18px; margin-bottom: 8pt;
+  }
+  ul li::before {
+    content: ""; position: absolute; left: 0; top: .65em; width: 7px; height: 1px; background: var(--downs);
+  }
+
+  .rule { height: 1px; background: var(--hair); margin: 18pt 0; }
+
+  h3 { font-family: 'Cormorant Garamond', serif; font-size: 14pt; font-weight: 500; margin: 16pt 0 6pt; color: var(--ink); }
+
+  /* ============== COVER ============== */
+  .cover {
+    display: flex; flex-direction: column; justify-content: space-between;
+    background: var(--paper);
+  }
+  .cover::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 6px;
+    background: linear-gradient(90deg, var(--pine), var(--downs) 70%, var(--downs-soft));
+  }
+  .cover .head {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 8.6pt; letter-spacing: .26em; text-transform: uppercase; color: var(--mute);
+  }
+  .cover .head .mark { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); }
+  .cover .head .mark svg { color: var(--downs); }
+
+  .cover-body { max-width: 160mm; }
+  .cover-eyebrow {
+    display: inline-flex; align-items: center; gap: 14px;
+    font-size: 9pt; letter-spacing: .28em; text-transform: uppercase; color: var(--downs);
+    margin-bottom: 14pt;
+  }
+  .cover-eyebrow::before {
+    content: ""; width: 42px; height: 1px; background: var(--downs); display: inline-block;
+  }
+  .cover-title {
+    font-family: 'Cormorant Garamond', serif; font-weight: 400;
+    font-size: 52pt; line-height: 1.0; letter-spacing: -0.02em; color: var(--ink); margin: 0;
+    position: relative;
+  }
+  .cover-title::after {
+    content: ""; display: block; width: 60px; height: 3px; background: var(--downs);
+    margin-top: 12pt;
+  }
+  .cover-ticker {
+    margin-top: 8pt; font-family: 'Roboto Mono', monospace; font-size: 11pt; color: var(--downs); letter-spacing: .12em;
+  }
+  .cover-sub {
+    margin-top: 22pt; font-family: 'Cormorant Garamond', serif; font-size: 22pt; font-weight: 300;
+    line-height: 1.25; color: var(--soft); max-width: 150mm; font-style: italic;
+  }
+  .cover-lede {
+    margin-top: 18pt; font-size: 11pt; line-height: 1.55; color: var(--soft); max-width: 140mm;
+  }
+  /* Cover KPI strip */
+  .cover-kpi {
+    display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 14pt;
+    margin-top: 14mm;
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    padding: 12pt 0;
+  }
+  .cover-kpi .cell .k { font-size: 7.4pt; letter-spacing: .22em; text-transform: uppercase; color: var(--mute); margin-bottom: 4pt; }
+  .cover-kpi .cell .v { font-family: 'Roboto Mono', monospace; font-size: 14pt; color: var(--downs); }
+
+  .rec-strip {
+    display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 14pt;
+    margin-top: 12mm;
+    background: var(--tint);
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    padding: 14pt 18pt;
+  }
+  .rec-strip .cell .k { font-size: 7.6pt; letter-spacing: .22em; text-transform: uppercase; color: var(--mute); margin-bottom: 4pt; }
+  .rec-strip .cell .v { font-family: 'Roboto Mono', monospace; font-size: 15pt; color: var(--ink); }
+  .rec-strip .cell .v.green { color: var(--downs); }
+  .rec-strip .cell .v.rec { font-family: 'Cormorant Garamond', serif; font-size: 17pt; color: var(--downs); }
+
+  /* Unified cover stat table — 8 equal cells, 4×2 grid */
+  .stat-table { margin-top: 8mm; border: 1px solid var(--line); background: var(--tint); }
+  .stat-table .row { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .stat-table .row + .row { border-top: 1px solid var(--line); }
+  .stat-table .cell { padding: 14pt 16pt; border-right: 1px solid var(--line); }
+  .stat-table .cell:last-child { border-right: 0; }
+  .stat-table .cell .k { font-family: 'Hanken Grotesk', sans-serif; font-size: 7.4pt; letter-spacing: .22em; text-transform: uppercase; color: var(--mute); margin-bottom: 7pt; line-height: 1; }
+  .stat-table .cell .v { font-family: 'Roboto Mono', monospace; font-size: 15pt; color: var(--ink); line-height: 1; white-space: nowrap; }
+  .stat-table .cell .v.up { color: var(--downs); }
+  .stat-table .cell .v.green { color: var(--downs); }
+  .stat-table .cell .v.rec { font-family: 'Roboto Mono', monospace; font-size: 13pt; color: var(--downs); line-height: 1; white-space: nowrap; }
+
+  .cover-foot {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    color: var(--mute); font-size: 8.6pt; letter-spacing: .12em; text-transform: uppercase;
+  }
+
+  /* ============== KEY KPI STRIP ============== */
+  .kpi {
+    display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
+    border: 1px solid var(--line); margin-bottom: 14pt; background: var(--tint);
+  }
+  .kpi .c { padding: 10pt 14pt; border-right: 1px solid var(--line); }
+  .kpi .c:last-child { border-right: 0; }
+  .kpi .c .k { font-size: 7.4pt; letter-spacing: .22em; text-transform: uppercase; color: var(--mute); margin-bottom: 5pt; }
+  .kpi .c .v { font-family: 'Roboto Mono', monospace; font-size: 14pt; color: var(--ink); }
+  .kpi .c .v.up { color: var(--downs); }
+  .kpi .c .v.down { color: var(--rose); }
+
+  /* ============== RISK TABLE ============== */
+  table.data { width: 100%; border-collapse: collapse; margin: 8pt 0 14pt; }
+  table.data th {
+    text-align: left; font-weight: 500;
+    font-size: 7.8pt; letter-spacing: .22em; text-transform: uppercase; color: var(--mute);
+    padding: 8pt 12pt 8pt 0; border-bottom: 1px solid var(--soft);
+  }
+  table.data td { padding: 9pt 12pt 9pt 0; vertical-align: top; border-bottom: 1px solid var(--hair); font-size: 9.8pt; }
+  table.data tr:last-child td { border-bottom: 0; }
+  table.data td.risk { width: 42%; color: var(--ink); }
+  table.data td.mitigant { color: var(--soft); }
+
+  /* ============== SCENARIO TABLE ============== */
+  table.scenarios { width: 100%; border-collapse: collapse; margin: 6pt 0 14pt; }
+  table.scenarios th, table.scenarios td {
+    padding: 9pt 12pt; text-align: left; border-bottom: 1px solid var(--hair); font-size: 10pt;
+  }
+  table.scenarios th {
+    font-weight: 500; font-size: 7.8pt; letter-spacing: .22em; text-transform: uppercase; color: var(--mute);
+    border-bottom: 1px solid var(--soft); padding-top: 8pt; padding-bottom: 8pt;
+  }
+  table.scenarios td.label { font-family: 'Cormorant Garamond', serif; font-size: 15pt; color: var(--ink); width: 18%; }
+  table.scenarios td.label.base { color: var(--downs); }
+  table.scenarios tr.row-base td { background: #E5EFE6; }
+  table.scenarios td .num { font-size: 11pt; }
+  table.scenarios td.assump { color: var(--soft); font-size: 9.5pt; line-height: 1.4; }
+
+  /* ============== "How MA makes money" BOX ============== */
+  .moneybox {
+    border-left: 2px solid var(--downs); padding: 0 0 0 14pt; margin: 14pt 0;
+  }
+  .moneybox .label { font-size: 7.8pt; letter-spacing: .26em; text-transform: uppercase; color: var(--downs); margin-bottom: 8pt; }
+  .moneybox .stream { margin-bottom: 7pt; font-size: 10pt; }
+  .moneybox .stream:last-child { margin-bottom: 0; }
+
+  /* ============== ASSUMPTION LINES ============== */
+  .assumps {
+    border: 1px solid var(--hair); background: var(--tint); padding: 10pt 14pt;
+    margin: 6pt 0 0;
+  }
+  .assumps .label { font-size: 7.2pt; letter-spacing: .24em; text-transform: uppercase; color: var(--downs); margin-bottom: 6pt; }
+  .assumps .row { display: grid; grid-template-columns: 32mm 1fr; gap: 10pt; padding: 3pt 0; border-bottom: 1px dotted var(--line); font-size: 8.5pt; line-height: 1.35; }
+  .assumps .row:last-child { border-bottom: 0; }
+  .assumps .row .k { font-weight: 500; color: var(--ink); font-size: 8.5pt; }
+  .assumps .row .v { color: var(--soft); }
+
+  /* Side-by-side layout for the post-DCF row */
+  .twopack { display: grid; grid-template-columns: 1fr 1fr; gap: 14pt; margin-top: 10pt; }
+  .twopack h3 { margin-top: 0; }
+
+  /* ============== WACC TABLE — small/compact ============== */
+  table.wacc { width: 100%; border-collapse: collapse; margin: 6pt 0 12pt; font-size: 8.5pt; }
+  table.wacc th, table.wacc td {
+    padding: 4pt 8pt; text-align: right; border-bottom: 1px solid var(--hair);
+  }
+  table.wacc th {
+    font-weight: 500; font-size: 7pt; letter-spacing: .22em; text-transform: uppercase; color: var(--mute);
+    border-bottom: 1px solid var(--soft);
+  }
+  table.wacc th:first-child, table.wacc td:first-child { text-align: left; font-family: 'Hanken Grotesk', sans-serif; }
+  table.wacc td:not(:first-child) { font-family: 'Roboto Mono', monospace; color: var(--soft); }
+  table.wacc td.src { font-family: 'Hanken Grotesk', sans-serif; color: var(--mute); font-size: 7.6pt; text-align: left; }
+  table.wacc tr.result td { font-weight: 600; color: var(--downs); border-top: 1px solid var(--soft); border-bottom: 0; padding-top: 6pt; background: #E5EFE6; }
+
+  /* ============== DCF DETAIL ============== */
+  table.dcf { width: 100%; border-collapse: collapse; margin: 6pt 0 10pt; font-size: 8.6pt; }
+  table.dcf th, table.dcf td {
+    padding: 4pt 5pt; border-bottom: 1px solid var(--hair);
+  }
+  table.dcf th {
+    font-weight: 500; font-size: 6.8pt; letter-spacing: .14em; text-transform: uppercase; color: var(--mute);
+    text-align: right; border-bottom: 1px solid var(--soft);
+  }
+  table.dcf th:first-child, table.dcf td:first-child { text-align: left; padding-right: 10pt; font-family: 'Hanken Grotesk', sans-serif; color: var(--ink); }
+  table.dcf td:not(:first-child) { text-align: right; font-family: 'Roboto Mono', monospace; color: var(--soft); }
+  table.dcf tr.divider td { padding: 0; height: 4pt; border-bottom: 0; }
+  table.dcf tr.total td { font-weight: 500; color: var(--ink); border-top: 1px solid var(--soft); }
+  table.dcf tr.implied td { color: var(--downs); font-weight: 600; background: #E5EFE6; }
+  table.dcf tr.implied td:first-child { color: var(--ink); }
+
+  /* ============== SENSITIVITY ============== */
+  .sens-wrap { display: flex; gap: 8pt; align-items: stretch; margin: 6pt 0 14pt; max-width: 130mm; margin-left: auto; margin-right: auto; }
+  .sens-wrap .y-axis {
+    display: flex; align-items: center; justify-content: center;
+    writing-mode: vertical-rl; transform: rotate(180deg);
+    font-family: 'Hanken Grotesk', sans-serif; font-size: 7.4pt;
+    letter-spacing: .26em; text-transform: uppercase; color: var(--downs);
+    padding: 4pt 0;
+  }
+  .sens-col { flex: 1; }
+  .sens-x-axis {
+    text-align: center; font-family: 'Hanken Grotesk', sans-serif; font-size: 7.4pt;
+    letter-spacing: .26em; text-transform: uppercase; color: var(--downs);
+    margin-bottom: 4pt;
+  }
+  table.sens { width: 100%; border-collapse: collapse; font-size: 8.2pt; }
+  table.sens th, table.sens td {
+    padding: 4pt 4pt; text-align: center; border: 1px solid var(--hair);
+    font-family: 'Roboto Mono', monospace; color: var(--soft);
+  }
+  table.sens th {
+    font-weight: 500; color: var(--mute); background: var(--tint);
+    font-size: 7.6pt;
+  }
+  table.sens th.corner { background: transparent; border-color: transparent; }
+  /* Inner ring around the base case: lighter green */
+  table.sens td.near {
+    background: #E5EFE6; color: var(--downs); font-weight: 500;
+  }
+  table.sens td.base {
+    background: var(--downs); color: #fff; font-weight: 600;
+    box-shadow: inset 0 0 0 3px var(--downs-soft);
+  }
+
+  /* ============== RECOMMENDATION BOX ============== */
+  .recbox {
+    background: var(--downs); color: #fff; padding: 18pt 20pt;
+    display: grid; grid-template-columns: auto 1fr auto; gap: 24pt; align-items: center;
+    margin-top: 18pt;
+  }
+  .recbox .label { font-size: 7.8pt; letter-spacing: .26em; text-transform: uppercase; opacity: .55; margin-bottom: 4pt; }
+  .recbox .v { font-family: 'Cormorant Garamond', serif; font-size: 22pt; line-height: 1; }
+  .recbox .price { font-family: 'Roboto Mono', monospace; font-size: 22pt; }
+  .recbox .note { font-size: 9.5pt; opacity: .75; max-width: 80mm; }
+
+  /* ============== THESIS BLOCKS ============== */
+  .thesis { display: grid; grid-template-columns: 22mm 1fr; gap: 14pt; margin-bottom: 14pt; align-items: start; }
+  .thesis .n { font-family: 'Roboto Mono', monospace; color: var(--downs); font-size: 9pt; padding-top: 4pt; letter-spacing: .14em; }
+  .thesis p { color: var(--soft); }
+  .thesis p strong { color: var(--ink); font-weight: 600; }
+
+  /* ============== ASIDE BOX ============== */
+  .aside {
+    border: 1px solid var(--line); border-left: 3px solid var(--downs);
+    background: var(--tint); padding: 10pt 14pt; margin: 6pt 0 0;
+    font-size: 8.5pt; line-height: 1.4;
+  }
+  .aside .label { font-size: 7.2pt; letter-spacing: .24em; text-transform: uppercase; color: var(--downs); margin-bottom: 6pt; }
+  .aside p { margin: 0 0 5pt; color: var(--soft); }
+  .aside p:last-child { margin-bottom: 0; }
+  .aside p strong { color: var(--ink); }
+
+  /* Print button — only on screen */
+  .print-bar {
+    position: fixed; top: 14px; right: 14px; z-index: 50;
+    background: var(--pine); color: #fff; border: 0; cursor: pointer;
+    padding: 10px 18px; border-radius: 999px; font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
+    box-shadow: 0 4px 16px rgba(21,42,30,.25);
+  }
+  .print-bar:hover { background: var(--downs); }
+
+  small.foot { color: var(--mute); font-size: 8.2pt; display: block; margin-top: 8pt; }
+
+  /* ============== PAYMENT FLOW DIAGRAM (Page 3) ============== */
+  .flow {
+    display: flex; align-items: stretch; gap: 0;
+    margin: 14pt 0 4pt; padding: 14pt 12pt;
+    background: var(--tint); border: 1px solid var(--hair); border-radius: 4px;
+  }
+  .flow .node {
+    flex: 1; padding: 10pt 4pt; text-align: center; background: #fff;
+    border: 1px solid var(--line); border-radius: 3px;
+    font-family: 'Hanken Grotesk', sans-serif; font-size: 8pt; line-height: 1.25;
+    color: var(--ink); display: flex; align-items: center; justify-content: center;
+  }
+  .flow .node strong { display: block; font-weight: 600; margin-bottom: 2pt; }
+  .flow .node-pine {
+    background: var(--downs); color: #fff; border-color: var(--downs);
+    box-shadow: 0 2px 8px -2px rgba(46, 94, 65, 0.4);
+    flex: 1.3;
+  }
+  .flow .node-pine strong { font-family: 'Cormorant Garamond', serif; font-size: 11pt; font-weight: 500; letter-spacing: .02em; }
+  .flow .arrow {
+    flex: 0 0 18px; display: flex; align-items: center; justify-content: center;
+    color: var(--downs); font-size: 14pt; font-weight: 300;
+  }
+  .flow-caption {
+    text-align: center; font-size: 8.5pt; color: var(--mute); margin-top: 4pt; margin-bottom: 14pt; font-style: italic;
+  }
+
+  /* ============== BIG THESIS NUMBERS (Page 4) ============== */
+  .thesis-big { display: grid; grid-template-columns: 32mm 1fr; gap: 14pt; margin-bottom: 16pt; align-items: start; }
+  .thesis-big .n {
+    font-family: 'Cormorant Garamond', serif; color: var(--downs-soft);
+    font-size: 54pt; font-weight: 300; line-height: 0.9;
+    letter-spacing: -0.02em; text-align: right; padding-right: 6pt;
+    border-right: 1px solid var(--hair); padding-top: 4pt;
+  }
+  .thesis-big p { color: var(--soft); margin: 0; padding-top: 6pt; }
+  .thesis-big p strong { color: var(--ink); font-weight: 600; }
+
+  /* ============== RISK TABLE — alternating tint ============== */
+  table.data tbody tr:nth-child(even) td { background: rgba(229, 239, 230, 0.45); }
+
+  /* ============== SCENARIO RANGE BAR (Page 6) ============== */
+  .scenario-range {
+    position: relative; height: 70pt; margin: 12pt 0 18pt;
+    padding: 8pt 14pt 14pt;
+    background: var(--tint); border: 1px solid var(--hair); border-radius: 4px;
+  }
+  .scenario-range .axis {
+    position: absolute; left: 14pt; right: 14pt; top: 36pt;
+    height: 2px; background: linear-gradient(90deg, var(--rose) 0%, var(--line) 30%, var(--line) 70%, var(--downs) 100%);
+    border-radius: 2px;
+  }
+  .scenario-range .mk {
+    position: absolute; transform: translateX(-50%);
+    top: 18pt; text-align: center;
+  }
+  .scenario-range .mk .dot {
+    width: 8pt; height: 8pt; border-radius: 50%; margin: 0 auto;
+    border: 2px solid #fff; box-shadow: 0 0 0 1px var(--line);
+  }
+  .scenario-range .mk.bear   .dot { background: var(--rose); box-shadow: 0 0 0 1px var(--rose); }
+  .scenario-range .mk.spot   .dot { background: var(--mute); box-shadow: 0 0 0 1px var(--mute); }
+  .scenario-range .mk.base   .dot { background: var(--downs); box-shadow: 0 0 0 2px var(--downs-soft); width: 11pt; height: 11pt; }
+  .scenario-range .mk.bull   .dot { background: var(--downs); box-shadow: 0 0 0 1px var(--downs); }
+  .scenario-range .mk .price { font-family: 'Roboto Mono', monospace; font-size: 10pt; color: var(--ink); margin-top: 10pt; }
+  .scenario-range .mk.base .price { color: var(--downs); font-weight: 600; }
+  .scenario-range .mk.bear .price { color: var(--rose); }
+  .scenario-range .mk .lbl { font-size: 7pt; letter-spacing: .2em; text-transform: uppercase; color: var(--mute); margin-top: 1pt; }
+  .scenario-range .axis-scale {
+    position: absolute; left: 14pt; right: 14pt; bottom: 4pt;
+    display: flex; justify-content: space-between; font-family: 'Roboto Mono', monospace;
+    font-size: 6.5pt; color: var(--mute);
+  }
+</style>
+</head>
+<body>
+
+<button class="print-bar no-print" onclick="window.print()">Save as PDF</button>
+
+<!-- ====================== PAGE 1 — COVER ====================== -->
+<section class="page cover">
+  <header class="head">
+    <span class="mark">
+      <svg viewBox="0 0 28 16" width="22" height="13" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 14 Q 7 4, 13 9 T 27 6"/>
+        <path d="M1 14 L 27 14" opacity=".4"/>
+      </svg>
+      Howegate Capital
+    </span>
+    <span>June 2026</span>
+  </header>
+
+  <div class="cover-body">
+    <span class="cover-eyebrow" style="margin-bottom:6pt;">Equity Research</span>
+    <div style="font-family:'Hanken Grotesk',sans-serif;font-size:8.5pt;letter-spacing:.24em;text-transform:uppercase;color:#5C675E;margin:0 0 14pt;">Student research project</div>
+    <h1 class="cover-title">Mastercard<br/>Incorporated</h1>
+    <div class="cover-ticker">NYSE : MA &nbsp;·&nbsp; 19 June 2026</div>
+    <p class="cover-sub">A toll road on the global shift from cash to digital.</p>
+  </div>
+
+  <div>
+    <table style="width:100%;border-collapse:collapse;border:1px solid #D0D8D1;margin-top:8mm;background:#F4F6F4;table-layout:fixed;">
+      <tr>
+        <td style="width:20%;padding:13pt 15pt;border-right:1px solid #D0D8D1;vertical-align:top;">
+          <div style="font-family:'Hanken Grotesk',sans-serif;font-size:7pt;letter-spacing:.22em;text-transform:uppercase;color:#5C675E;margin-bottom:6pt;">Op. Margin</div>
+          <div style="font-family:'Roboto Mono',monospace;font-size:15pt;color:#2E5E41;line-height:1;">~58%</div>
+        </td>
+        <td style="width:20%;padding:13pt 15pt;border-right:1px solid #D0D8D1;vertical-align:top;">
+          <div style="font-family:'Hanken Grotesk',sans-serif;font-size:7pt;letter-spacing:.22em;text-transform:uppercase;color:#5C675E;margin-bottom:6pt;">VAS Growth</div>
+          <div style="font-family:'Roboto Mono',monospace;font-size:15pt;color:#2E5E41;line-height:1;">+24%</div>
+        </td>
+        <td style="width:20%;padding:13pt 15pt;border-right:1px solid #D0D8D1;vertical-align:top;">
+          <div style="font-family:'Hanken Grotesk',sans-serif;font-size:7pt;letter-spacing:.22em;text-transform:uppercase;color:#5C675E;margin-bottom:6pt;">Cards in Issue</div>
+          <div style="font-family:'Roboto Mono',monospace;font-size:15pt;color:#161D17;line-height:1;">3.4bn</div>
+        </td>
+        <td style="width:20%;padding:13pt 15pt;border-right:1px solid #D0D8D1;vertical-align:top;">
+          <div style="font-family:'Hanken Grotesk',sans-serif;font-size:7pt;letter-spacing:.22em;text-transform:uppercase;color:#5C675E;margin-bottom:6pt;">52-wk High</div>
+          <div style="font-family:'Roboto Mono',monospace;font-size:15pt;color:#161D17;line-height:1;">$601</div>
+        </td>
+        <td style="width:20%;padding:13pt 15pt;vertical-align:top;">
+          <div style="font-family:'Hanken Grotesk',sans-serif;font-size:7pt;letter-spacing:.22em;text-transform:uppercase;color:#5C675E;margin-bottom:6pt;">Current</div>
+          <div style="font-family:'Roboto Mono',monospace;font-size:15pt;color:#161D17;line-height:1;">$489.79</div>
+        </td>
+      </tr>
+    </table>
+    <p style="font-family:'Hanken Grotesk',sans-serif;font-size:8pt;color:#5C675E;margin:10pt 0 0;line-height:1.5;">This is research for information and education only, not investment advice.</p>
+    <div class="cover-foot" style="margin-top:10pt;">
+      <span>Howegate Capital · Independent Equity Research</span>
+      <span>Page 01 / 09</span>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== PAGE 2 — INVESTMENT SUMMARY ====================== -->
+<section class="page">
+  <div class="runhdr">
+    <span class="mark">
+      <svg viewBox="0 0 28 16" width="18" height="11" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 14 Q 7 4, 13 9 T 27 6"/>
+        <path d="M1 14 L 27 14" opacity=".4"/>
+      </svg>
+      Mastercard Incorporated · NYSE: MA
+    </span>
+    <span>Howegate Capital</span>
+  </div>
+
+  <div class="eyebrow" style="margin-top: 8pt;">Key Points</div>
+
+  <ul>
+    <li><strong>A toll-road business model.</strong> Mastercard takes a small, automated fee on payment volume without issuing cards, lending, or carrying credit risk. The result is ~58% operating margins, substantial free cash flow, and revenue that compounds with the flow of global commerce.</li>
+    <li><strong>A large structural runway remains.</strong> Roughly half of the world's consumer payments are still not made on card credentials, around $11tn of cash remains in circulation, and $77tn of the $80tn commercial payments market still moves by cheque, ACH and wire rather than card.</li>
+    <li><strong>The revenue mix is shifting toward higher-margin lines.</strong> Value-added services (cybersecurity, fraud, data, loyalty) now approach 40% of revenue and grow at 24%, faster and higher margin than the core network.</li>
+    <li><strong>The shares have pulled back from their high.</strong> They trade 18% below the 52-week high of $601, putting this analysis at a different entry point than the business has commanded for most of the past year.</li>
+    <li><strong>Scenario modelling.</strong> A base-case five-year DCF on conservative assumptions implies a share value of $526; a faster cash-to-digital conversion scenario extends that to $671, while a recession-and-adverse-regulation scenario implies $358.</li>
+  </ul>
+
+  <div class="runftr">
+    <span>Howegate Capital · Independent Equity Research</span>
+    <span class="pageno">02</span>
+  </div>
+</section>
+
+<!-- ====================== PAGE 3 — BUSINESS OVERVIEW ====================== -->
+<section class="page">
+  <div class="runhdr">
+    <span class="mark">
+      <svg viewBox="0 0 28 16" width="18" height="11" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 14 Q 7 4, 13 9 T 27 6"/>
+        <path d="M1 14 L 27 14" opacity=".4"/>
+      </svg>
+      Mastercard Incorporated · NYSE: MA
+    </span>
+    <span>Howegate Capital</span>
+  </div>
+
+  <div class="eyebrow" style="margin-top: 8pt;">Business Overview</div>
+
+  <p>Mastercard is not a bank but is the network and rulebook that move money between the four parties to a card payment. The cardholder pays, their bank (the issuer) extends credit and guarantees the funds, the merchant makes the sale, and the merchant's bank (the acquirer) collects the money. Mastercard sits in the middle, authorising and settling each transaction instantaneously and enforcing the rules that let a card issued in one country work in a shop in another.</p>
+
+  <div class="flow">
+    <div class="node"><div><strong>Cardholder</strong>Pays</div></div>
+    <div class="arrow">›</div>
+    <div class="node"><div><strong>Issuer Bank</strong>Guarantees funds</div></div>
+    <div class="arrow">›</div>
+    <div class="node node-pine"><div><strong>Mastercard</strong>Authorises &amp; settles<br/>Takes a small fee on volume</div></div>
+    <div class="arrow">›</div>
+    <div class="node"><div><strong>Acquirer Bank</strong>Collects payment</div></div>
+    <div class="arrow">›</div>
+    <div class="node"><div><strong>Merchant</strong>Receives payment</div></div>
+  </div>
+  <p class="flow-caption">Mastercard never issues cards, never lends, never carries credit risk.</p>
+
+  <p>Its structure is a two-sided network: merchants accept Mastercard because billions of people carry it, and people carry it because it is accepted nearly everywhere (~3.4bn cards in issue). Each new participant makes the network more valuable to the other side, switching is costly, and processing one more transaction costs almost nothing, so incremental volume drops through at high margins.</p>
+
+  <p>Revenue is reported after deducting the rebates Mastercard pays banks to win and keep choosing Mastercard. What remains is earned across four lines:</p>
+
+  <div class="moneybox">
+    <div class="label">Where the revenue comes from</div>
+    <div class="stream"><strong>Domestic assessment fees </strong>— a small percentage of gross dollar volume.</div>
+    <div class="stream"><strong>Transaction processing (switching) fees </strong>— charged per transaction, so the rise of small everyday payments is a tailwind.</div>
+    <div class="stream"><strong>Cross-border fees </strong>— a premium fee charged on top of the usual ones when a card is used outside its home country. The highest-margin line, growing 15%, driven by travel and international e-commerce.</div>
+    <div class="stream"><strong>Value-added services &amp; solutions </strong>— cybersecurity, fraud prevention, data analytics, consulting and loyalty sold on top of the network. The fastest growing line, now 40% of revenue, growing at 24%.</div>
+  </div>
+
+  <p>Beyond the network, Mastercard converts earnings into free cash flow and returns the bulk to shareholders through buybacks and a growing dividend. In Q1 2026 alone it repurchased $4.0bn of stock and paid $0.8bn in dividends, steadily shrinking the share count. Ownership is 90% institutional (Mastercard Foundation, Vanguard, BlackRock, State Street), with no founder or activist control and a single voting class.</p>
+
+  <div class="runftr">
+    <span>Howegate Capital · Independent Equity Research</span>
+    <span class="pageno">03</span>
+  </div>
+</section>
+
+<!-- ====================== PAGE 4 — INDUSTRY + THESIS ====================== -->
+<section class="page">
+  <div class="runhdr">
+    <span class="mark">
+      <svg viewBox="0 0 28 16" width="18" height="11" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 14 Q 7 4, 13 9 T 27 6"/>
+        <path d="M1 14 L 27 14" opacity=".4"/>
+      </svg>
+      Mastercard Incorporated · NYSE: MA
+    </span>
+    <span>Howegate Capital</span>
+  </div>
+
+  <div class="eyebrow" style="margin-top: 8pt;">Industry Overview</div>
+
+  <p>Mastercard competes on two fronts: the card network oligopoly, and the emerging world of new payment methods that bypass cards entirely.</p>
+
+  <ul>
+    <li><strong>Visa</strong> — the larger, slightly more defensive twin and Mastercard's principal rival. The two form a stable duopoly that rarely competes on price; Visa grows a touch more slowly on recent trends.</li>
+    <li><strong>China UnionPay</strong> — largest globally by domestic volume but concentrated in China and Asia, a limited direct competitor in Western markets.</li>
+    <li><strong>American Express</strong> — a closed loop premium network and issuer combined; competes for higher spend customers and brands, not for ubiquity.</li>
+  </ul>
+
+  <div class="rule"></div>
+
+  <div class="eyebrow" style="margin-top: 6pt;">Structural Features</div>
+
+  <div class="thesis-big">
+    <div class="n">01</div>
+    <p><strong>The network itself is difficult to replicate.</strong> Two-sided network effects, scale economics, brand and switching costs combine into one of the wider moats in public markets, and the Visa/Mastercard duopoly tends to protect pricing on both sides.</p>
+  </div>
+
+  <div class="thesis-big">
+    <div class="n">02</div>
+    <p><strong>The cash-to-digital shift is a multi-decade driver.</strong> Half the world's consumer payments still aren't on card credentials, and the shift is structural across Africa, Asia and Latin America — each newly digitised consumer adds volume to a network whose marginal cost is near zero.</p>
+  </div>
+
+  <div class="thesis-big">
+    <div class="n">03</div>
+    <p><strong>The economics are capital-light.</strong> 58% operating margins, minimal capex and no credit risk produce substantial free cash flow, and sustained buybacks plus a rising dividend compound per-share value even when volume growth moderates.</p>
+  </div>
+
+  <div class="runftr">
+    <span>Howegate Capital · Independent Equity Research</span>
+    <span class="pageno">04</span>
+  </div>
+</section>
+
+<!-- ====================== PAGE 5 — CATALYSTS + RISKS ====================== -->
+<section class="page">
+  <div class="runhdr">
+    <span class="mark">
+      <svg viewBox="0 0 28 16" width="18" height="11" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 14 Q 7 4, 13 9 T 27 6"/>
+        <path d="M1 14 L 27 14" opacity=".4"/>
+      </svg>
+      Mastercard Incorporated · NYSE: MA
+    </span>
+    <span>Howegate Capital</span>
+  </div>
+
+  <div class="eyebrow" style="margin-top: 8pt;">What Would Move the Picture</div>
+
+  <h3 style="margin-top: 4pt;">Catalysts</h3>
+  <ul>
+    <li><strong>Cross-border travel recovery.</strong> Continued normalisation, especially in Asia-Pacific, feeds Mastercard's highest-margin fee line.</li>
+    <li><strong>Value-added services scaling.</strong> Cyber, fraud and data services growing at 24% mix margins higher and reduce dependence on raw volume.</li>
+    <li><strong>Emerging-market digitisation.</strong> The structural shift away from cash in under-penetrated markets is the largest long-run volume driver.</li>
+    <li><strong>Commercial / B2B flows.</strong> Around $77tn of the $80tn commercial payments market still moves by cheque, ACH and wire; independent research projects 370% transaction-value growth in virtual cards over five years.</li>
+  </ul>
+
+  <h3>Risks &amp; Mitigants</h3>
+  <ul>
+    <li><strong>A premium multiple.</strong> The case rests on growth and margin delivery rather than re-rating, though the de-rating from $601 has narrowed the gap.</li>
+    <li><strong>Regulation.</strong> EU/US scrutiny of network fees, the proposed CCCA and interchange caps, though the fee take is a small fraction of transaction value and prior caps were absorbed without derailing growth.</li>
+    <li><strong>Account-to-account rails.</strong> Real-time A2A systems (Brazil's PIX, India's UPI, UK Faster Payments) bypass cards, though this is concentrated in specific markets and one Mastercard is itself connecting into.</li>
+    <li><strong>Digital wallets.</strong> PayPal, Apple Pay and Alipay could build their own settlement rails, though today they largely ride on card rails as partners rather than rivals.</li>
+    <li><strong>Stablecoins and CBDCs.</strong> Settlement without a card-network intermediary; Mastercard is integrating via its $1.8bn BVNK acquisition, with on-chain payments still ~1% of volume.</li>
+    <li><strong>Macro / FX sensitivity.</strong> A spending contraction feeds directly into revenue, partially offset by the non-cyclical services mix.</li>
+  </ul>
+
+  <div class="runftr">
+    <span>Howegate Capital · Independent Equity Research</span>
+    <span class="pageno">05</span>
+  </div>
+</section>
+
+<!-- ====================== PAGE 6 — VALUATION (Scenarios + Assumptions) ====================== -->
+<section class="page">
+  <div class="runhdr">
+    <span class="mark">
+      <svg viewBox="0 0 28 16" width="18" height="11" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 14 Q 7 4, 13 9 T 27 6"/>
+        <path d="M1 14 L 27 14" opacity=".4"/>
+      </svg>
+      Mastercard Incorporated · NYSE: MA
+    </span>
+    <span>Howegate Capital</span>
+  </div>
+
+  <div class="eyebrow lg" style="margin-top: 8pt;">Valuation</div>
+
+  <p>We value Mastercard on a five-year unlevered DCF. The terminal value uses the Gordon growth method at 2.5%, below the long-run rate of nominal GDP. The base case assumes revenue growth easing from 15% to 12%, EBIT margin grinding from 58.5% to 60.5% on operating leverage, a 19% tax rate, D&amp;A 3% and capex 3.5% of sales.</p>
+
+  <h3>Scenario analysis</h3>
+  <table class="scenarios">
+    <thead>
+      <tr>
+        <th>Case</th>
+        <th>Implied share value</th>
+        <th>Assumption set</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="label">A</td>
+        <td><span class="num">$671</span></td>
+        <td class="assump">Faster cash to digital conversion and a step up in global payment volumes; cross-border and value-added services outperform.</td>
+      </tr>
+      <tr class="row-base">
+        <td class="label base">B</td>
+        <td><span class="num" style="color: var(--downs); font-weight:600;">$526</span></td>
+        <td class="assump">Growth 15%→12%, EBIT margin 58.5%→60.5%, tax 19%, terminal g 2.5%.</td>
+      </tr>
+      <tr>
+        <td class="label">C</td>
+        <td><span class="num">$358</span></td>
+        <td class="assump">Recession compresses volumes and adverse interchange/regulatory decisions bite; growth and margins both fade.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Base DCF — free cash flow build ($m)</h3>
+  <table class="dcf">
+    <thead>
+      <tr>
+        <th>($m)</th>
+        <th>2023A</th><th>2024A</th><th>2025A</th><th>2026E</th><th>2027E</th><th>2028E</th><th>2029E</th><th>2030E</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Revenue</td>           <td>25,098</td><td>28,167</td><td>32,791</td><td>37,710</td><td>42,989</td><td>48,578</td><td>54,893</td><td>61,480</td></tr>
+      <tr><td>% growth</td>          <td>13%</td><td>12%</td><td>16%</td><td>15%</td><td>14%</td><td>13%</td><td>13%</td><td>12%</td></tr>
+      <tr><td>EBIT</td>              <td>14,008</td><td>15,582</td><td>18,897</td><td>22,060</td><td>25,364</td><td>28,904</td><td>32,936</td><td>37,195</td></tr>
+      <tr><td>% margin</td>          <td>55.8%</td><td>55.3%</td><td>57.6%</td><td>58.5%</td><td>59.0%</td><td>59.5%</td><td>60.0%</td><td>60.5%</td></tr>
+      <tr><td>(−) Taxes</td>         <td>(2,510)</td><td>(2,431)</td><td>(3,672)</td><td>(4,191)</td><td>(4,819)</td><td>(5,492)</td><td>(6,258)</td><td>(7,067)</td></tr>
+      <tr><td>EBIAT</td>             <td>11,498</td><td>13,151</td><td>15,225</td><td>17,869</td><td>20,544</td><td>23,412</td><td>26,678</td><td>30,128</td></tr>
+      <tr><td>(+) D&amp;A</td>       <td>799</td><td>897</td><td>1,143</td><td>1,131</td><td>1,290</td><td>1,457</td><td>1,647</td><td>1,844</td></tr>
+      <tr><td>(−) CapEx</td>         <td>(1,088)</td><td>(1,194)</td><td>(1,215)</td><td>(1,320)</td><td>(1,505)</td><td>(1,700)</td><td>(1,921)</td><td>(2,152)</td></tr>
+      <tr><td>(−) Δ NWC</td>         <td>(749)</td><td>(1,725)</td><td>(821)</td><td>(1,508)</td><td>(1,720)</td><td>(1,943)</td><td>(1,647)</td><td>(1,844)</td></tr>
+      <tr class="total"><td>Unlevered FCF</td><td>10,460</td><td>11,129</td><td>14,332</td><td>16,172</td><td>18,610</td><td>21,226</td><td>24,757</td><td>27,976</td></tr>
+    </tbody>
+  </table>
+
+  <div class="runftr">
+    <span>Howegate Capital · Independent Equity Research</span>
+    <span class="pageno">06</span>
+  </div>
+</section>
+
+<!-- ====================== PAGE 7 — DCF SUMMARY + ASSUMPTIONS + ASIDE ====================== -->
+<section class="page">
+  <div class="runhdr">
+    <span class="mark">
+      <svg viewBox="0 0 28 16" width="18" height="11" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 14 Q 7 4, 13 9 T 27 6"/>
+        <path d="M1 14 L 27 14" opacity=".4"/>
+      </svg>
+      Mastercard Incorporated · NYSE: MA
+    </span>
+    <span>Howegate Capital</span>
+  </div>
+
+  <div class="eyebrow lg" style="margin-top: 8pt;">Valuation · DCF Summary</div>
+
+  <h3>DCF summary</h3>
+  <table class="dcf" style="margin-top: 6pt;">
+    <tbody>
+      <tr><td>Sum of PV (years 1–5)</td><td colspan="8">86,143</td></tr>
+      <tr><td>Terminal value (Gordon, g 2.5%)</td><td colspan="8">567,837</td></tr>
+      <tr><td>PV of terminal value</td><td colspan="8">394,684</td></tr>
+      <tr class="total"><td>Enterprise value</td><td colspan="8">480,827</td></tr>
+      <tr><td>(+) Cash</td><td colspan="8">7,906</td></tr>
+      <tr><td>(−) Debt</td><td colspan="8">(18,960)</td></tr>
+      <tr class="total"><td>Equity value</td><td colspan="8">469,773</td></tr>
+      <tr><td>FDSO (m)</td><td colspan="8">893</td></tr>
+      <tr class="implied"><td>Implied share value</td><td colspan="8">$526.06</td></tr>
+    </tbody>
+  </table>
+
+  <div class="twopack">
+    <div>
+      <h3 style="margin-top: 4pt;">Base case assumptions</h3>
+      <div class="assumps">
+        <div class="row"><span class="k">Revenue growth</span><span class="v">15% → 12% by 2030, as the network matures.</span></div>
+        <div class="row"><span class="k">EBIT margin</span><span class="v">58.5% → 60.5%, ~40bp/year operating leverage.</span></div>
+        <div class="row"><span class="k">Effective tax rate</span><span class="v">19%, in line with the recent run-rate.</span></div>
+        <div class="row"><span class="k">D&amp;A</span><span class="v">3% of sales, in line with the five-year history.</span></div>
+        <div class="row"><span class="k">Capex</span><span class="v">3.5% of sales, slightly above history.</span></div>
+        <div class="row"><span class="k">Change in NWC</span><span class="v">3 – 4% of sales, in line with history.</span></div>
+        <div class="row"><span class="k">Terminal growth</span><span class="v">2.5%, conservatively below long-run nominal GDP.</span></div>
+        <div class="row"><span class="k">WACC</span><span class="v">7.55% (build-up overleaf).</span></div>
+      </div>
+    </div>
+    <div>
+      <h3 style="margin-top: 4pt;">What the model can and can't tell you</h3>
+      <div class="aside">
+        <p><strong>Most of the value sits in the terminal.</strong> About 82% of the enterprise value comes from the terminal value — the discounted cash flows beyond 2030. That number depends on what the business looks like decades from now, which is unknowable with any precision. The point of a DCF is to bound a sensible range, not to predict a number.</p>
+        <p><strong>Two inputs do most of the work.</strong> A 25bp move in WACC shifts the implied price by ~$25; a 25bp move in terminal growth, ~$24. Together they account for almost all of the band overleaf — the sensitivity matrix is the honest version of the result.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="runftr">
+    <span>Howegate Capital · Independent Equity Research</span>
+    <span class="pageno">07</span>
+  </div>
+</section>
+
+<!-- ====================== PAGE 8 — WACC + SENSITIVITY ====================== -->
+<section class="page">
+  <div class="runhdr">
+    <span class="mark">
+      <svg viewBox="0 0 28 16" width="18" height="11" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 14 Q 7 4, 13 9 T 27 6"/>
+        <path d="M1 14 L 27 14" opacity=".4"/>
+      </svg>
+      Mastercard Incorporated · NYSE: MA
+    </span>
+    <span>Howegate Capital</span>
+  </div>
+
+  <div class="eyebrow lg" style="margin-top: 8pt;">Valuation · WACC &amp; Sensitivity</div>
+
+  <h3>WACC build-up</h3>
+  <table class="wacc">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Value</th>
+        <th>Source / Note</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Risk-free rate</td><td>4.46%</td><td class="src">10-year US Treasury yield, June 2026 close.</td></tr>
+      <tr><td>Beta</td><td>0.74</td><td class="src">Sensitivity to the index; &lt; 1 = less volatile than the S&amp;P 500.</td></tr>
+      <tr><td>Equity risk premium</td><td>4.46%</td><td class="src">Damodaran implied ERP, January 2026.</td></tr>
+      <tr><td>Cost of equity</td><td>7.76%</td><td class="src">CAPM: 4.46% + 0.74 × 4.46%.</td></tr>
+      <tr class="divider"><td></td></tr>
+      <tr><td>Pre-tax cost of debt</td><td>3.16%</td><td class="src">Interest expense ÷ total debt.</td></tr>
+      <tr><td>Tax rate (statutory)</td><td>17.0%</td><td class="src">Statutory rate applied to the debt shield.</td></tr>
+      <tr><td>After-tax cost of debt</td><td>2.62%</td><td class="src">3.16% × (1 − 17%).</td></tr>
+      <tr class="divider"><td></td></tr>
+      <tr><td>Market cap</td><td>$435.6bn</td><td class="src">Shares × spot price, end of period.</td></tr>
+      <tr><td>Total debt</td><td>$19.0bn</td><td class="src">Short-term $1.75bn + long-term $17.21bn.</td></tr>
+      <tr><td>% equity</td><td>95.8%</td><td class="src">Market cap ÷ (market cap + debt).</td></tr>
+      <tr><td>% debt</td><td>4.2%</td><td class="src">Debt ÷ (market cap + debt).</td></tr>
+      <tr class="result"><td>WACC</td><td>7.55%</td><td class="src" style="color: var(--downs)">95.8% × 7.76% + 4.2% × 2.62%</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top: 22pt; text-align: center;">Sensitivity — implied share price ($)</h3>
+  <div class="sens-wrap">
+    <div class="y-axis">WACC</div>
+    <div class="sens-col">
+      <div class="sens-x-axis">Long-term growth rate (g)</div>
+      <table class="sens">
+        <thead>
+          <tr>
+            <th class="corner"></th>
+            <th>2.00%</th><th>2.25%</th><th>2.50%</th><th>2.75%</th><th>3.00%</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th>7.05%</th><td>$536</td><td>$560</td><td>$588</td><td>$618</td><td>$652</td></tr>
+          <tr><th>7.30%</th><td>$509</td><td class="near">$531</td><td class="near">$555</td><td class="near">$582</td><td>$612</td></tr>
+          <tr><th>7.55%</th><td>$484</td><td class="near">$504</td><td class="base">$526</td><td class="near">$550</td><td>$577</td></tr>
+          <tr><th>7.80%</th><td>$462</td><td class="near">$480</td><td class="near">$500</td><td class="near">$521</td><td>$545</td></tr>
+          <tr><th>8.05%</th><td>$441</td><td>$458</td><td>$476</td><td>$495</td><td>$517</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <small class="foot" style="text-align: center;">Dark green cell is the base case (WACC 7.55%, g 2.5%). Light green cells map the immediate band ±25bp on either input. Range across the grid: $441 – $652.</small>
+
+  <div class="runftr">
+    <span>Howegate Capital · Independent Equity Research</span>
+    <span class="pageno">08</span>
+  </div>
+</section>
+
+<!-- ====================== PAGE 9 — CONCLUSION ====================== -->
+<section class="page">
+  <div class="runhdr">
+    <span class="mark">
+      <svg viewBox="0 0 28 16" width="18" height="11" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 14 Q 7 4, 13 9 T 27 6"/>
+        <path d="M1 14 L 27 14" opacity=".4"/>
+      </svg>
+      Mastercard Incorporated · NYSE: MA
+    </span>
+    <span>Howegate Capital</span>
+  </div>
+
+  <div class="eyebrow" style="margin-top: 8pt;">Conclusion</div>
+
+  <p class="lede">Mastercard shows expanding margins and growing cash flow attached to a multi-decade structural shift toward digital payments.</p>
+
+  <p>Visa is a comparably strong franchise, arguably more stable and larger in scale, but Mastercard's faster-growing services mix and cross-border exposure give it a different growth profile. The business is sensitive to global spending cycles and can re-rate quickly in either direction on macro or regulatory news, which is the main variable to track rather than competitive displacement from Visa specifically. A base-case DCF on conservative assumptions sits modestly above the current share price; the wider question for the model is less about the five-year build and more about what happens to network economics in the terminal period, where most of the value sits. The analysis here would be most affected by evidence of structural volume leakage to alternative payment rails (A2A, stablecoins) on the downside, or by faster-than-modelled cash-to-digital conversion on the upside.</p>
+
+  <div class="rule" style="margin-top: 28pt;"></div>
+
+  <small class="foot" style="margin-top: 14pt;">
+    <strong style="color: var(--ink); font-weight: 600;">Disclaimer.</strong> This research piece is for information and education only. It is not a recommendation, an offer, or a solicitation to buy or sell any security. Howegate Capital is not authorised or regulated by the Financial Conduct Authority. The author may or may not hold a position in the securities discussed. Do your own research and, if in doubt, speak to a qualified financial adviser.
+  </small>
+
+  <div class="runftr">
+    <span>Howegate Capital · Independent Equity Research</span>
+    <span class="pageno">09</span>
+  </div>
+</section>
+
+</body>
+</html>
