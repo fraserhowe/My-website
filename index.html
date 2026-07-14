@@ -460,7 +460,7 @@
         Two virtual £100,000 portfolios, managed by Claude. Positions are reviewed and updated every Monday, with the reasoning behind each trade published openly. Benchmarked against the S&P 500 in GBP terms.
       </p>
       <p class="reveal reveal-delay-3 mt-7 text-sm font-mono text-downs-deep">
-        Week <span id="weekNum">2</span> · <span id="experimentDate">6 Jul 2026</span>
+        Week <span id="weekNum">3</span> · <span id="experimentDate">13 Jul 2026</span>
       </p>
     </div>
   </div>
@@ -478,33 +478,34 @@
   <div class="bg-pine text-white">
     <div class="max-w-6xl mx-auto px-5 sm:px-8 py-14 sm:py-20">
       <p class="reveal text-[0.78rem] tracking-[0.28em] uppercase text-downs-soft mb-6">Scorecard</p>
-      <h2 class="reveal reveal-delay-1 text-3xl sm:text-4xl mb-10">Both books, since inception.</h2>
+      <h2 class="reveal reveal-delay-1 text-3xl sm:text-4xl mb-10">Where the two books stand.</h2>
       <div class="reveal reveal-delay-2 grid md:grid-cols-3 gap-x-10 gap-y-10">
         <div>
           <div class="text-[0.72rem] tracking-[0.22em] uppercase text-white/50 mb-2">Portfolio A · ETFs</div>
-          <div id="aNav" class="num text-3xl sm:text-4xl">£98,687</div>
-          <div class="mt-3 flex items-center gap-3 text-sm">
-            <span class="text-white/55">Return</span>
-            <span id="aReturn" class="num text-white">−1.31%</span>
+          <div id="aNav" class="num text-3xl sm:text-4xl">£101,061</div>
+          <div class="mt-3 space-y-1.5 text-sm">
+            <div class="flex items-center justify-between gap-4"><span class="text-white/55">This week</span><span id="aWeek" class="num text-white">+2.41%</span></div>
+            <div class="flex items-center justify-between gap-4"><span class="text-white/55">Since inception</span><span id="aReturn" class="num text-white">+1.06%</span></div>
           </div>
         </div>
         <div class="md:border-l md:border-white/15 md:pl-10">
           <div class="text-[0.72rem] tracking-[0.22em] uppercase text-white/50 mb-2">Portfolio B · Equities</div>
-          <div id="bNav" class="num text-3xl sm:text-4xl">£98,582</div>
-          <div class="mt-3 flex items-center gap-3 text-sm">
-            <span class="text-white/55">Return</span>
-            <span id="bReturn" class="num text-white">−1.42%</span>
+          <div id="bNav" class="num text-3xl sm:text-4xl">£99,640</div>
+          <div class="mt-3 space-y-1.5 text-sm">
+            <div class="flex items-center justify-between gap-4"><span class="text-white/55">This week</span><span id="bWeek" class="num text-white">+1.07%</span></div>
+            <div class="flex items-center justify-between gap-4"><span class="text-white/55">Since inception</span><span id="bReturn" class="num text-white">−0.36%</span></div>
           </div>
         </div>
         <div class="md:border-l md:border-white/15 md:pl-10">
           <div class="text-[0.72rem] tracking-[0.22em] uppercase text-white/50 mb-2">S&P 500 · VUAG (GBP)</div>
-          <div id="benchIndex" class="num text-3xl sm:text-4xl">100.83</div>
-          <div class="mt-3 flex items-center gap-3 text-sm">
-            <span class="text-white/55">Return</span>
-            <span id="benchReturn" class="num text-white">+0.83%</span>
+          <div id="benchIndex" class="num text-3xl sm:text-4xl">100.89</div>
+          <div class="mt-3 space-y-1.5 text-sm">
+            <div class="flex items-center justify-between gap-4"><span class="text-white/55">This week</span><span id="benchWeek" class="num text-white">+0.06%</span></div>
+            <div class="flex items-center justify-between gap-4"><span class="text-white/55">Since inception</span><span id="benchReturn" class="num text-white">+0.89%</span></div>
           </div>
         </div>
       </div>
+      <p class="reveal reveal-delay-3 mt-8 text-xs text-white/45 leading-relaxed">VUAG at £108.720 against the 107.76 inception anchor. FX: GBP/USD 1.3402, GBP/EUR 1.1743. Priced off the Friday 10 Jul close; all prices confirmed, no estimates.</p>
     </div>
   </div>
 
@@ -521,7 +522,7 @@
           </div>
         </div>
         <canvas id="perfChart" style="max-height:380px"></canvas>
-        <p class="text-xs text-ink-mute mt-3 text-center sm:text-left italic">Lines populate week-on-week. Showing Weeks 1–2.</p>
+        <p class="text-xs text-ink-mute mt-3 text-center sm:text-left italic">Lines populate week-on-week. Showing Weeks 1–3.</p>
       </div>
     </div>
   </div>
@@ -617,7 +618,7 @@
       <div class="reveal">
         <p class="text-[0.78rem] tracking-[0.28em] uppercase text-downs-soft mb-5">This week</p>
         <h2 class="text-3xl sm:text-4xl mb-8" id="weekTitle"></h2>
-        <p class="text-lg leading-relaxed text-white/75" id="weekBody"></p>
+        <div class="space-y-5 text-lg leading-relaxed text-white/75" id="weekBody"></div>
         <p class="mt-8 text-xs text-white/45 italic">This is a research simulation; nothing here is financial advice.</p>
       </div>
     </div>
@@ -775,8 +776,8 @@
 ---------------------------------------------------------------------------- */
 const DATA = {
   // Last time the site was updated. Shown on the Experiment page.
-  updatedAt: "6 Jul 2026",
-  weekNumber: 2,
+  updatedAt: "13 Jul 2026",
+  weekNumber: 3,
 
   // Latest research notes. Newest first. Status: "published" | "upcoming".
   // url:  paste a PDF or HTML path like "notes/games-workshop.pdf" — or leave blank to keep the card non-clickable for now.
@@ -821,19 +822,21 @@ const DATA = {
   //   4. Update marketOverview paragraphs
   experiment: {
     inception: "29 Jun 2026",
-    fx: { gbpUsd: 1.3190, gbpEur: 1.1580 },
+    fx: { gbpUsd: 1.3402, gbpEur: 1.1743 },
 
     // Weekly performance — all three series indexed to 100 at inception
     performance: {
-      labels: ["W1", "W2"],
-      A:     [100, 98.687],
-      B:     [100, 98.582],
-      bench: [100, 100.83],
+      labels: ["W1", "W2", "W3"],
+      A:     [100, 98.687, 101.061],
+      B:     [100, 98.582, 99.640],
+      bench: [100, 100.83, 100.89],
     },
 
     marketOverview: [
-      `<strong class="font-semibold text-ink">This week.</strong> The rotation that shaped our first week ran on. The S&P 500 rose about 1.8% and the Dow set records, but the strength sat outside technology. Chips were sold hard for a second week, with the semiconductor index down 6.7% on 1 July as investors booked profits after the sector roughly doubled in the second quarter. The triggers were specific to AI: OpenAI was reported to be in talks to sell a 5% stake to the US government, and Meta said it may sell spare compute capacity, a hint that AI spending has run ahead of need. A soft June jobs report, 57,000 against about 113,000 expected, eased fears of a Fed hike and supported the broad market. Oil kept sliding toward $67.`,
-      `<strong class="font-semibold text-ink">The week ahead.</strong> Quieter on data. June Fed minutes are the main event, ahead of earnings season, with TSMC reporting on 16 July. The open question is whether this is healthy broadening or the start of a deeper move out of AI.`,
+      `<strong class="font-semibold text-ink">This week.</strong> The AI trade came roaring back. The S&P 500 rose 0.42% on Friday to close at 7,575.39, notching a weekly gain of more than 1%, with Nvidia rising around 4% and Meta jumping about 6% on reports it may have engineered major AI cost savings. Thursday was the standout session for our book: the VanEck Semiconductor ETF climbed 2.5%, led by a 4.5% gain in Micron after it announced up to $3 billion of investment in the US chip supply chain, and both the Nasdaq and the semiconductor index closed back above their 50-day moving averages. The rally was selective, rewarding proven AI growth and large-cap quality while small caps, software and the broader memory trade lagged.`,
+      `<strong class="font-semibold text-ink">SK Hynix's debut.</strong> The event of the week was the South Korean memory maker's US listing. It opened on the Nasdaq on Friday at $170 and finished roughly 13% above its offer price, with some traders worried it could compete for funds with US memory names like Micron. That worry landed on Monday: SK Hynix's US shares tumbled 8%, its Seoul line fell more than 15% in its worst day on record, and the selling spread across chips, with Micron off 5% and AMD down 2%.`,
+      `<strong class="font-semibold text-ink">Monday's risk-off.</strong> Geopolitics returned as the week's risk. Stocks fell after President Trump announced he was reinstating a blockade on Iranian shipping through the Strait of Hormuz, sending oil higher; the S&P 500 lost 0.79% and the Nasdaq fell 1.55%. Our Friday marks therefore capture a strong week, and Monday's open gave a chunk of it back.`,
+      `<strong class="font-semibold text-ink">For a GBP investor.</strong> The pound climbed to $1.343, its highest since mid-June and a second straight weekly gain, as markets priced in a Bank of England rate hike by year end; Andy Burnham is set to become prime minister on 20 July. The firmer pound was a small headwind on all USD marks, and it explains why our GBP-wrapped lines (SMGB, gold, defence) fell even in a decent week for their underlyings. Elsewhere: TSMC's first-half revenue reached nearly $75 billion, up 35.6% year on year; Rheinmetall gave back its post-contract bounce as investors questioned whether its near €1 billion share of a 15-year UK military training contract is incremental to guidance; Strategy (MSTR) adopted a new capital framework with a $1 billion buyback and a Bitcoin monetisation programme of up to $1.25 billion; and Agnico Eagle slipped as brokers cut gold-price forecasts and the Barnat pit-wall movement weighed on near-term output.`,
     ],
 
     portfolioA: {
@@ -843,32 +846,32 @@ const DATA = {
       navOpening: 100000.00,
       friction: 0.00,
       holdings: [
-        { ticker: "NVDA",   name: "Nvidia",                         ccy: "USD", entryPx: 193.23,  now: 194.44,  valueGbp:  9924, weightNow: 10.1, plPct:  -0.8, shares:   68.261, costGbp: 10000 },
-        { ticker: "AVGO",   name: "Broadcom",                       ccy: "USD", entryPx: 365.02,  now: 360.45,  valueGbp:  9739, weightNow:  9.9, plPct:  -2.6, shares:   36.135, costGbp: 10000 },
-        { ticker: "TSM",    name: "TSMC (ADR)",                     ccy: "USD", entryPx: 434.99,  now: 434.16,  valueGbp:  8859, weightNow:  9.0, plPct:  -1.6, shares:   27.290, costGbp:  9000 },
-        { ticker: "SMGB",   name: "VanEck Semiconductor UCITS ETF", ccy: "GBP", entryPx:  90.70,  now:  86.19,  valueGbp:  8553, weightNow:  8.7, plPct:  -5.0, shares:   99.230, costGbp:  9000 },
-        { ticker: "CEG",    name: "Constellation Energy",           ccy: "USD", entryPx: 264.02,  now: 238.00,  valueGbp:  8891, weightNow:  9.0, plPct: -11.1, shares:   49.958, costGbp: 10000 },
-        { ticker: "NATO.L", name: "Future of Defence ETF",          ccy: "USD", entryPx:  19.552, now:  21.313, valueGbp:  9676, weightNow:  9.8, plPct:   7.5, shares:  607.150, costGbp:  9000 },
-        { ticker: "SGLN.L", name: "iShares Physical Gold ETF",      ccy: "GBP", entryPx:  59.94,  now:  60.40,  valueGbp: 10077, weightNow: 10.2, plPct:   0.8, shares:  166.834, costGbp: 10000 },
-        { ticker: "AMD",    name: "AMD",                            ccy: "USD", entryPx: 521.58,  now: 517.82,  valueGbp:  7833, weightNow:  7.9, plPct:  -2.1, shares:   20.231, costGbp:  8000 },
-        { ticker: "IB1T",   name: "iShares Bitcoin ETP",            ccy: "GBP", entryPx:   4.5425,now:   4.6647,valueGbp:  5135, weightNow:  5.2, plPct:   2.7, shares: 1100.715, costGbp:  5000 },
+        { ticker: "NVDA",   name: "Nvidia",                         ccy: "USD", entryPx: 193.23,  now: 210.96,  valueGbp: 10745, weightNow: 10.6, plPct:  -0.8, shares:   68.261, costGbp: 10000 },
+        { ticker: "AVGO",   name: "Broadcom",                       ccy: "USD", entryPx: 365.02,  now: 399.97,  valueGbp: 10784, weightNow: 10.7, plPct:  -2.6, shares:   36.135, costGbp: 10000 },
+        { ticker: "TSM",    name: "TSMC (ADR)",                     ccy: "USD", entryPx: 434.99,  now: 434.11,  valueGbp:  8840, weightNow:  8.7, plPct:  -1.6, shares:   27.290, costGbp:  9000 },
+        { ticker: "SMGB",   name: "VanEck Semiconductor UCITS ETF", ccy: "GBP", entryPx:  90.70,  now:  85.55,  valueGbp:  8489, weightNow:  8.4, plPct:  -5.0, shares:   99.230, costGbp:  9000 },
+        { ticker: "CEG",    name: "Constellation Energy",           ccy: "USD", entryPx: 264.02,  now: 251.38,  valueGbp:  9371, weightNow:  9.3, plPct: -11.1, shares:   49.958, costGbp: 10000 },
+        { ticker: "NATO.L", name: "Future of Defence ETF",          ccy: "USD", entryPx:  19.552, now:  20.495, valueGbp:  9285, weightNow:  9.2, plPct:   7.5, shares:  607.150, costGbp:  9000 },
+        { ticker: "SGLN.L", name: "iShares Physical Gold ETF",      ccy: "GBP", entryPx:  59.94,  now:  59.20,  valueGbp:  9877, weightNow:  9.8, plPct:   0.8, shares:  166.834, costGbp: 10000 },
+        { ticker: "AMD",    name: "AMD",                            ccy: "USD", entryPx: 521.58,  now: 557.89,  valueGbp:  8422, weightNow:  8.3, plPct:  -2.1, shares:   20.231, costGbp:  8000 },
+        { ticker: "IB1T",   name: "iShares Bitcoin ETP",            ccy: "GBP", entryPx:   4.5425,now:   4.7692,valueGbp:  5250, weightNow:  5.2, plPct:   2.7, shares: 1100.715, costGbp:  5000 },
       ],
-      cashWeight: 20.3,
+      cashWeight: 19.8,
       cashGbp: 20000,
-      navCurrent: 98687,
-      returnPct: -1.31,
+      navCurrent: 101061,
+      returnPct: 1.06,
       notes: [
         { ticker: "NVDA",   text: "AI compute leader, bought around 8% cheaper after the rotation. Demand signals remain the strongest in the market and the core thesis is intact. We are holding for the datacentre buildout to compound rather than for a quick bounce." },
         { ticker: "AVGO",   text: "Custom AI silicon and networking, down around 11% into our entry and flagged as very cheap by Bernstein with smart money accumulating. This is our highest conviction reset entry. We want the market to reprice the custom silicon story back toward where the fundamentals point." },
         { ticker: "TSM",    text: "The foundry bottleneck at roughly 70% share, so almost every AI chip runs through them. Q2 earnings land on 16 July and the setup into that print looks constructive. We are hoping the results confirm pricing power and lift sentiment across the sector." },
         { ticker: "SMGB",   text: "A single line giving broad semis breadth across memory, equipment and the second tier names. It is the UK listed UCITS version, GBP quoted and free of FX drag, which is exactly why it belongs in this book. We want it to recover the recent breakdown and track the sector higher without the currency cost." },
         { ticker: "CEG",    text: "Power for AI via nuclear, trading around 36% below its high. The FY EPS guide and the structural pull from datacentre demand underpin the case. We are holding for the multiyear power shortage story to play out rather than the next quarter." },
-        { ticker: "NATO.L", text: "A diversified defence basket, now treated as the USD line and up around 9% in dollars. It spreads exposure across the sector and cushions the single name Rheinmetall risk sitting in the other book. We want steady sector strength rather than any one contract outcome." },
+        { ticker: "NATO.L", text: "A diversified defence basket, now treated as the USD line and modestly up in dollars since entry. It spreads exposure across the sector and cushions the single name Rheinmetall risk sitting in the other book. We want steady sector strength rather than any one contract outcome." },
         { ticker: "SGLN.L", text: "Physical gold after the reset back below 4,000 dollars, GBP quoted. This is the book's equity hedge and the ballast when risk assets wobble. We are hoping it holds firm and offsets drawdowns elsewhere." },
         { ticker: "AMD",    text: "The second accelerator vendor, bought at a lower multiple than Nvidia, with UBS recently setting a street high view. It gives us a second horse in the accelerator race without paying the leader's premium. We want share gains and margin progress to close some of that valuation gap." },
         { ticker: "IB1T",   text: "Direct Bitcoin exposure after the break below 60k, kept small and speculative. It is the crypto sleeve, sized so a sharp move either way stays contained. We are hoping for a recovery in Bitcoin without the position ever threatening the book." },
       ],
-      summary: "Action: hold all. Gold, bitcoin and defence cushioned the chip drop, which is the ETF book doing its job."
+      summary: "Action: hold all. The AI core did the work this week — Nvidia, Broadcom and AMD led the recovery and Constellation bounced — moving the ETF book back ahead of the benchmark since inception."
     },
 
     portfolioB: {
@@ -878,20 +881,20 @@ const DATA = {
       navOpening: 100000.00,
       friction: 0.00,
       holdings: [
-        { ticker: "NVDA", name: "Nvidia",               ccy: "USD", entryPx:  193.23, now:  194.44, valueGbp: 9924, weightNow: 10.1, plPct:  -0.8, shares: 68.261, costGbp: 10000 },
-        { ticker: "AVGO", name: "Broadcom",             ccy: "USD", entryPx:  365.02, now:  360.45, valueGbp: 9739, weightNow:  9.9, plPct:  -2.6, shares: 36.135, costGbp: 10000 },
-        { ticker: "TSM",  name: "TSMC (ADR)",           ccy: "USD", entryPx:  434.99, now:  434.16, valueGbp: 8859, weightNow:  9.0, plPct:  -1.6, shares: 27.290, costGbp:  9000 },
-        { ticker: "MU",   name: "Micron",               ccy: "USD", entryPx: 1132.33, now:  975.56, valueGbp: 7647, weightNow:  7.8, plPct: -15.0, shares: 10.484, costGbp:  9000 },
-        { ticker: "AMD",  name: "AMD",                  ccy: "USD", entryPx:  521.58, now:  517.82, valueGbp: 7833, weightNow:  7.9, plPct:  -2.1, shares: 20.231, costGbp:  8000 },
-        { ticker: "CEG",  name: "Constellation Energy", ccy: "USD", entryPx:  264.02, now:  238.00, valueGbp: 8891, weightNow:  9.0, plPct: -11.1, shares: 49.958, costGbp: 10000 },
-        { ticker: "RHM",  name: "Rheinmetall",          ccy: "EUR", entryPx:  946.60, now: 1111.80, valueGbp: 9299, weightNow:  9.4, plPct:  16.2, shares:  9.787, costGbp:  8000 },
-        { ticker: "AEM",  name: "Agnico Eagle",         ccy: "USD", entryPx:  158.29, now:  154.01, valueGbp: 9596, weightNow:  9.7, plPct:  -4.0, shares: 83.328, costGbp: 10000 },
-        { ticker: "MSTR", name: "Strategy",             ccy: "USD", entryPx:   82.31, now:  100.00, valueGbp: 4793, weightNow:  4.9, plPct:  19.8, shares: 64.099, costGbp:  4000 },
+        { ticker: "NVDA", name: "Nvidia",               ccy: "USD", entryPx:  193.23, now:  210.96, valueGbp: 10745, weightNow: 10.8, plPct:  -0.8, shares: 68.261, costGbp: 10000 },
+        { ticker: "AVGO", name: "Broadcom",             ccy: "USD", entryPx:  365.02, now:  399.97, valueGbp: 10784, weightNow: 10.8, plPct:  -2.6, shares: 36.135, costGbp: 10000 },
+        { ticker: "TSM",  name: "TSMC (ADR)",           ccy: "USD", entryPx:  434.99, now:  434.11, valueGbp:  8840, weightNow:  8.9, plPct:  -1.6, shares: 27.290, costGbp:  9000 },
+        { ticker: "MU",   name: "Micron",               ccy: "USD", entryPx: 1132.33, now:  979.30, valueGbp:  7661, weightNow:  7.7, plPct: -15.0, shares: 10.484, costGbp:  9000 },
+        { ticker: "AMD",  name: "AMD",                  ccy: "USD", entryPx:  521.58, now:  557.89, valueGbp:  8422, weightNow:  8.5, plPct:  -2.1, shares: 20.231, costGbp:  8000 },
+        { ticker: "CEG",  name: "Constellation Energy", ccy: "USD", entryPx:  264.02, now:  251.38, valueGbp:  9371, weightNow:  9.4, plPct: -11.1, shares: 49.958, costGbp: 10000 },
+        { ticker: "RHM",  name: "Rheinmetall",          ccy: "EUR", entryPx:  946.60, now:  979.20, valueGbp:  8160, weightNow:  8.2, plPct:  16.2, shares:  9.787, costGbp:  8000 },
+        { ticker: "AEM",  name: "Agnico Eagle",         ccy: "USD", entryPx:  158.29, now:  146.87, valueGbp:  9132, weightNow:  9.2, plPct:  -4.0, shares: 83.328, costGbp: 10000 },
+        { ticker: "MSTR", name: "Strategy",             ccy: "USD", entryPx:   82.31, now:   94.64, valueGbp:  4526, weightNow:  4.5, plPct:  19.8, shares: 64.099, costGbp:  4000 },
       ],
-      cashWeight: 22.3,
+      cashWeight: 22.1,
       cashGbp: 22000,
-      navCurrent: 98582,
-      returnPct: -1.42,
+      navCurrent: 99640,
+      returnPct: -0.36,
       notes: [
         { ticker: "NVDA", text: "AI compute leader, bought around 8% cheaper after the rotation. Demand signals remain the strongest in the market and the core thesis is intact. We are holding for the datacentre buildout to compound rather than for a quick bounce." },
         { ticker: "AVGO", text: "Custom AI silicon and networking, down around 11% into our entry and flagged as very cheap by Bernstein with smart money accumulating. This is our highest conviction reset entry. We want the market to reprice the custom silicon story back toward where the fundamentals point." },
@@ -903,21 +906,25 @@ const DATA = {
         { ticker: "AEM",  text: "A senior gold miner bought into the metals reset, firming as gold steadied and trading on a reasonable multiple. It gives leveraged exposure to the gold story with real cashflow behind it. We want a firm gold price to flow through to earnings and the share." },
         { ticker: "MSTR", text: "The crypto proxy, trimmed to 4% and deliberately speculative. It is high risk after Bitcoin's drop pushed its mNAV below 1.0, so the small size is intentional. We are hoping for a Bitcoin recovery while keeping the downside contained." },
       ],
-      summary: "Action: hold all. Micron and Constellation dragged, while Rheinmetall and MicroStrategy rescued a large part of it. Every thesis is intact."
+      summary: "Action: hold all. The AI names rebounded hard, but Rheinmetall, Agnico and Strategy pulled the other way together, so the single-stock book still trails since inception. None of those theses has broken."
     },
 
     themeAllocation: [
-      { theme: "AI / Semiconductors", pctA: 45.6, pctB: 44.7, aDetail: "NVDA, AVGO, TSM, SMGB, AMD",     bDetail: "NVDA, AVGO, TSM, MU, AMD" },
-      { theme: "Power-for-AI",        pctA:  9.0, pctB:  9.0, aDetail: "CEG",                             bDetail: "CEG" },
-      { theme: "Defence",             pctA:  9.8, pctB:  9.4, aDetail: "NATO.L (Future of Defence ETF)",  bDetail: "Rheinmetall" },
-      { theme: "Gold",                pctA: 10.2, pctB:  9.7, aDetail: "SGLN.L (Physical Gold ETF)",      bDetail: "Agnico Eagle" },
-      { theme: "Crypto",              pctA:  5.2, pctB:  4.9, aDetail: "IB1T (Bitcoin ETP)",              bDetail: "Strategy (MSTR)" },
-      { theme: "Cash",                pctA: 20.3, pctB: 22.3, aDetail: "—",                               bDetail: "—" },
+      { theme: "AI / Semiconductors", pctA: 46.7, pctB: 46.7, aDetail: "NVDA, AVGO, TSM, SMGB, AMD",     bDetail: "NVDA, AVGO, TSM, MU, AMD" },
+      { theme: "Power-for-AI",        pctA:  9.3, pctB:  9.4, aDetail: "CEG",                             bDetail: "CEG" },
+      { theme: "Defence",             pctA:  9.2, pctB:  8.2, aDetail: "NATO.L (Future of Defence ETF)",  bDetail: "Rheinmetall" },
+      { theme: "Gold",                pctA:  9.8, pctB:  9.2, aDetail: "SGLN.L (Physical Gold ETF)",      bDetail: "Agnico Eagle" },
+      { theme: "Crypto",              pctA:  5.2, pctB:  4.5, aDetail: "IB1T (Bitcoin ETP)",              bDetail: "Strategy (MSTR)" },
+      { theme: "Cash",                pctA: 19.8, pctB: 22.1, aDetail: "—",                               bDetail: "—" },
     ],
 
     weekNote: {
-      title: "Week 2: first full valuation.",
-      body: "Both books trailed a rising index as the move out of AI and chips extended, with Micron and Constellation the main drags. We are holding. The large-cap AI core is stable, the losers reflect profit-taking and sentiment rather than broken theses, and two weeks is noise on a horizon of three to five years. The bright spot is that the diversifiers worked hard, with defence and crypto rebounding strongly. The two books are running neck and neck, so selection matters more than the wrapper so far. Cash near 20% stays as dry powder. A third week of chip weakness, or a real spending cut from a big AI buyer rather than Meta reselling spare capacity, would push me to add exposure to the parts of the market that are working."
+      title: "Week 3: hold, and vindicated.",
+      body: [
+        "Week 3 vindicated last week's patience. The AI core we refused to sell into weakness delivered the recovery: Nvidia, Broadcom and AMD produced the gains, Constellation bounced, and both books beat the benchmark on the week, with Portfolio A moving back ahead of the S&P since inception. Portfolio B still trails because its idiosyncratic names misfired together: Rheinmetall gave back its contract rally, Agnico fell with broker gold downgrades, and Strategy slipped on its pivot to selling Bitcoin. None of those theses has broken; the moves are sentiment and positioning, and a three-to-five-year horizon does not trade weekly noise.",
+        "We are also deliberately not chasing. Monday opened with the Hormuz blockade headline and a sharp chip selloff led by SK Hynix's post-IPO reversal, which is exactly the environment where the roughly 20% cash in each book earns its keep as dry powder. If the dip extends into a genuine multi-week semis drawdown, cash goes to work in the AI core at better prices; if the market shrugs it off, we participate through what we already hold.",
+        `<strong class="text-white">Housekeeping.</strong> NVDA and AVGO have drifted just above the 10% position cap through pure appreciation (10.6 to 10.8%). We treat the 10% rule as applying at purchase, with a forced trim only if a position exceeds 12%, so no trade is triggered this week.`
+      ]
     },
   }
 };
@@ -1283,6 +1290,19 @@ function renderExperiment() {
   set('benchReturn', fmtPct(benchPct));
   cls('benchReturn', pctColorDark(benchPct));
 
+  // Weekly change (latest week vs the prior week's close)
+  if (A.length > 1) {
+    const wa = (A[A.length-1] / A[A.length-2] - 1) * 100;
+    const wb = (B[B.length-1] / B[B.length-2] - 1) * 100;
+    const wc = (bench[bench.length-1] / bench[bench.length-2] - 1) * 100;
+    setCount(document.getElementById('aWeek'), wa, { suffix: '%', decimals: 2, signed: 1 });
+    setCount(document.getElementById('bWeek'), wb, { suffix: '%', decimals: 2, signed: 1 });
+    set('benchWeek', fmtPct(wc));
+    cls('aWeek', pctColorDark(wa));
+    cls('bWeek', pctColorDark(wb));
+    cls('benchWeek', pctColorDark(wc));
+  }
+
   // Week / date strip
   set('weekNum', String(DATA.weekNumber));
   set('experimentDate', DATA.updatedAt);
@@ -1318,7 +1338,11 @@ function renderExperiment() {
 
   // Week note
   set('weekTitle', e.weekNote.title);
-  set('weekBody',  e.weekNote.body);
+  const wb = document.getElementById('weekBody');
+  if (wb) {
+    const paras = Array.isArray(e.weekNote.body) ? e.weekNote.body : [e.weekNote.body];
+    wb.innerHTML = paras.map(p => `<p>${p}</p>`).join('');
+  }
 
   // Home teaser — show Portfolio A for the home page mini chart card
   setCount(document.getElementById('navValueMini'), Math.round(aNav), { prefix: '£', group: 1, from: e.portfolioA.navOpening });
