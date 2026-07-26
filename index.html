@@ -505,7 +505,7 @@
           </div>
         </div>
       </div>
-      <p class="reveal reveal-delay-3 mt-8 text-xs text-white/45 leading-relaxed">VUAG at £107.76 against the 107.76 inception anchor. FX: GBP/USD 1.3313, GBP/EUR 1.1721. Priced off the Friday 24 Jul close; US and European prices from official closes, LSE lines and VUAG from the Trading 212 feed.</p>
+      <p class="reveal reveal-delay-3 mt-8 text-xs text-white/45 leading-relaxed">VUAG at £107.76 against the 107.76 inception anchor. FX: GBP/USD 1.3313, GBP/EUR 1.1702. Priced off the Friday 24 Jul close; US and European prices from official closes, LSE lines and VUAG from the Trading 212 feed.</p>
     </div>
   </div>
 
@@ -833,19 +833,19 @@ const DATA = {
   //   4. Update marketOverview paragraphs
   experiment: {
     inception: "29 Jun 2026",
-    fx: { gbpUsd: 1.3313, gbpEur: 1.1721 },
+    fx: { gbpUsd: 1.3313, gbpEur: 1.1702 },
 
     // Weekly performance — all three series indexed to 100 at inception
     performance: {
       labels: ["W1", "W2", "W3", "W4", "W5"],
-      A:     [100, 98.687, 101.061, 96.960, 100.093],
-      B:     [100, 98.582, 99.640, 94.983, 98.898],
+      A:     [100, 98.687, 101.061, 96.960, 100.092],
+      B:     [100, 98.582, 99.640, 94.983, 98.912],
       bench: [100, 100.83, 100.89, 99.59, 100.00],
     },
 
     marketOverview: [
       `<strong class="font-semibold text-ink">This week.</strong> AI-linked equities clawed back a chunk of the prior week's Kimi K3 rout, but a fresh scare arrived mid-week from an unexpected direction: Alphabet and Tesla earnings on 22 July. Both beat on revenue, yet Alphabet shares fell around 7% after raising 2026 capex guidance to $195–205bn, and Tesla dropped roughly 14.5% as its free cash flow turned negative on AI and robotics spending, dragging the Nasdaq down 2.15% on 23 July. It is the same question as last week in a new outfit: will the spending behind AI pay off, or is the market simply demanding evidence sooner. Even so, the week net-net favoured chips. AMD's two-day Advancing AI event (22–23 July) landed well, with Helios rack pricing confirmed and a new OpenAI partnership, and the memory complex bounced hard on reports that Q3 pricing could rise another 25%. Brent crude pushed through $100 a barrel on escalating Israel-Iran tensions, keeping gold pinned just above $4,000 as a safe-haven bid competed with a more hawkish Federal Reserve under new chair Kevin Warsh.`,
-      `<strong class="font-semibold text-ink">Inside our own book.</strong> Every AI/semis holding in both books finished the week higher: Nvidia +2.0%, Broadcom +3.0%, AMD +5.3%, and Micron the standout at +8.5% as Morgan Stanley called the pullback a buying opportunity and Micron's Anthropic tie-up and $22bn of long-term supply agreements reasserted the memory supercycle case. Rheinmetall was the best performer in either book, up 9.6% as its order book and raised 2026 sales guidance reasserted themselves after the F126 scare two weeks ago, and Agnico Eagle rose 6.0% with gold miners as bullion held its line. The one soft spot was Strategy, down 3.4% even as bitcoin firmed, as the market kept pressing on its recent shift toward selling bitcoin to fund distributions and read the more conservative capital stance as caution rather than conviction.`,
+      `<strong class="font-semibold text-ink">Inside our own book.</strong> Every AI/semis holding in both books finished the week higher: Nvidia +2.0%, Broadcom +3.0%, AMD +5.3%, and Micron the standout at +8.5% as Morgan Stanley called the pullback a buying opportunity and Micron's Anthropic tie-up and $22bn of long-term supply agreements reasserted the memory supercycle case. The best performer in either book was actually Constellation Energy, up 9.0% as the power-for-AI trade caught a bid alongside the chip recovery. Rheinmetall added 5.4% as its order book and raised 2026 sales guidance reasserted themselves after the F126 scare two weeks ago, and Agnico Eagle rose 6.0% with gold miners as bullion held its line. The one soft spot was Strategy, down 3.4% even as bitcoin firmed, as the market kept pressing on its recent shift toward selling bitcoin to fund distributions and read the more conservative capital stance as caution rather than conviction.`,
       `<strong class="font-semibold text-ink">For a GBP investor.</strong> Sterling drifted lower on the week, GBP/USD slipping from 1.3454 to 1.3313, as markets weighed the cost of Andy Burnham's early spending pledges against the political-risk unwind that had lifted the pound when he took office. A softer pound this time was a small tailwind on translation for the dollar-heavy half of both books rather than a drag. VUAG, our benchmark, round-tripped exactly back to its £107.76 inception level, meaning a GBP investor in the plain index sits precisely flat since 29 June. The coming week brings the Federal Reserve decision (28–29 July) and the Bank of England's own "Super Thursday" (30 July, a hold at 3.75% widely expected), the next tests for sterling and risk appetite alike.`,
     ],
 
@@ -868,7 +868,7 @@ const DATA = {
       ],
       cashWeight: 20.0,
       cashGbp: 20014,
-      navCurrent: 100093,
+      navCurrent: 100092,
       returnPct: 0.09,
       notes: [
         { ticker: "NVDA",   text: "AI compute leader, bought around 8% cheaper after the rotation. Demand signals remain the strongest in the market and the core thesis is intact. We are holding for the datacentre buildout to compound rather than for a quick bounce." },
@@ -897,14 +897,14 @@ const DATA = {
         { ticker: "MU",   name: "Micron",               ccy: "USD", entryPx: 1132.33, now:  920.95, valueGbp:  7252, weightNow:  7.3, plPct: -19.4, shares: 10.484, costGbp:  9000 },
         { ticker: "AMD",  name: "AMD",                  ccy: "USD", entryPx:  521.58, now:  521.95, valueGbp:  7932, weightNow:  8.0, plPct:  -0.9, shares: 20.231, costGbp:  8000 },
         { ticker: "CEG",  name: "Constellation Energy", ccy: "USD", entryPx:  264.02, now:  274.35, valueGbp: 10295, weightNow: 10.4, plPct:   3.0, shares: 49.958, costGbp: 10000 },
-        { ticker: "RHM",  name: "Rheinmetall",          ccy: "EUR", entryPx:  946.60, now: 1037.60, valueGbp:  8664, weightNow:  8.8, plPct:   8.3, shares:  9.787, costGbp:  8000 },
+        { ticker: "RHM",  name: "Rheinmetall",          ccy: "EUR", entryPx:  946.60, now: 1037.60, valueGbp:  8678, weightNow:  8.8, plPct:   8.5, shares:  9.787, costGbp:  8000 },
         { ticker: "AEM",  name: "Agnico Eagle",         ccy: "USD", entryPx:  158.29, now:  145.13, valueGbp:  9084, weightNow:  9.2, plPct:  -9.2, shares: 83.328, costGbp: 10000 },
         { ticker: "MSTR", name: "Strategy",             ccy: "USD", entryPx:   82.31, now:   91.67, valueGbp:  4414, weightNow:  4.5, plPct:  10.3, shares: 64.099, costGbp:  4000 },
       ],
       cashWeight: 22.3,
       cashGbp: 22016,
-      navCurrent: 98898,
-      returnPct: -1.10,
+      navCurrent: 98912,
+      returnPct: -1.09,
       notes: [
         { ticker: "NVDA", text: "AI compute leader, bought around 8% cheaper after the rotation. Demand signals remain the strongest in the market and the core thesis is intact. We are holding for the datacentre buildout to compound rather than for a quick bounce." },
         { ticker: "AVGO", text: "Custom AI silicon and networking, down around 11% into our entry and flagged as very cheap by Bernstein with smart money accumulating. This is our highest conviction reset entry. We want the market to reprice the custom silicon story back toward where the fundamentals point." },
@@ -912,7 +912,7 @@ const DATA = {
         { ticker: "MU",   text: "The purest large cap play on the memory supercycle, entered fresh off record earnings. This week's 8.5% bounce, a new Anthropic supply deal and $22bn of long-term agreements are early evidence the pricing cycle is reasserting itself. It remains our most volatile line." },
         { ticker: "AMD",  text: "The second accelerator vendor, bought at a lower multiple than Nvidia, with UBS recently setting a street high view. The Advancing AI event added a new OpenAI partnership and confirmed Helios rack pricing, evidence the demand side of the thesis is still building." },
         { ticker: "CEG",  text: "Power for AI via nuclear, trading around 36% below its high. The FY EPS guide and the structural pull from datacentre demand underpin the case. We are holding for the multiyear power shortage story to play out rather than the next quarter." },
-        { ticker: "RHM",  text: "The defence proxy, cut to 8% after the F126 scare. This week it was the best performer in either book, up 9.6% as the order book and raised 2026 sales guidance reasserted themselves. The contrarian entry is playing out as intended." },
+        { ticker: "RHM",  text: "The defence proxy, cut to 8% after the F126 scare. It added 5.4% this week as the order book and raised 2026 sales guidance reasserted themselves, taking it to +8.5% since entry. The contrarian entry is playing out as intended." },
         { ticker: "AEM",  text: "A senior gold miner bought into the metals reset, up 6.0% this week as gold held its line near $4,000 amid Middle East tension. It gives leveraged exposure to the gold story with real cashflow behind it." },
         { ticker: "MSTR", text: "The crypto proxy, trimmed to 4-5% and deliberately speculative. It slipped 3.4% this week even as bitcoin firmed, as the market kept questioning its recent shift toward selling bitcoin to fund distributions. The small size keeps this contained either way." },
       ],
@@ -931,7 +931,7 @@ const DATA = {
     weekNote: {
       title: "Week 5: the bounce back.",
       body: [
-        "Both books recovered hard from last week's sentiment-driven sell-off. Portfolio A rose 3.2% on the week to sit almost exactly flat since inception at +0.09%, edging just ahead of the benchmark. Portfolio B climbed 4.1% to -1.10% since inception, closing most of the gap it opened up last week. VUAG, our benchmark, round-tripped precisely back to its £107.76 inception level and is now flat at 0.00%. The pattern is the one we expected: a sentiment-driven drawdown in high-quality names tends to unwind once the fear passes, and this week it did, led by Rheinmetall (+9.6%) and Micron (+8.5%), the two names that fell hardest on their respective scares.",
+        "Both books recovered hard from last week's sentiment-driven sell-off. Portfolio A rose 3.2% on the week to sit almost exactly flat since inception at +0.09%, edging just ahead of the benchmark. Portfolio B climbed 4.1% to -1.09% since inception, closing most of the gap it opened up last week. VUAG, our benchmark, round-tripped precisely back to its £107.76 inception level and is now flat at 0.00%. The pattern is the one we expected: a sentiment-driven drawdown in high-quality names tends to unwind once the fear passes, and this week it did, led by Constellation Energy (+9.0%) and Micron (+8.5%), the latter the name that fell hardest in last week's memory sell-off.",
         "We are holding all positions in both books, with conviction rather than by default. Nothing in this week's news changes a single thesis: the AI-spending debate that hit Alphabet and Tesla on 22 July is a real and growing risk to monitor, since Broadcom and Nvidia sit on the same supply side of that trade, but neither of those two names is ours and neither has yet shown any crack in demand. A one-week bounce off an oversold level is not the genuine multi-week drawdown or valuation dislocation that would justify putting the roughly 20-22% cash buffer to work, so it stays in reserve for now. Taiwan Semiconductor remains the first candidate if a real opportunity opens up.",
         `<strong class="text-white">Housekeeping.</strong> Weights drifted with prices but nothing breached the rules; the largest line in either book is Nvidia at 10.7%, still well under the 12% forced-trim threshold, and the 10% cap is treated as applying at purchase, not to drift. From this week we have also started accruing interest on cash balances, per the standing process, at an assumed 3.75% annualised rate (the current Bank of England Bank Rate) — a small addition of roughly £14 to Portfolio A and £16 to Portfolio B this week, and going forward each week.`
       ]
