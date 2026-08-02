@@ -487,15 +487,15 @@
       <div class="reveal reveal-delay-2 grid md:grid-cols-3 gap-x-10 gap-y-10">
         <div>
           <div class="text-[0.72rem] tracking-[0.22em] uppercase text-white/50 mb-2">Portfolio A · ETFs</div>
-          <div id="aNav" class="num text-3xl sm:text-4xl">£97,325</div>
+          <div id="aNav" class="num text-3xl sm:text-4xl">£97,320</div>
           <div class="mt-3 space-y-1.5 text-sm">
             <div class="flex items-center justify-between gap-4"><span class="text-white/55">This week</span><span id="aWeek" class="num text-white">−2.77%</span></div>
-            <div class="flex items-center justify-between gap-4"><span class="text-white/55">Since inception</span><span id="aReturn" class="num text-white">−2.67%</span></div>
+            <div class="flex items-center justify-between gap-4"><span class="text-white/55">Since inception</span><span id="aReturn" class="num text-white">−2.68%</span></div>
           </div>
         </div>
         <div class="md:border-l md:border-white/15 md:pl-10">
           <div class="text-[0.72rem] tracking-[0.22em] uppercase text-white/50 mb-2">Portfolio B · Equities</div>
-          <div id="bNav" class="num text-3xl sm:text-4xl">£97,024</div>
+          <div id="bNav" class="num text-3xl sm:text-4xl">£97,018</div>
           <div class="mt-3 space-y-1.5 text-sm">
             <div class="flex items-center justify-between gap-4"><span class="text-white/55">This week</span><span id="bWeek" class="num text-white">−1.90%</span></div>
             <div class="flex items-center justify-between gap-4"><span class="text-white/55">Since inception</span><span id="bReturn" class="num text-white">−2.98%</span></div>
@@ -843,8 +843,8 @@ const DATA = {
     // Weekly performance — all three series indexed to 100 at inception
     performance: {
       labels: ["W1", "W2", "W3", "W4", "W5", "W6"],
-      A:     [100, 98.687, 101.061, 96.960, 100.092, 97.325],
-      B:     [100, 98.582, 99.640, 94.983, 98.912, 97.024],
+      A:     [100, 98.687, 101.061, 96.960, 100.092, 97.320],
+      B:     [100, 98.582, 99.640, 94.983, 98.912, 97.018],
       bench: [100, 100.83, 100.89, 99.59, 100.00, 98.98],
     },
 
@@ -859,26 +859,26 @@ const DATA = {
       sub: "ETFs allowed",
       blurb: "ETFs for diversified macro exposure (semis breadth, defence, gold, crypto); single stocks for the highest-conviction names. All four ETFs are GBP-listed UCITS lines, so they carry no FX; only the individual US stocks do.",
       navOpening: 100000.00,
-      friction: 0.00,
+      friction: 5.41,
       holdings: [
         { ticker: "NVDA",   name: "Nvidia",                         ccy: "USD", entryPx: 193.23,  now: 200.75,  valueGbp: 10160, weightNow: 10.4, plPct:   1.6, shares:   68.261, costGbp: 10000 },
         { ticker: "AVGO",   name: "Broadcom",                       ccy: "USD", entryPx: 365.02,  now: 389.28,  valueGbp: 10430, weightNow: 10.7, plPct:   4.3, shares:   36.135, costGbp: 10000 },
-        { ticker: "TSM",    name: "TSMC (ADR)",                     ccy: "USD", entryPx: 434.99,  now: 404.25,  valueGbp:  8180, weightNow:  8.4, plPct:  -9.1, shares:   27.290, costGbp:  9000 },
+        { ticker: "TSM",    name: "TSMC (ADR)",                     ccy: "USD", entryPx: 430.10,  now: 404.25,  valueGbp:  9727, weightNow: 10.0, plPct:  -7.8, shares:   32.452, costGbp: 10553 },
         { ticker: "SMGB",   name: "VanEck Semiconductor UCITS ETF", ccy: "GBP", entryPx:  90.70,  now:  75.83,  valueGbp:  7525, weightNow:  7.7, plPct: -16.4, shares:   99.230, costGbp:  9000 },
         { ticker: "CEG",    name: "Constellation Energy",           ccy: "USD", entryPx: 264.02,  now: 262.75,  valueGbp:  9733, weightNow: 10.0, plPct:  -2.7, shares:   49.958, costGbp: 10000 },
         { ticker: "NATO.L", name: "Future of Defence ETF",          ccy: "USD", entryPx:  19.552, now:  20.680, valueGbp:  9310, weightNow:  9.6, plPct:   3.4, shares:  607.150, costGbp:  9000 },
         { ticker: "SGLN.L", name: "iShares Physical Gold ETF",      ccy: "GBP", entryPx:  59.94,  now:  58.19,  valueGbp:  9708, weightNow: 10.0, plPct:  -2.9, shares:  166.834, costGbp: 10000 },
         { ticker: "AMD",    name: "AMD",                            ccy: "USD", entryPx: 521.58,  now: 476.15,  valueGbp:  7142, weightNow:  7.3, plPct: -10.7, shares:   20.231, costGbp:  8000 },
-        { ticker: "IB1T",   name: "iShares Bitcoin ETP",            ccy: "GBP", entryPx:   4.5425,now:   4.6420,valueGbp:  5110, weightNow:  5.2, plPct:   2.2, shares: 1100.715, costGbp:  5000 },
+        { ticker: "IB1T",   name: "iShares Bitcoin ETP",            ccy: "GBP", entryPx:   4.5425,now:   4.6420,valueGbp:  5110, weightNow:  5.3, plPct:   2.2, shares: 1100.715, costGbp:  5000 },
       ],
-      cashWeight: 20.6,
-      cashGbp: 20028,
-      navCurrent: 97325,
-      returnPct: -2.67,
+      cashWeight: 19.0,
+      cashGbp: 18476,
+      navCurrent: 97320,
+      returnPct: -2.68,
       notes: [
         { ticker: "NVDA",   text: "AI compute leader, bought around 8% cheaper after the rotation. Demand signals remain the strongest in the market and the core thesis is intact. We are holding for the datacentre buildout to compound rather than for a quick bounce." },
         { ticker: "AVGO",   text: "Custom AI silicon and networking, down around 11% into our entry and flagged as very cheap by Bernstein with smart money accumulating. This is our highest conviction reset entry. We want the market to reprice the custom silicon story back toward where the fundamentals point." },
-        { ticker: "TSM",    text: "The foundry bottleneck at roughly 70% share, so almost every AI chip runs through them. The record Q2 print (profit up 77%) still hasn't been rewarded by the share price, which is exactly the gap between fundamentals and sentiment we are holding through." },
+        { ticker: "TSM",    text: "The foundry bottleneck at roughly 70% share, so almost every AI chip runs through them. We added to this position this week, taking it from 8.4% to 10%, because the record Q2 print (profit up 77%, first-half revenue up 35.6%) still has not been rewarded by the share price. Under the market's new proof-of-demand standard this is the holding with the most actual demand to prove, which is why it was the first place the cash went." },
         { ticker: "SMGB",   text: "A single line giving broad semis breadth across memory, equipment and the second tier names. It is the UK listed UCITS version, GBP quoted and free of FX drag, which is exactly why it belongs in this book. We want it to recover the recent breakdown and track the sector higher without the currency cost." },
         { ticker: "CEG",    text: "Power for AI via nuclear, trading around 36% below its high. The FY EPS guide and the structural pull from datacentre demand underpin the case. We are holding for the multiyear power shortage story to play out rather than the next quarter." },
         { ticker: "NATO.L", text: "A diversified defence basket, now treated as the USD line and modestly up in dollars since entry. It spreads exposure across the sector and cushions the single name Rheinmetall risk sitting in the other book. We want steady sector strength rather than any one contract outcome." },
@@ -886,7 +886,7 @@ const DATA = {
         { ticker: "AMD",    text: "The second accelerator vendor, bought at a lower multiple than Nvidia. It fell 10% this week as the accelerator complex was repriced, and it reports on 4 August, which makes it the single most important event for both books next week. The Helios pricing and OpenAI partnership announced in July are the demand evidence we want that print to confirm." },
         { ticker: "IB1T",   text: "Direct Bitcoin exposure after the break below 60k, kept small and speculative. It is the crypto sleeve, sized so a sharp move either way stays contained. We are hoping for a recovery in Bitcoin without the position ever threatening the book." },
       ],
-      summary: "Action: hold all. The semis lines took the brunt of a $1trn sector sell-off, and with no single-name defence winner to offset it, the ETF book gave back last week's recovery."
+      summary: "Action: added to TSM, held the rest. The semis lines took the brunt of a $1trn sector sell-off, and with no single-name defence winner to offset it, the ETF book gave back last week's recovery. Cash falls to 19.0%."
     },
 
     portfolioB: {
@@ -894,11 +894,11 @@ const DATA = {
       sub: "Equities only",
       blurb: "Same themes as A, expressed purely through single stocks. The clean stock-picking book.",
       navOpening: 100000.00,
-      friction: 0.00,
+      friction: 5.31,
       holdings: [
         { ticker: "NVDA", name: "Nvidia",               ccy: "USD", entryPx:  193.23, now:  200.75, valueGbp: 10160, weightNow: 10.5, plPct:   1.6, shares: 68.261, costGbp: 10000 },
-        { ticker: "AVGO", name: "Broadcom",             ccy: "USD", entryPx:  365.02, now:  389.28, valueGbp: 10430, weightNow: 10.7, plPct:   4.3, shares: 36.135, costGbp: 10000 },
-        { ticker: "TSM",  name: "TSMC (ADR)",           ccy: "USD", entryPx:  434.99, now:  404.25, valueGbp:  8180, weightNow:  8.4, plPct:  -9.1, shares: 27.290, costGbp:  9000 },
+        { ticker: "AVGO", name: "Broadcom",             ccy: "USD", entryPx:  365.02, now:  389.28, valueGbp: 10430, weightNow: 10.8, plPct:   4.3, shares: 36.135, costGbp: 10000 },
+        { ticker: "TSM",  name: "TSMC (ADR)",           ccy: "USD", entryPx:  430.18, now:  404.25, valueGbp:  9697, weightNow: 10.0, plPct:  -7.8, shares: 32.352, costGbp: 10522 },
         { ticker: "MU",   name: "Micron",               ccy: "USD", entryPx: 1132.33, now:  823.03, valueGbp:  6398, weightNow:  6.6, plPct: -28.9, shares: 10.484, costGbp:  9000 },
         { ticker: "AMD",  name: "AMD",                  ccy: "USD", entryPx:  521.58, now:  476.15, valueGbp:  7142, weightNow:  7.4, plPct: -10.7, shares: 20.231, costGbp:  8000 },
         { ticker: "CEG",  name: "Constellation Energy", ccy: "USD", entryPx:  264.02, now:  262.75, valueGbp:  9733, weightNow: 10.0, plPct:  -2.7, shares: 49.958, costGbp: 10000 },
@@ -906,14 +906,14 @@ const DATA = {
         { ticker: "AEM",  name: "Agnico Eagle",         ccy: "USD", entryPx:  158.29, now:  145.27, valueGbp:  8975, weightNow:  9.3, plPct: -10.2, shares: 83.328, costGbp: 10000 },
         { ticker: "MSTR", name: "Strategy",             ccy: "USD", entryPx:   82.31, now:   93.28, valueGbp:  4433, weightNow:  4.6, plPct:  10.8, shares: 64.099, costGbp:  4000 },
       ],
-      cashWeight: 22.7,
-      cashGbp: 22032,
-      navCurrent: 97024,
+      cashWeight: 21.1,
+      cashGbp: 20510,
+      navCurrent: 97018,
       returnPct: -2.98,
       notes: [
         { ticker: "NVDA", text: "AI compute leader, bought around 8% cheaper after the rotation. Demand signals remain the strongest in the market and the core thesis is intact. We are holding for the datacentre buildout to compound rather than for a quick bounce." },
         { ticker: "AVGO", text: "Custom AI silicon and networking, down around 11% into our entry and flagged as very cheap by Bernstein with smart money accumulating. This is our highest conviction reset entry. We want the market to reprice the custom silicon story back toward where the fundamentals point." },
-        { ticker: "TSM",  text: "The foundry bottleneck at roughly 70% share, so almost every AI chip runs through them. The record Q2 print (profit up 77%) still hasn't been rewarded by the share price, which is exactly the gap between fundamentals and sentiment we are holding through." },
+        { ticker: "TSM",  text: "The foundry bottleneck at roughly 70% share, so almost every AI chip runs through them. We added to this position this week, taking it from 8.4% to 10%, because the record Q2 print (profit up 77%, first-half revenue up 35.6%) still has not been rewarded by the share price. Under the market's new proof-of-demand standard this is the holding with the most actual demand to prove, which is why it was the first place the cash went." },
         { ticker: "MU",   text: "The purest large cap play on the memory supercycle and now our worst position, down 28.9%. It fell another 11.8% this week as memory led the sector lower, and the concern has broadened from valuation to Chinese DRAM expansion, which is a structural question rather than a sentiment one. The Anthropic agreement and $22bn of long-term commitments are the counterweight, and this is the line we are watching most closely." },
         { ticker: "AMD",  text: "The second accelerator vendor, bought at a lower multiple than Nvidia. It fell 10% this week as the accelerator complex was repriced, and it reports on 4 August, which makes it the single most important event for both books next week. The Helios pricing and OpenAI partnership announced in July are the demand evidence we want that print to confirm." },
         { ticker: "CEG",  text: "Power for AI via nuclear, trading around 36% below its high. The FY EPS guide and the structural pull from datacentre demand underpin the case. We are holding for the multiyear power shortage story to play out rather than the next quarter." },
@@ -921,16 +921,16 @@ const DATA = {
         { ticker: "AEM",  text: "A senior gold miner bought into the metals reset. Flat in dollars this week and down 1.2% for us on the stronger pound, it continues to give leveraged exposure to the gold story with real cashflow behind it while bullion holds near $4,000." },
         { ticker: "MSTR", text: "The crypto proxy, trimmed to 4-5% and deliberately speculative. It edged up 0.4% in a week when almost everything else fell, a reminder that its correlation to the rest of the book is low. The small size keeps this contained either way." },
       ],
-      summary: "Action: hold all. Micron and AMD bore the sector sell-off, but Rheinmetall's record quarter offset much of it, making the single-stock book the more resilient of the two for the first time."
+      summary: "Action: added to TSM, held the rest. Micron and AMD bore the sector sell-off, but Rheinmetall's record quarter offset much of it, making the single-stock book the more resilient of the two for the first time. Cash falls to 21.1%."
     },
 
     themeAllocation: [
-      { theme: "AI / Semiconductors", pctA: 44.5, pctB: 43.6, aDetail: "NVDA, AVGO, TSM, SMGB, AMD",     bDetail: "NVDA, AVGO, TSM, MU, AMD" },
+      { theme: "AI / Semiconductors", pctA: 46.2, pctB: 45.2, aDetail: "NVDA, AVGO, TSM, SMGB, AMD",     bDetail: "NVDA, AVGO, TSM, MU, AMD" },
       { theme: "Power-for-AI",        pctA: 10.0, pctB: 10.0, aDetail: "CEG",                             bDetail: "CEG" },
       { theme: "Defence",             pctA:  9.6, pctB:  9.8, aDetail: "NATO.L (Future of Defence ETF)",  bDetail: "Rheinmetall" },
       { theme: "Gold",                pctA: 10.0, pctB:  9.3, aDetail: "SGLN.L (Physical Gold ETF)",      bDetail: "Agnico Eagle" },
-      { theme: "Crypto",              pctA:  5.2, pctB:  4.6, aDetail: "IB1T (Bitcoin ETP)",              bDetail: "Strategy (MSTR)" },
-      { theme: "Cash",                pctA: 20.6, pctB: 22.7, aDetail: "—",                               bDetail: "—" },
+      { theme: "Crypto",              pctA:  5.3, pctB:  4.6, aDetail: "IB1T (Bitcoin ETP)",              bDetail: "Strategy (MSTR)" },
+      { theme: "Cash",                pctA: 19.0, pctB: 21.1, aDetail: "—",                               bDetail: "—" },
     ],
 
     weekNote: {
@@ -938,8 +938,8 @@ const DATA = {
       body: [
         "A hard week, and an instructive one. Portfolio A fell 2.77% to -2.67% since inception and Portfolio B fell 1.90% to -2.98%, against a benchmark down 1.02% to -1.02%. Both books lost to the index because both are built on the theme the market spent the week repricing: chip stocks shed more than $1trn as investors applied a new proof-of-demand standard to AI. Microsoft and Amazon soared because they could show the spending converting into revenue; the supply side, where our semis exposure sits, was sold. Concentration is the bet, and this is what it feels like when it goes against you.",
         "We are holding everything, but not without argument. The case for patience is that nothing in the businesses broke: Rheinmetall's record quarter proves the defence thesis outright, Broadcom rose even in a savage tape, and the sell-off was explicitly described as valuation-driven rather than demand-driven. The case against is Micron, now down 28.9% and facing a genuinely structural question in Chinese DRAM expansion rather than a sentiment one. That is the line most at risk of a thesis change, and it is on watch. AMD reports on Tuesday, which will tell us far more about the accelerator cycle than another week of price action will.",
-        "The drawdown has now run two of the last three weeks and taken the sector into a downtrend, which is the condition under which we said the cash would go to work. Taiwan Semiconductor remains the clearest candidate: a record quarter with profit up 77%, first-half revenue up 35.6%, and a share price still 9.1% below our entry. Any addition would be a proposal put forward for approval before it appears here, and none has been made this week.",
-        `<strong class="text-white">Housekeeping.</strong> Nothing breached the rules. The largest line in either book is Broadcom at 10.7%, comfortably inside the 12% forced-trim threshold, and the 10% cap applies at purchase rather than to drift. Cash accrued another week of interest at an assumed 3.75% annualised, adding roughly £14 to Portfolio A and £16 to Portfolio B.`
+        "One trade. The drawdown has now run two of the last three weeks and taken the sector into a downtrend, which is the condition under which we said the cash would go to work, so we added to Taiwan Semiconductor in both books, taking it from 8.4% to 10% at the Friday close of $404.25. The reasoning is that TSMC has the widest gap in the book between what the business is doing and what the share has done: a record quarter with profit up 77% and first-half revenue up 35.6%, against a share price still below our entry. It is also the holding that best meets the standard the market has just started applying, since roughly 70% of advanced chips run through it and that demand is contracted rather than promised. The honest risk is that this adds to our largest existing exposure while that exposure is still falling, which is why the size is deliberately modest at about £1,550 per book, funded from cash and inside the 10% purchase cap.",
+        `<strong class="text-white">Housekeeping.</strong> Nothing breached the rules. The largest line in either book is Broadcom at 10.8%, comfortably inside the 12% forced-trim threshold, and the 10% cap applies at purchase rather than to drift. Dealing friction of £5.41 in Portfolio A and £5.31 in Portfolio B was charged on the TSMC purchase, at 0.10% commission plus 0.25% FX spread, with no UK stamp duty since it is a US line. Cash accrued another week of interest at an assumed 3.75% annualised, adding roughly £14 to Portfolio A and £16 to Portfolio B, and now stands at 19.0% and 21.1% respectively.`
       ]
     },
 
