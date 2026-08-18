@@ -495,10 +495,10 @@
         </div>
         <div class="md:border-l md:border-white/15 md:pl-10">
           <div class="text-[0.72rem] tracking-[0.22em] uppercase text-white/50 mb-2">Portfolio B · Equities</div>
-          <div id="bNav" class="num text-3xl sm:text-4xl">£104,404</div>
+          <div id="bNav" class="num text-3xl sm:text-4xl">£104,392</div>
           <div class="mt-3 space-y-1.5 text-sm">
-            <div class="flex items-center justify-between gap-4"><span class="text-white/55">This week</span><span id="bWeek" class="num text-white">+1.32%</span></div>
-            <div class="flex items-center justify-between gap-4"><span class="text-white/55">Since inception</span><span id="bReturn" class="num text-white">+4.40%</span></div>
+            <div class="flex items-center justify-between gap-4"><span class="text-white/55">This week</span><span id="bWeek" class="num text-white">+1.30%</span></div>
+            <div class="flex items-center justify-between gap-4"><span class="text-white/55">Since inception</span><span id="bReturn" class="num text-white">+4.39%</span></div>
           </div>
         </div>
         <div class="md:border-l md:border-white/15 md:pl-10">
@@ -844,14 +844,14 @@ const DATA = {
     performance: {
       labels: ["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"],
       A:     [100, 98.687, 101.061, 96.960, 100.092, 97.320, 102.605, 102.80192],
-      B:     [100, 98.582, 99.640, 94.983, 98.912, 97.018, 103.049, 104.40445],
+      B:     [100, 98.582, 99.640, 94.983, 98.912, 97.018, 103.049, 104.392],
       bench: [100, 100.83, 100.89, 99.59, 100.00, 98.98, 103.06, 102.98812],
     },
 
     marketOverview: [
       `<strong class="font-semibold text-ink">This week.</strong> July CPI landed in line (2.7% headline) but a hotter 3.1% core reading did nothing to dent the case for easing: futures now price a roughly 94% chance of a September Fed cut. Friday's biggest move was profit-taking, not a fundamental shift — Broadcom fell hard as investors rotated out of the AI complex's winners after the S&P 500 touched a fresh record, even as AMD kept climbing on its own demand story.`,
       `<strong class="font-semibold text-ink">Inside our own book.</strong> Micron was the standout, up 10.7% as some of the memory-supercycle sell-off unwound, while Broadcom's profit-taking pulled the other way — down 8.1%, the week's worst mover in both books, though still comfortably inside the 12% trim line. Rheinmetall kept climbing too, up 4.9% on a Danish decoy-system order, even after cutting FY2026 revenue guidance on 13 August following the loss of part of a German Navy frigate programme — a genuine change in the numbers that we address in the decision below. Constellation added a further 4.7% as the market kept digesting its 6 August guidance raise, and Agnico Eagle another 4.3% on the back of last week's record cash flow.`,
-      `<strong class="font-semibold text-ink">For a GBP investor.</strong> Sterling firmed slightly against the dollar, GBP/USD nudging from 1.3455 to 1.3491, a modest headwind on every dollar holding rather than a driver of the week. VUAG itself was essentially flat, down 0.07% in pounds — which is why both books' gains this week, 0.19% for Portfolio A and 1.32% for Portfolio B, came from stock selection rather than the market or the currency doing the work.`,
+      `<strong class="font-semibold text-ink">For a GBP investor.</strong> Sterling firmed slightly against the dollar, GBP/USD nudging from 1.3455 to 1.3491, a modest headwind on every dollar holding rather than a driver of the week. VUAG itself was essentially flat, down 0.07% in pounds — which is why both books' gains this week, 0.19% for Portfolio A and 1.30% for Portfolio B, came from stock selection rather than the market or the currency doing the work.`,
     ],
 
     portfolioA: {
@@ -876,8 +876,8 @@ const DATA = {
       navCurrent: 102802,
       returnPct: 2.80,
       notes: [
-        { ticker: "NVDA",   text: "AI compute leader. A quiet week, up 0.5%, pausing after the AMD-driven surge two weeks ago. The core thesis is unchanged: the datacentre buildout is the multi-year story, not the week-to-week move." },
-        { ticker: "AVGO",   text: "Custom AI silicon and networking, and this week's worst mover in either book at -8.1% — pure profit-taking after the S&P 500 touched a fresh record, not anything company-specific. Still the book's largest line at 10.2%, comfortably inside the 12% trim threshold." },
+        { ticker: "NVDA",   text: "AI compute leader. A quiet week, up 0.5%, but Broadcom's pullback moved it into the book's largest line at 11.1%. The core thesis is unchanged: the datacentre buildout is the multi-year story, not the week-to-week move." },
+        { ticker: "AVGO",   text: "Custom AI silicon and networking, and this week's worst mover in either book at -8.1% — pure profit-taking after the S&P 500 touched a fresh record, not anything company-specific. Slipped to second-largest in the book at 10.2%, just behind Nvidia, still comfortably inside the 12% trim threshold." },
         { ticker: "TSM",    text: "The foundry bottleneck at roughly 70% share. Up a modest 1.5% this week, in line with the sector. Applied Materials' record quarter this week (revenue up 25% year on year) is an independent confirmation that the equipment layer feeding TSM's own capacity is still expanding." },
         { ticker: "SMGB",   text: "A single line giving broad semis breadth across memory, equipment and the second-tier names. Flat at +0.5% this week, tracking a mixed sector tape — Broadcom's pullback offsetting AMD's gain — which is exactly the diversification this line is meant to provide." },
         { ticker: "CEG",    text: "Power for AI via nuclear. Up 4.7% this week as the market kept digesting the 6 August guidance raise — hyperscaler spending running nearly 75% higher than last year and a fresh Meta power agreement. The power-shortage thesis keeps getting confirmed by the numbers rather than the narrative." },
@@ -894,7 +894,7 @@ const DATA = {
       sub: "Equities only",
       blurb: "Same themes as A, expressed purely through single stocks. The clean stock-picking book.",
       navOpening: 100000.00,
-      friction: 0,
+      friction: 11.73,
       holdings: [
         { ticker: "NVDA", name: "Nvidia",               ccy: "USD", entryPx:  193.23, now:  225.16, valueGbp: 11393, weightNow: 10.9, plPct:  13.9, shares: 68.261, costGbp: 10000 },
         { ticker: "AVGO", name: "Broadcom",             ccy: "USD", entryPx:  365.02, now:  392.99, valueGbp: 10526, weightNow: 10.1, plPct:   5.3, shares: 36.135, costGbp: 10000 },
@@ -902,43 +902,43 @@ const DATA = {
         { ticker: "MU",   name: "Micron",               ccy: "USD", entryPx: 1132.33, now:  971.66, valueGbp:  7551, weightNow:  7.2, plPct: -16.1, shares: 10.484, costGbp:  9000 },
         { ticker: "AMD",  name: "AMD",                  ccy: "USD", entryPx:  521.58, now:  514.39, valueGbp:  7714, weightNow:  7.4, plPct:  -3.6, shares: 20.231, costGbp:  8000 },
         { ticker: "CEG",  name: "Constellation Energy", ccy: "USD", entryPx:  264.02, now:  282.50, valueGbp: 10461, weightNow: 10.0, plPct:   4.6, shares: 49.958, costGbp: 10000 },
-        { ticker: "RHM",  name: "Rheinmetall",          ccy: "EUR", entryPx:  946.60, now: 1202.00, valueGbp: 10057, weightNow:  9.6, plPct:  25.7, shares:  9.787, costGbp:  8000 },
+        { ticker: "RHM",  name: "Rheinmetall",          ccy: "EUR", entryPx:  946.60, now: 1202.00, valueGbp:  6705, weightNow:  6.4, plPct:  25.7, shares:  6.525, costGbp:  5334 },
         { ticker: "AEM",  name: "Agnico Eagle",         ccy: "USD", entryPx:  158.29, now:  186.46, valueGbp: 11517, weightNow: 11.0, plPct:  15.2, shares: 83.328, costGbp: 10000 },
         { ticker: "MSTR", name: "Strategy",             ccy: "USD", entryPx:   82.31, now:   93.04, valueGbp:  4421, weightNow:  4.2, plPct:  10.5, shares: 64.099, costGbp:  4000 },
       ],
-      cashWeight: 19.7,
-      cashGbp: 20540,
-      navCurrent: 104404,
-      returnPct: 4.40,
+      cashWeight: 22.9,
+      cashGbp: 23880,
+      navCurrent: 104392,
+      returnPct: 4.39,
       notes: [
-        { ticker: "NVDA", text: "AI compute leader. A quiet week, up 0.5%, pausing after the AMD-driven surge two weeks ago. The core thesis is unchanged: the datacentre buildout is the multi-year story, not the week-to-week move." },
-        { ticker: "AVGO", text: "Custom AI silicon and networking, and this week's worst mover in either book at -8.1% — pure profit-taking after the S&P 500 touched a fresh record, not anything company-specific. Still the book's largest line at 10.1%, comfortably inside the 12% trim threshold." },
+        { ticker: "NVDA", text: "AI compute leader. A quiet week, up 0.5%, and now the second-largest line in the book at 10.9% after Broadcom's pullback, just behind Agnico Eagle. The core thesis is unchanged: the datacentre buildout is the multi-year story, not the week-to-week move." },
+        { ticker: "AVGO", text: "Custom AI silicon and networking, and this week's worst mover in either book at -8.1% — pure profit-taking after the S&P 500 touched a fresh record, not anything company-specific. Now the third-largest line in the book at 10.1%, behind Agnico Eagle and Nvidia, still comfortably inside the 12% trim threshold." },
         { ticker: "TSM",  text: "The foundry bottleneck at roughly 70% share. Up a modest 1.5% this week, in line with the sector. Applied Materials' record quarter this week (revenue up 25% year on year) is an independent confirmation that the equipment layer feeding TSM's own capacity is still expanding." },
         { ticker: "MU",   text: "The purest large-cap play on the memory supercycle, and this week's best performer across either book at +10.7%, clawing back some of the recent DRAM-expansion sell-off. Still our worst position since entry at -16.1%, and still the line we watch most closely, but this week's move argues for patience over panic." },
         { ticker: "AMD",  text: "The second accelerator vendor, up 6.4% this week, continuing to build on last week's earnings beat even as Micron stole the spotlight elsewhere in the complex. We are holding for the datacentre buildout to compound rather than chasing the week's strength." },
         { ticker: "CEG",  text: "Power for AI via nuclear. Up 4.7% this week as the market kept digesting the 6 August guidance raise — hyperscaler spending running nearly 75% higher than last year and a fresh Meta power agreement. The power-shortage thesis keeps getting confirmed by the numbers rather than the narrative." },
-        { ticker: "RHM",  text: "The defence proxy, and now the richest position in either book at +27.0% since entry after a fourth straight week of gains — up 4.9% this week on a Danish decoy-system order and a reiterated €80.5bn backlog. Set against that: Rheinmetall cut FY2026 revenue guidance on 13 August, from €14.0-14.5bn to €13.7-14.2bn, after losing part of the German Navy's F126 frigate programme — a real deterioration in the numbers, not the cash-flow-timing question the market was chewing on two weeks ago. See the decision below." },
-        { ticker: "AEM",  text: "A senior gold miner, up 4.3% this week on the back of last week's record free cash flow and a continuing gold bid. Now the second-best position in the book since entry, at +17.8%." },
+        { ticker: "RHM",  text: "The defence proxy. We trimmed a third of the position this week — 9.787 shares down to 6.525 — at the Friday close of €1,202, banking part of a +27.0% gain after Rheinmetall cut FY2026 revenue guidance on 13 August (from €14.0-14.5bn to €13.7-14.2bn) following the loss of part of the German Navy's F126 frigate programme, even as the shares kept climbing on a Danish decoy-system order and a reiterated €80.5bn backlog. A real deterioration in the numbers alongside a price that kept rising was the trigger; the remaining stake is still up 27.0% since entry and the thesis is intact, just sized down. Dealing friction on the sale: £11.73." },
+        { ticker: "AEM",  text: "A senior gold miner, up 4.3% this week on the back of last week's record free cash flow and a continuing gold bid. Now the book's largest position by weight after Rheinmetall's trim, and still the second-best performer since entry at +17.8%." },
         { ticker: "MSTR", text: "The crypto proxy, down 7.0% this week — the second-worst mover in either book — as Bitcoin slid toward $63,000 despite firming rate-cut odds. Kept small and deliberately speculative; the capital-allocation shift flagged last week (funding dividends via Bitcoin sales) is still the thing to watch." },
       ],
-      summary: "Action: proposing a trim to Rheinmetall (below), pending sign-off — everything else held. Micron's rebound and Rheinmetall's continued climb led the book; no position breached the 12% trim threshold. Cash sits at 19.7%."
+      summary: "Action: trimmed Rheinmetall by a third (9.787 → 6.525 shares), banking part of the gain; held everything else. Micron's rebound and Rheinmetall's pre-trim climb led the book; no position breached the 12% trim threshold. Cash sits at 22.9%."
     },
 
     themeAllocation: [
       { theme: "AI / Semiconductors", pctA: 46.6, pctB: 45.4, aDetail: "NVDA, AVGO, TSM, SMGB, AMD",     bDetail: "NVDA, AVGO, TSM, MU, AMD" },
       { theme: "Power-for-AI",        pctA: 10.2, pctB: 10.0, aDetail: "CEG",                             bDetail: "CEG" },
-      { theme: "Defence",             pctA: 10.1, pctB:  9.6, aDetail: "NATO.L (Future of Defence ETF)",  bDetail: "Rheinmetall" },
+      { theme: "Defence",             pctA: 10.1, pctB:  6.4, aDetail: "NATO.L (Future of Defence ETF)",  bDetail: "Rheinmetall" },
       { theme: "Gold",                pctA: 10.2, pctB: 11.0, aDetail: "SGLN.L (Physical Gold ETF)",      bDetail: "Agnico Eagle" },
       { theme: "Crypto",              pctA:  5.0, pctB:  4.2, aDetail: "IB1T (Bitcoin ETP)",              bDetail: "Strategy (MSTR)" },
-      { theme: "Cash",                pctA: 18.0, pctB: 19.7, aDetail: "—",                               bDetail: "—" },
+      { theme: "Cash",                pctA: 18.0, pctB: 22.9, aDetail: "—",                               bDetail: "—" },
     ],
 
     weekNote: {
-      title: "Week 8: Rheinmetall's numbers catch down to its price.",
+      title: "Week 8: trimming Rheinmetall, banking part of the gain.",
       body: [
-        "A quiet week by recent standards. Portfolio A rose 0.19% and Portfolio B 1.32%, against a benchmark that was essentially flat at −0.07%. The gap between the two books was almost entirely idiosyncratic rather than macro: Micron's 10.7% rebound and Rheinmetall's 4.9% gain did the work in Portfolio B, while Broadcom's 8.1% pullback — profit-taking after the S&P 500 hit a record, not a change in the business — capped both books equally since it's the largest line in each.",
-        "We're proposing a trade, not just holding. Rheinmetall cut its FY2026 revenue guidance on 13 August (from €14.0-14.5bn to €13.7-14.2bn) after losing part of the German Navy's F126 frigate programme, even as the shares kept climbing on a Danish decoy-system order and a reiterated €80.5bn backlog. That combination — real numbers moving the wrong way while the price keeps moving the right way — is the kind of thesis-relevant information a three-to-five-year holder should act on rather than just note, especially in a position that's already the richest line in either book at +27.0% since entry. We're proposing trimming roughly a third of the Rheinmetall position in Portfolio B, banking part of the gain and rebuilding cash, while keeping the majority of the line and the defence theme intact — Portfolio A's NATO.L basket is unaffected. No position in either book crossed the mechanical 12% cap this week, so this is the only change on the table.",
-        `<strong class="text-white">Housekeeping.</strong> Broadcom remains the largest line in both books, still inside the 12% trim threshold. No trades were executed this week — the Rheinmetall trim above is proposed and held pending sign-off, so share counts are unchanged and no dealing friction was charged. Cash accrued a week of interest at Bank Rate and now stands at 18.0% (Portfolio A) and 19.7% (Portfolio B).`
+        "A quiet week by recent standards. Portfolio A rose 0.19% and Portfolio B 1.30%, against a benchmark that was essentially flat at −0.07%. The gap between the two books was almost entirely idiosyncratic rather than macro: Micron's 10.7% rebound and Rheinmetall's pre-trim 4.9% gain did the work in Portfolio B, while Broadcom's 8.1% pullback — profit-taking after the S&P 500 hit a record, not a change in the business — hit both books, though it's no longer the largest line in either: that's now Nvidia in Portfolio A (11.1%) and Agnico Eagle in Portfolio B (11.0%).",
+        "We acted rather than just held. Rheinmetall cut its FY2026 revenue guidance on 13 August (from €14.0-14.5bn to €13.7-14.2bn) after losing part of the German Navy's F126 frigate programme, even as the shares kept climbing on a Danish decoy-system order and a reiterated €80.5bn backlog. That combination — real numbers moving the wrong way while the price keeps moving the right way — is the kind of thesis-relevant information a three-to-five-year holder should act on rather than just note, especially in a position that was already the richest line in either book at +27.0% since entry. We trimmed a third of the Rheinmetall position in Portfolio B — 9.787 shares down to 6.525, sold at the Friday close of €1,202 — banking part of the gain and rebuilding cash, while keeping the majority of the line and the defence theme intact. Portfolio A's NATO.L basket is unaffected. No position in either book crossed the mechanical 12% cap this week, so this was the only change made.",
+        `<strong class="text-white">Housekeeping.</strong> Nvidia and Agnico Eagle are now the largest lines in Portfolio A and B respectively, both comfortably inside the 12% trim threshold. Dealing friction of £11.73 was charged on the Rheinmetall sale (0.10% commission plus 0.25% FX spread, no UK stamp on a non-UK line); no other trades this week. Cash accrued a week of interest at Bank Rate before the trade and now stands at 18.0% (Portfolio A) and 22.9% (Portfolio B).`
       ]
     },
 
@@ -1269,7 +1269,7 @@ function renderPortfolio(which) {
         <td class="py-3 pr-0 num text-right">100%</td>
       </tr>
       <tr class="text-xs text-ink-mute">
-        <td colspan="9" class="py-2 pr-0 leading-relaxed">Chg is the local-currency price move since entry. Value and P/L are in pounds and include the currency move, so a dollar holding can rise in price yet slip in pounds as sterling firms. No trades this week; dealing friction £0.00.</td>
+        <td colspan="9" class="py-2 pr-0 leading-relaxed">Chg is the local-currency price move since entry. Value and P/L are in pounds and include the currency move, so a dollar holding can rise in price yet slip in pounds as sterling firms. ${p.friction > 0 ? `Dealing friction charged this week: £${p.friction.toFixed(2)}.` : 'No trades this week; dealing friction £0.00.'}</td>
       </tr>
     `;
   }
