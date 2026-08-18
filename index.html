@@ -471,11 +471,6 @@
       <p class="reveal text-[0.78rem] tracking-[0.28em] uppercase text-downs-deep mb-5">Market overview</p>
       <h2 class="reveal reveal-delay-1 text-3xl sm:text-4xl mb-8 split-headline">This week.</h2>
       <div id="marketOverviewText" class="reveal reveal-delay-2 space-y-5 text-lg leading-relaxed text-ink-soft"></div>
-
-      <div class="reveal reveal-delay-3 mt-10 border-t border-ink/10 pt-7">
-        <p class="text-[0.78rem] tracking-[0.28em] uppercase text-downs-deep mb-4">The week ahead</p>
-        <ul id="catalysts" class="divide-y divide-ink/10"></ul>
-      </div>
     </div>
   </div>
 
@@ -514,6 +509,27 @@
     </div>
   </div>
 
+  <!-- Inside the book — pine, the decision narrative behind the scorecard -->
+  <div class="bg-pine text-white">
+    <div class="max-w-3xl mx-auto px-5 sm:px-8 py-14 sm:py-20">
+      <div class="reveal">
+        <p class="text-[0.78rem] tracking-[0.28em] uppercase text-downs-soft mb-5">Inside the book</p>
+        <h2 class="text-3xl sm:text-4xl mb-8" id="weekTitle"></h2>
+        <div class="space-y-5 text-lg leading-relaxed text-white/75" id="weekBody"></div>
+        <p class="mt-8 text-xs text-white/45 italic">This is a research simulation; nothing here is financial advice.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Week ahead — white -->
+  <div class="bg-white border-y border-ink/5">
+    <div class="max-w-3xl mx-auto px-5 sm:px-8 py-14 sm:py-20">
+      <p class="reveal text-[0.78rem] tracking-[0.28em] uppercase text-downs-deep mb-5">The week ahead</p>
+      <h2 class="reveal reveal-delay-1 text-3xl sm:text-4xl mb-8 split-headline">Catalysts to watch.</h2>
+      <ul id="catalysts" class="reveal reveal-delay-2 divide-y divide-ink/10"></ul>
+    </div>
+  </div>
+
   <!-- Performance chart — cream -->
   <div class="bg-cream">
     <div class="max-w-6xl mx-auto px-5 sm:px-8 py-12 sm:py-20">
@@ -548,7 +564,7 @@
 
       <!-- Holdings -->
       <div class="reveal overflow-x-auto -mx-5 sm:mx-0 px-5 sm:px-0 mb-10">
-        <table class="w-full min-w-[920px] text-left text-sm sm:text-base">
+        <table class="w-full min-w-[820px] text-left text-sm sm:text-base">
           <thead>
             <tr class="text-[0.72rem] tracking-[0.22em] uppercase text-ink-mute border-b border-ink/15">
               <th class="py-3 pr-4 font-normal">Ticker</th>
@@ -556,7 +572,6 @@
               <th class="py-3 pr-4 font-normal">Ccy</th>
               <th class="py-3 pr-4 font-normal text-right">Entry</th>
               <th class="py-3 pr-4 font-normal text-right">Now</th>
-              <th class="py-3 pr-4 font-normal text-right">Chg</th>
               <th class="py-3 pr-4 font-normal text-right">Value</th>
               <th class="py-3 pr-4 font-normal text-right">P/L</th>
               <th class="py-3 pr-0 font-normal text-right">Weight</th>
@@ -585,8 +600,19 @@
     </div>
   </div>
 
-  <!-- Methodology — white -->
+  <!-- Watchlist — white -->
   <div class="bg-white border-t border-ink/5">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 py-14 sm:py-20">
+      <p class="reveal text-[0.78rem] tracking-[0.28em] uppercase text-downs-deep mb-5">Watchlist</p>
+      <h2 class="reveal reveal-delay-1 text-3xl sm:text-4xl mb-6">Names under consideration.</h2>
+      <p class="reveal reveal-delay-2 text-ink-mute leading-relaxed mb-8 max-w-3xl">Names under consideration for the two books, grouped by the themes already held. These are reasons for interest only, not targets or recommendations. A name graduates to a proposed buy only when the case and the price line up.</p>
+      <ul id="watchlist" class="reveal reveal-delay-3 divide-y divide-ink/10"></ul>
+      <p class="reveal mt-8 max-w-3xl text-sm text-ink-mute italic">The watchlist is a research log, reasoning only. It is not advice, and nothing here is a recommendation to buy or sell.</p>
+    </div>
+  </div>
+
+  <!-- Methodology — cream -->
+  <div class="bg-cream">
     <div class="max-w-6xl mx-auto px-5 sm:px-8 py-14 sm:py-20">
       <div class="grid md:grid-cols-3 gap-12">
         <div class="reveal">
@@ -614,29 +640,6 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
-
-  <!-- This week's note — pine -->
-  <div class="bg-pine text-white">
-    <div class="max-w-3xl mx-auto px-5 sm:px-8 py-14 sm:py-20">
-      <div class="reveal">
-        <p class="text-[0.78rem] tracking-[0.28em] uppercase text-downs-soft mb-5">This week</p>
-        <h2 class="text-3xl sm:text-4xl mb-8" id="weekTitle"></h2>
-        <div class="space-y-5 text-lg leading-relaxed text-white/75" id="weekBody"></div>
-        <p class="mt-8 text-xs text-white/45 italic">This is a research simulation; nothing here is financial advice.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Watchlist — cream -->
-  <div class="bg-cream">
-    <div class="max-w-6xl mx-auto px-5 sm:px-8 py-14 sm:py-20">
-      <p class="reveal text-[0.78rem] tracking-[0.28em] uppercase text-downs-deep mb-5">Watchlist</p>
-      <h2 class="reveal reveal-delay-1 text-3xl sm:text-4xl mb-6">Names under consideration.</h2>
-      <p class="reveal reveal-delay-2 text-ink-mute leading-relaxed mb-8 max-w-3xl">Names under consideration for the two books, grouped by the themes already held. These are reasons for interest only, not targets or recommendations. A name graduates to a proposed buy only when the case and the price line up.</p>
-      <ul id="watchlist" class="reveal reveal-delay-3 divide-y divide-ink/10"></ul>
-      <p class="reveal mt-8 max-w-3xl text-sm text-ink-mute italic">The watchlist is a research log, reasoning only. It is not advice, and nothing here is a recommendation to buy or sell.</p>
     </div>
   </div>
 
@@ -849,9 +852,8 @@ const DATA = {
     },
 
     marketOverview: [
-      `<strong class="font-semibold text-ink">This week.</strong> July CPI landed in line (2.7% headline) but a hotter 3.1% core reading did nothing to dent the case for easing: futures now price a roughly 94% chance of a September Fed cut. Friday's biggest move was profit-taking, not a fundamental shift — Broadcom fell hard as investors rotated out of the AI complex's winners after the S&P 500 touched a fresh record, even as AMD kept climbing on its own demand story.`,
-      `<strong class="font-semibold text-ink">Inside our own book.</strong> Micron was the standout, up 10.7% as some of the memory-supercycle sell-off unwound, while Broadcom's profit-taking pulled the other way — down 8.1%, the week's worst mover in both books, though still comfortably inside the 12% trim line. Rheinmetall kept climbing too, up 4.9% on a Danish decoy-system order, even after cutting FY2026 revenue guidance on 13 August following the loss of part of a German Navy frigate programme — a genuine change in the numbers that we address in the decision below. Constellation added a further 4.7% as the market kept digesting its 6 August guidance raise, and Agnico Eagle another 4.3% on the back of last week's record cash flow.`,
-      `<strong class="font-semibold text-ink">For a GBP investor.</strong> Sterling firmed slightly against the dollar, GBP/USD nudging from 1.3455 to 1.3491, a modest headwind on every dollar holding rather than a driver of the week. VUAG itself was essentially flat, down 0.07% in pounds — which is why both books' gains this week, 0.19% for Portfolio A and 1.30% for Portfolio B, came from stock selection rather than the market or the currency doing the work.`,
+      `<strong class="font-semibold text-ink">This week.</strong> July CPI landed in line at 2.7% headline, but a hotter 3.1% core reading did nothing to dent the case for easing — futures now price a roughly 94% chance of a September Fed cut. Friday's biggest single move was profit-taking rather than a fundamental shift: investors rotated out of the AI complex's recent winners, Broadcom hardest hit, after the S&P 500 touched a fresh record, even as AMD and the wider chip-equipment supply chain (Applied Materials posted a record quarter) kept the underlying demand picture strong. Gold held near $4,350 after its recent push higher, while Bitcoin slid toward $63,000 despite the firmer rate-cut odds — crypto and gold aren't trading the same macro book right now.`,
+      `<strong class="font-semibold text-ink">For a GBP investor.</strong> Sterling firmed slightly against the dollar, GBP/USD nudging from 1.3455 to 1.3491 — a modest headwind on dollar-denominated assets this week, with VUAG itself essentially flat in pounds, down 0.07%.`,
     ],
 
     portfolioA: {
@@ -936,7 +938,7 @@ const DATA = {
     weekNote: {
       title: "Week 8: trimming Rheinmetall, banking part of the gain.",
       body: [
-        "A quiet week by recent standards. Portfolio A rose 0.19% and Portfolio B 1.30%, against a benchmark that was essentially flat at −0.07%. The gap between the two books was almost entirely idiosyncratic rather than macro: Micron's 10.7% rebound and Rheinmetall's pre-trim 4.9% gain did the work in Portfolio B, while Broadcom's 8.1% pullback — profit-taking after the S&P 500 hit a record, not a change in the business — hit both books, though it's no longer the largest line in either: that's now Nvidia in Portfolio A (11.1%) and Agnico Eagle in Portfolio B (11.0%).",
+        "A quiet week by recent standards. Portfolio A rose 0.19% and Portfolio B 1.30%, against a benchmark that was essentially flat at −0.07%. The gap between the two books was almost entirely idiosyncratic rather than macro: Micron's 10.7% rebound and Rheinmetall's pre-trim 4.9% gain did the work in Portfolio B, where Agnico Eagle also added 4.3% on the back of last week's record cash flow — Portfolio A's gold line, SGLN.L, added a quieter 0.4%. Constellation added 4.7% in both books as the market kept digesting its 6 August guidance raise. Broadcom's 8.1% pullback — profit-taking after the S&P 500 hit a record, not a change in the business — hit both books the other way, and cost it the largest-line spot in each: that's now Nvidia in Portfolio A (11.1%) and Agnico Eagle in Portfolio B (11.0%).",
         "We acted rather than just held. Rheinmetall cut its FY2026 revenue guidance on 13 August (from €14.0-14.5bn to €13.7-14.2bn) after losing part of the German Navy's F126 frigate programme, even as the shares kept climbing on a Danish decoy-system order and a reiterated €80.5bn backlog. That combination — real numbers moving the wrong way while the price keeps moving the right way — is the kind of thesis-relevant information a three-to-five-year holder should act on rather than just note, especially in a position that was already the richest line in either book at +27.0% since entry. We trimmed a third of the Rheinmetall position in Portfolio B — 9.787 shares down to 6.525, sold at the Friday close of €1,202 — banking part of the gain and rebuilding cash, while keeping the majority of the line and the defence theme intact. Portfolio A's NATO.L basket is unaffected. No position in either book crossed the mechanical 12% cap this week, so this was the only change made.",
         `<strong class="text-white">Housekeeping.</strong> Nvidia and Agnico Eagle are now the largest lines in Portfolio A and B respectively, both comfortably inside the 12% trim threshold. Dealing friction of £11.73 was charged on the Rheinmetall sale (0.10% commission plus 0.25% FX spread, no UK stamp on a non-UK line); no other trades this week. Cash accrued a week of interest at Bank Rate before the trade and now stands at 18.0% (Portfolio A) and 22.9% (Portfolio B).`
       ]
@@ -955,7 +957,6 @@ const DATA = {
       { name: "Microsoft (MSFT)",    theme: "AI platforms",              why: "The clearest evidence yet that AI capex converts into revenue, with Azure passing a $100bn annual run-rate. It is the demand side of the trade rather than the supply side we already own, which would diversify the book's biggest risk." },
       { name: "ASML",                theme: "AI / semis infrastructure", why: "The only supplier of EUV lithography, the tool every advanced chip depends on. Applied Materials' record Q3 this week (revenue up 25% year on year, beating on EPS) is a second independent confirmation that equipment demand is still expanding, even though the stock fell on the print." },
       { name: "Vistra / Talen Energy", theme: "Power-for-AI",            why: "Independent power producers with nuclear and gas fleets positioned to supply surging data-centre demand. Constellation's own 6 August guidance raise, on hyperscaler spending nearly 75% higher than last year, is the same structural demand these names would add exposure to." },
-      { name: "Alphabet (GOOGL)",    theme: "AI platforms",              why: "Cloud grew 82% year on year, yet the shares fell around 7% in July after capex guidance was raised to $195-205bn. The case still rests on whether that spending starts showing returns, the same test Microsoft and Constellation's hyperscaler customers have now both passed." },
     ],
   }
 };
@@ -1228,7 +1229,6 @@ function renderPortfolio(which) {
   const body = document.getElementById('holdingsBody');
   if (body) {
     body.innerHTML = p.holdings.map(h => {
-      const chg = (h.now / h.entryPx - 1) * 100;      // local-currency price move since entry
       const pl  = (h.valueGbp / h.costGbp - 1) * 100; // £ profit/loss (includes the FX move)
       return `
       <tr class="ticker-row">
@@ -1237,7 +1237,6 @@ function renderPortfolio(which) {
         <td class="py-3 pr-4 text-xs text-ink-mute">${h.ccy}</td>
         <td class="py-3 pr-4 num text-right text-ink-mute">${fmtLocal(h.ccy, h.entryPx)}</td>
         <td class="py-3 pr-4 num text-right">${fmtLocal(h.ccy, h.now)}</td>
-        <td class="py-3 pr-4 num text-right ${pctColor(chg)}">${fmtPL(chg)}</td>
         <td class="py-3 pr-4 num text-right">£${h.valueGbp.toLocaleString('en-GB')}</td>
         <td class="py-3 pr-4 num text-right ${pctColor(pl)}">${fmtPL(pl)}</td>
         <td class="py-3 pr-0 num text-right">${h.weightNow.toFixed(1)}%</td>
@@ -1247,7 +1246,6 @@ function renderPortfolio(which) {
         <td class="py-3 pr-4 num text-ink-mute">CASH</td>
         <td class="py-3 pr-4 text-ink-mute">Sterling</td>
         <td class="py-3 pr-4 text-xs text-ink-mute">GBP</td>
-        <td class="py-3 pr-4 num text-right text-ink-mute">—</td>
         <td class="py-3 pr-4 num text-right text-ink-mute">—</td>
         <td class="py-3 pr-4 num text-right text-ink-mute">—</td>
         <td class="py-3 pr-4 num text-right">£${p.cashGbp.toLocaleString('en-GB')}</td>
@@ -1261,15 +1259,15 @@ function renderPortfolio(which) {
   const foot = document.getElementById('holdingsFoot');
   if (foot) {
     foot.innerHTML = `
-      <tr><td colspan="9" class="pt-5"></td></tr>
+      <tr><td colspan="8" class="pt-5"></td></tr>
       <tr class="text-sm border-t border-ink/15">
-        <td colspan="6" class="py-3 pr-4 text-ink">NAV · Week ${DATA.weekNumber}</td>
+        <td colspan="5" class="py-3 pr-4 text-ink">NAV · Week ${DATA.weekNumber}</td>
         <td class="py-3 pr-4 num text-right text-ink">£${p.navCurrent.toLocaleString('en-GB')}</td>
         <td class="py-3 pr-4 num text-right ${pctColor(p.returnPct)}">${fmtPct(p.returnPct)}</td>
         <td class="py-3 pr-0 num text-right">100%</td>
       </tr>
       <tr class="text-xs text-ink-mute">
-        <td colspan="9" class="py-2 pr-0 leading-relaxed">Chg is the local-currency price move since entry. Value and P/L are in pounds and include the currency move, so a dollar holding can rise in price yet slip in pounds as sterling firms. ${p.friction > 0 ? `Dealing friction charged this week: £${p.friction.toFixed(2)}.` : 'No trades this week; dealing friction £0.00.'}</td>
+        <td colspan="8" class="py-2 pr-0 leading-relaxed">P/L is the £ profit or loss since entry, including the currency move, so a dollar holding can rise in price yet slip in pounds as sterling firms. ${p.friction > 0 ? `Dealing friction charged this week: £${p.friction.toFixed(2)}.` : 'No trades this week; dealing friction £0.00.'}</td>
       </tr>
     `;
   }
