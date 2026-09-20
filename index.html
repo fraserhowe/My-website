@@ -605,7 +605,7 @@
     <div class="max-w-6xl mx-auto px-5 sm:px-8 py-14 sm:py-20">
       <p class="reveal text-[0.78rem] tracking-[0.28em] uppercase text-downs-deep mb-5">Watchlist</p>
       <h2 class="reveal reveal-delay-1 text-3xl sm:text-4xl mb-6">Names under consideration.</h2>
-      <p class="reveal reveal-delay-2 text-ink-mute leading-relaxed mb-8 max-w-3xl">Names under consideration for the two books, grouped by the themes already held. These are reasons for interest only, not targets or recommendations. A name graduates to a proposed buy only when the case and the price line up.</p>
+      <p class="reveal reveal-delay-2 text-ink-mute leading-relaxed mb-8 max-w-3xl">Names under consideration for the two books, grouped by the themes already held. These are reasons for interest only, not targets or recommendations. A name is only added to a book when the case and the price line up.</p>
       <ul id="watchlist" class="reveal reveal-delay-3 divide-y divide-ink/10"></ul>
       <p class="reveal mt-8 max-w-3xl text-sm text-ink-mute italic">The watchlist is a research log, reasoning only. It is not advice, and nothing here is a recommendation to buy or sell.</p>
     </div>
@@ -846,8 +846,8 @@ const DATA = {
     // Weekly performance — all three series indexed to 100 at inception
     performance: {
       labels: ["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8", "W9", "W10", "W11", "W12", "W13"],
-      A:     [100, 98.687, 101.061, 96.960, 100.092, 97.320, 102.605, 102.80192, 100.500, 101.081, 102.288, 101.863, 102.760],
-      B:     [100, 98.582, 99.640, 94.983, 98.912, 97.018, 103.049, 104.392, 104.025, 103.987, 106.617, 105.038, 107.046],
+      A:     [100, 98.687, 101.061, 96.960, 100.092, 97.320, 102.605, 102.80192, 100.500, 101.081, 102.288, 101.863, 102.742],
+      B:     [100, 98.582, 99.640, 94.983, 98.912, 97.018, 103.049, 104.392, 104.025, 103.987, 106.617, 105.038, 107.027],
       bench: [100, 100.83, 100.89, 99.59, 100.00, 98.98, 103.06, 102.98812, 101.03934, 102.69117, 102.283, 101.837, 102.357],
     },
 
@@ -861,7 +861,7 @@ const DATA = {
       sub: "ETFs allowed",
       blurb: "ETFs for diversified macro exposure (semis breadth, defence, gold, crypto); single stocks for the highest-conviction names. All four ETFs are GBP-listed UCITS lines, so they carry no FX; only the individual US stocks do.",
       navOpening: 100000.00,
-      friction: 0,
+      friction: 17.85,
       holdings: [
         { ticker: "NVDA",   name: "Nvidia",                         ccy: "USD", entryPx: 193.23,  now: 222.27,  valueGbp: 11358, weightNow: 11.1, plPct:  13.6, shares:   68.261, costGbp: 10000 },
         { ticker: "AVGO",   name: "Broadcom",                       ccy: "USD", entryPx: 365.02,  now: 357.61,  valueGbp:  9674, weightNow:  9.4, plPct:  -3.3, shares:   36.135, costGbp: 10000 },
@@ -872,13 +872,14 @@ const DATA = {
         { ticker: "SGLN.L", name: "iShares Physical Gold ETF",      ccy: "GBP", entryPx:  59.94,  now:  63.17,  valueGbp: 10539, weightNow: 10.3, plPct:   5.4, shares:  166.834, costGbp: 10000 },
         { ticker: "AMD",    name: "AMD",                            ccy: "USD", entryPx: 521.58,  now: 559.82,  valueGbp:  8479, weightNow:  8.3, plPct:   6.0, shares:   20.231, costGbp:  8000 },
         { ticker: "IB1T",   name: "iShares Bitcoin ETP",            ccy: "GBP", entryPx:   4.5425,now:   6.031, valueGbp:  6638, weightNow:  6.5, plPct:  32.8, shares: 1100.715, costGbp:  5000 },
+        { ticker: "MSFT",   name: "Microsoft",                      ccy: "USD", entryPx: 493.78,  now: 493.78,  valueGbp:  5082, weightNow:  4.9, plPct:   0.0, shares:   13.749, costGbp:  5082 },
       ],
-      cashWeight: 18.1,
-      cashGbp: 18567,
-      navCurrent: 102760,
-      returnPct: 2.76,
+      cashWeight: 13.1,
+      cashGbp: 13467,
+      navCurrent: 102742,
+      returnPct: 2.74,
       notes: [
-        { ticker: "NVDA",   text: "AI compute leader, up 3.0% in pounds as Friday's chip-sector rebound offset a rough start to the week. Now the largest line in this book at 11.1% and up 13.6% since entry." },
+        { ticker: "NVDA",   text: "AI compute leader, up 3.0% in pounds as Friday's chip-sector rebound offset a rough start to the week. Still the largest line in this book at 11.1% and up 13.6% since entry." },
         { ticker: "AVGO",   text: "Custom AI silicon and networking, essentially flat in pounds (-0.1%) — caught in the same early-week AI-slowdown scare as the rest of the chip complex before Friday's recovery. Down 3.3% since entry." },
         { ticker: "TSM",    text: "The foundry bottleneck at roughly 70% share, up 1.5% in pounds, tracking the wider semiconductor recovery into the week's close. Essentially flat since entry." },
         { ticker: "SMGB",   text: "A single line for broad semis breadth, up a modest 0.2% in pounds — the basket absorbed the week's whipsaw without much net movement. Still the weakest position in this book since entry at -12.1%." },
@@ -887,8 +888,9 @@ const DATA = {
         { ticker: "SGLN.L", text: "Physical gold, up 0.7% in pounds to a one-week high — its first weekly gain in a month — as falling yields blunted the Fed's hawkish first hike of the cycle. Up 5.4% since entry." },
         { ticker: "AMD",    text: "The second accelerator vendor and the best position in this book this week, up 9.7% in pounds as chip stocks staged a sharp Friday rebound from the week's AI-slowdown scare. Up 6.0% since entry." },
         { ticker: "IB1T",   text: "Direct Bitcoin exposure, up 3.8% in pounds as Bitcoin pushed back toward $80,000 on resilient risk appetite even as the Fed tightened. The best position in this book since entry at +32.8%." },
+        { ticker: "MSFT",   text: "New this week — the demand side of AI rather than the supply side the rest of the book owns many times over. Initiated at Friday's close of $493.78, funded from cash, after a week that showed exactly what a pure-supply-side book is exposed to. Started at 4.9% of the book; too new for a since-entry return." },
       ],
-      summary: "Action: held everything this week; no line breached the 12% trim threshold. We're proposing to fund a new Microsoft position from cash — see Inside the book — but no shares have changed hands yet. AMD and Bitcoin exposure (IB1T) led the book higher; Constellation Energy's pullback was the one drag. Cash sits at 18.1%, pending the proposed trade."
+      summary: "Action: initiated a Microsoft position (13.749 shares, £5,082 invested, £17.85 dealing friction) funded from cash; held everything else. No line breached the 12% trim threshold. AMD and Bitcoin exposure (IB1T) led the book higher this week; Constellation Energy's pullback was the one drag. Cash sits at 13.1% after the trade."
     },
 
     portfolioB: {
@@ -896,7 +898,7 @@ const DATA = {
       sub: "Equities only",
       blurb: "Same themes as A, expressed purely through single stocks. The clean stock-picking book.",
       navOpening: 100000.00,
-      friction: 0,
+      friction: 18.73,
       holdings: [
         { ticker: "NVDA", name: "Nvidia",               ccy: "USD", entryPx:  193.23, now:  222.27, valueGbp: 11358, weightNow: 10.6, plPct:  13.6, shares: 68.261, costGbp: 10000 },
         { ticker: "AVGO", name: "Broadcom",             ccy: "USD", entryPx:  365.02, now:  357.61, valueGbp:  9674, weightNow:  9.0, plPct:  -3.3, shares: 36.135, costGbp: 10000 },
@@ -907,11 +909,12 @@ const DATA = {
         { ticker: "RHM",  name: "Rheinmetall",          ccy: "EUR", entryPx:  946.60, now: 1011.80, valueGbp:  5672, weightNow:  5.3, plPct:   6.3, shares:  6.525, costGbp:  5334 },
         { ticker: "AEM",  name: "Agnico Eagle",         ccy: "USD", entryPx:  158.29, now:  199.49, valueGbp: 11772, weightNow: 11.0, plPct:  24.4, shares: 78.826, costGbp:  9460 },
         { ticker: "MSTR", name: "Strategy",             ccy: "USD", entryPx:   82.31, now:  153.92, valueGbp:  7386, weightNow:  6.9, plPct:  84.6, shares: 64.099, costGbp:  4000 },
+        { ticker: "MSFT", name: "Microsoft",            ccy: "USD", entryPx:  493.78, now:  493.78, valueGbp:  5331, weightNow:  5.0, plPct:   0.0, shares: 14.422, costGbp:  5331 },
       ],
-      cashWeight: 23.1,
-      cashGbp: 24680,
-      navCurrent: 107046,
-      returnPct: 7.05,
+      cashWeight: 18.1,
+      cashGbp: 19330,
+      navCurrent: 107027,
+      returnPct: 7.03,
       notes: [
         { ticker: "NVDA", text: "AI compute leader, up 3.0% in pounds as Friday's chip-sector rebound offset a rough start to the week. Up 13.6% since entry." },
         { ticker: "AVGO", text: "Custom AI silicon and networking, essentially flat in pounds — caught in the same early-week AI-slowdown scare as the rest of the chip complex before Friday's recovery. Down 3.3% since entry." },
@@ -922,25 +925,27 @@ const DATA = {
         { ticker: "RHM",  text: "The defence proxy, up 2.1% in pounds — a rebound on fresh 155mm-shell and naval-intelligence contract wins that outweighed a mid-week pullback as Ukraine ceasefire talk continued. Up 6.3% since entry, recovering from two straight down weeks." },
         { ticker: "AEM",  text: "A senior gold miner, up 0.7% in pounds, broadly tracking physical gold's own move to a one-week high. The largest line in this book at 11.0% and up 24.4% since entry." },
         { ticker: "MSTR", text: "The crypto proxy and the best position in either book this week and since entry, up 18.9% in pounds as Bitcoin rallied back toward $80,000 and the company kept building its cash reserve. Now up 84.6% since entry, still deliberately small at 6.9% of the book." },
+        { ticker: "MSFT", text: "New this week — the demand side of AI rather than the supply side the rest of the book owns many times over. Initiated at Friday's close of $493.78, funded from cash, after a week that showed exactly what a pure-supply-side book is exposed to. Started at 5.0% of the book; too new for a since-entry return." },
       ],
-      summary: "Action: held everything this week; no line breached the 12% trim threshold. We're proposing to fund a new Microsoft position from cash — see Inside the book — but no shares have changed hands yet. Strategy's Bitcoin-driven surge and AMD's rebound did the heavy lifting; Constellation Energy's pullback was the one drag, with Micron's memory-pricing recovery an added tailwind. Cash sits at 23.1%, pending the proposed trade."
+      summary: "Action: initiated a Microsoft position (14.422 shares, £5,331 invested, £18.73 dealing friction) funded from cash; held everything else. No line breached the 12% trim threshold. Strategy's Bitcoin-driven surge and AMD's rebound did the heavy lifting; Constellation Energy's pullback was the one drag, with Micron's memory-pricing recovery an added tailwind. Cash sits at 18.1% after the trade."
     },
 
     themeAllocation: [
       { theme: "AI / Semiconductors", pctA: 46.7, pctB: 44.9, aDetail: "NVDA, AVGO, TSM, SMGB, AMD",     bDetail: "NVDA, AVGO, TSM, MU, AMD" },
+      { theme: "AI platforms",        pctA:  4.9, pctB:  5.0, aDetail: "MSFT (Microsoft)",                bDetail: "MSFT (Microsoft)" },
       { theme: "Power-for-AI",        pctA:  9.3, pctB:  8.9, aDetail: "CEG",                             bDetail: "CEG" },
       { theme: "Defence",             pctA:  9.3, pctB:  5.3, aDetail: "NATO.L (Future of Defence ETF)",  bDetail: "Rheinmetall" },
       { theme: "Gold",                pctA: 10.3, pctB: 11.0, aDetail: "SGLN.L (Physical Gold ETF)",      bDetail: "Agnico Eagle" },
       { theme: "Crypto",              pctA:  6.5, pctB:  6.9, aDetail: "IB1T (Bitcoin ETP)",              bDetail: "Strategy (MSTR)" },
-      { theme: "Cash",                pctA: 18.1, pctB: 23.1, aDetail: "—",                               bDetail: "—" },
+      { theme: "Cash",                pctA: 13.1, pctB: 18.1, aDetail: "—",                               bDetail: "—" },
     ],
 
     weekNote: {
-      title: "Week 13: an AI-slowdown scare, a Fed hike, and a proposed Microsoft diversification.",
+      title: "Week 13: an AI-slowdown scare, a Fed hike, and we add Microsoft.",
       body: [
-        "Portfolio A rose 0.88% and Portfolio B rose 1.91%, both comfortably ahead of the benchmark's 0.51%. AMD (+9.7% in both books) and Strategy (+18.9%, Portfolio B only) did the heavy lifting — AMD rode Friday's chip-sector rebound once the week's AI-slowdown scare passed, and Strategy tracked Bitcoin's push back toward $80,000. Constellation Energy was the one common drag, down 9.5% in pounds in both books despite no negative company news: the pullback tracked the broader AI-capex wobble rather than the business itself, in the same week analysts turned more constructive on the stock and the company confirmed a $715m Rhode Island power-plant acquisition. Micron added 5.3% as its memory-pricing story kept building.",
-        "We're proposing a trade, not just holding. This week's opening shock — Dario Amodei's call for a coordinated AI slowdown, echoed by Sam Altman and Elon Musk, that briefly wiped almost 6% off a semiconductor gauge — was a reminder that both books carry AI exposure almost entirely on the supply side: chip designers, foundries and equipment, with no line that benefits from AI spending without also carrying AI-regulation or AI-capex-pace risk. Microsoft has sat on the watchlist for exactly this reason for three weeks running. We're proposing initiating a roughly 5% position in Microsoft in both books — about £5,100 in Portfolio A and £5,350 in Portfolio B — funded from cash, which would bring post-trade cash to roughly 13% (A) and 18% (B), still a healthy buffer. This isn't a reaction to one week's headline: it's the diversification case that's been on the list since Week 10, crystallised by a week that showed exactly what a pure-supply-side book is exposed to. No position in either book crossed the mechanical 12% cap this week, so this is the only change on the table.",
-        `<strong class="text-white">Housekeeping.</strong> Portfolio A's largest line is Nvidia at 11.1%; Portfolio B's is Agnico Eagle at 11.0%. Strategy is now the best position in either book since entry at +84.6%, up from +55% a week ago as Bitcoin extended its rally; the semiconductor ETF (SMGB) remains the weakest at −12.1%. No trades executed this week — the Microsoft proposal above is pending Fraser's sign-off, so share counts are unchanged and no dealing friction was charged. Cash accrued a week's interest at 3.75% and stands at 18.1% (A) / 23.1% (B). Since inception: A +2.76% vs the benchmark's +2.36%; B +7.05%.`
+        "Portfolio A rose 0.86% and Portfolio B rose 1.89%, both comfortably ahead of the benchmark's 0.51%. AMD (+9.7% in both books) and Strategy (+18.9%, Portfolio B only) did the heavy lifting — AMD rode Friday's chip-sector rebound once the week's AI-slowdown scare passed, and Strategy tracked Bitcoin's push back toward $80,000. Constellation Energy was the one common drag, down 9.5% in pounds in both books despite no negative company news: the pullback tracked the broader AI-capex wobble rather than the business itself, in the same week analysts turned more constructive on the stock and the company confirmed a $715m Rhode Island power-plant acquisition. Micron added 5.3% as its memory-pricing story kept building.",
+        "We acted rather than just held. This week's opening shock — Dario Amodei's call for a coordinated AI slowdown, echoed by Sam Altman and Elon Musk, that briefly wiped almost 6% off a semiconductor gauge — was a reminder that both books carried AI exposure almost entirely on the supply side: chip designers, foundries and equipment, with no line that benefits from AI spending without also carrying AI-regulation or AI-capex-pace risk. Microsoft has sat on the watchlist for exactly this reason for three weeks running. We initiated a Microsoft position in both books at Friday's close of $493.78 — 13.749 shares in Portfolio A (£5,082 invested) and 14.422 shares in Portfolio B (£5,331 invested), both funded from cash, taking post-trade cash to 13.1% (A) and 18.1% (B). This wasn't a reaction to one week's headline: it's the diversification case that's been on the list since Week 10, crystallised by a week that showed exactly what a pure-supply-side book is exposed to. No position in either book crossed the mechanical 12% cap this week, so this was the only change made.",
+        `<strong class="text-white">Housekeeping.</strong> Portfolio A's largest line is Nvidia at 11.1%; Portfolio B's is Agnico Eagle at 11.0%. Strategy is now the best position in either book since entry at +84.6%, up from +55% a week ago as Bitcoin extended its rally; the semiconductor ETF (SMGB) remains the weakest at −12.1%. The Microsoft trade above was the only dealing this week — combined friction of £36.58 across both books (0.10% commission plus 0.25% FX spread, no UK stamp on a non-UK line). Cash accrued a week's interest at 3.75% before the trade and now stands at 13.1% (A) / 18.1% (B). Since inception: A +2.74% vs the benchmark's +2.36%; B +7.03%.`
       ]
     },
 
@@ -954,7 +959,7 @@ const DATA = {
 
     // Research log of names under consideration. Reasoning only, never targets.
     watchlist: [
-      { name: "ASML",                 theme: "AI / semis infrastructure", why: "The sole supplier of EUV lithography, a position that does not depend on which chip designer wins. The case is intact, but it would add to a semiconductor theme already at 45–47% of each book — one reason this week's proposed Microsoft add went to a different theme entirely." },
+      { name: "ASML",                 theme: "AI / semis infrastructure", why: "The sole supplier of EUV lithography, a position that does not depend on which chip designer wins. The case is intact, but it would add to a semiconductor theme already at 45–47% of each book — one reason this week's new Microsoft position went to a different theme entirely." },
       { name: "Western Digital (WDC)", theme: "Memory / storage",         why: "NAND flash pricing is forecast to rise as much as 60% this quarter, an even tighter market than the DRAM surge that has now carried Micron up two weeks running. A way to add memory exposure without concentrating further in the book's still-weakest line." },
       { name: "Vertiv (VRT)",          theme: "Power-for-AI infrastructure", why: "Data-centre power and cooling equipment — a way to diversify the Power-for-AI theme beyond a single nuclear generator. Worth studying given this week's reminder that Constellation can fall nearly 10% on capex sentiment alone, with nothing in either book to offset that swing." },
     ],
